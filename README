@@ -1,0 +1,10 @@
+Installation:
+./setup.py install
+
+Run app:
+
+- Run ./mB to run from dir
+- Run mpdBrowser after installation.
+
+To remove covers cache:
+rm -rf ~/.local/share/mpdBrowser
