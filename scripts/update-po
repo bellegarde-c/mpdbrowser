@@ -1,0 +1,11 @@
+#!/bin/sh
+cd po
+for i in *.po
+do
+   if [ "$i" = "mpdBrowser.pot" ]
+     then
+     continue
+   fi
+   msgmerge -U $i mpdBrowser.pot
+done
+
