@@ -45,7 +45,6 @@ class mpdBrowserIPC_S(threading.Thread, IdleObject):
             try:
                 data = self.__server.recv (1024)
                 if data == "start":
-                    print "Raise event"
                     self.emit ("present")
                 else:
                     break
