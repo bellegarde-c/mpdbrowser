@@ -418,10 +418,14 @@ class mpdBrowserBase:
             Popup menu with songs list
         """
         album = self.__albums[pos][ALBUM_NAME]
-        artist = self.__albums[pos][ALBUM_ARTIST]
+        path = self.__albums[pos][ALBUM_PATH]
         popupMenu = gtk.Menu()
-        for song in self.__DB.getSongs (artist, album):
-            item =  gtk.MenuItem (song[0])
+        for song in self.__DB.getSongs (path, album):
+            if len (song[0]) > 25:
+                name = song[0][:25] + "..."
+            else:
+                name = song[0]
+            item =  gtk.MenuItem (name)
             item.connect ("activate", self.__menuItemCb, song[1], action)
             popupMenu.add (item)
         popupMenu.show_all()

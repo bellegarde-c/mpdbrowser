@@ -100,7 +100,28 @@ class mpdBrowserCfgDlg (IdleObject):
         buffer.insert_with_tags_by_name (iter,
                             "Copyleft Bellegarde Cedric (gnumdk@gmail.com)",
                             "bold")
+        buffer.insert (iter, "\n\n")  
+        buffer.insert_with_tags_by_name (iter, _("How play an album?"), "bold")
+        buffer.insert (iter, "\n")
+        buffer.insert (iter, _("Just click on it"))
         buffer.insert (iter, "\n\n")
+        buffer.insert_with_tags_by_name (iter, 
+                                         _("How enqueue an album?"), "bold")
+        buffer.insert (iter, "\n")
+        buffer.insert (iter, _("Just click on it with <Ctrl> pressed"))
+        buffer.insert (iter, "\n\n")
+
+        buffer.insert_with_tags_by_name (iter, _("How play a song?"), "bold")
+        buffer.insert (iter, "\n")
+        buffer.insert (iter, _("Just right click on album, then select song"))
+        buffer.insert (iter, "\n\n")
+        buffer.insert_with_tags_by_name (iter, 
+                                         _("How enqueue a song?"), "bold")
+        buffer.insert (iter, "\n")
+        buffer.insert (iter, 
+           _("Just right click on album with <Ctrl> pressed, then select song"))
+        buffer.insert (iter, "\n\n")
+        
         buffer.insert_with_tags_by_name (iter, _("How to add a cover?"), "bold")
         buffer.insert (iter, "\n")
         buffer.insert (iter, _("Just copy an image to album folder"))
@@ -118,11 +139,15 @@ class mpdBrowserCfgDlg (IdleObject):
         text.set_editable (False)
         text.set_buffer (buffer)
 
+        scrolled = gtk.ScrolledWindow ()
+        scrolled.set_policy (gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+        scrolled.add (text)
+
         notebook = gtk.Notebook ()        
         prefsLabel = gtk.Label (_("Preferences"))
         notebook.append_page (vbox, prefsLabel) 
         infosLabel = gtk.Label (_("Informations"))
-        notebook.append_page (text, infosLabel)
+        notebook.append_page (scrolled, infosLabel)
         
         closeButton = self.__prefsWindow.add_button (gtk.STOCK_CLOSE, 
                                                      gtk.RESPONSE_CLOSE)
