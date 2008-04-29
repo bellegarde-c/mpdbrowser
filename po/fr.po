@@ -125,7 +125,7 @@ msgstr "Comment lire un morceau?"
 
 #: src/mpdBrowserCfgDlg.py:116
 msgid "Just right click on album, then select song"
-msgstr "Cliquez droit sur un album, puis selectionnez la chanson"
+msgstr "Clique droit sur un album, puis selectionnez la chanson"
 
 #: src/mpdBrowserCfgDlg.py:119
 msgid "How enqueue a song?"
@@ -133,7 +133,7 @@ msgstr "Comment ajouter un morceau?"
 
 #: src/mpdBrowserCfgDlg.py:122
 msgid "Just right click on album with <Ctrl> pressed, then select song"
-msgstr "Cliquez droit sur un album en maintenant <Ctrl> enfoncé, puis selectionnez la chanson"
+msgstr "Clique droit sur un album en maintenant <Ctrl> enfoncé, puis selectionnez la chanson"
 
 #: src/mpdBrowserCfgDlg.py:125
 msgid "How to add a cover?"
