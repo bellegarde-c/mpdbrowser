@@ -84,7 +84,9 @@ class mpdBrowserBase:
         self.__scrolled.set_policy (gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
                 
         statusBox = gtk.HBox ();
+        self.__progressBar = gtk.ProgressBar ()
         self.__statusBar = gtk.Statusbar ()
+        self.__statusBar.set_no_show_all (True)
         self.__contId = self.__statusBar.get_context_id ("info")
         image = gtk.Image ()
         image.set_from_stock (gtk.STOCK_PREFERENCES, gtk.ICON_SIZE_MENU)
@@ -92,6 +94,7 @@ class mpdBrowserBase:
         self.__prefsButton.add (image)
         self.__prefsButton.connect ("clicked", self.__prefsCb, self.__window)
         statusBox.pack_start (self.__prefsButton, False, False, 0)
+        statusBox.pack_start (self.__progressBar, True, True, 0)
         statusBox.pack_start (self.__statusBar, True, True, 0)
         
         self.__filterBox = gtk.HBox ()
@@ -182,8 +185,11 @@ class mpdBrowserBase:
                                         self.__conf.get ("hidemissing"))
         self.__DB.connect ("scanned", self.__scannedCb)
         self.__DB.connect ("status", self.__statusCb)
+        self.__DB.connect ("progress", self.__progressCb)
         self.__DB.connect ("exit", self.quit)
-            
+        self.__statusBar.hide ()
+        self.__progressBar.show ()
+
     
     def __eventsFilter (self, iconview, event):
         """
@@ -323,13 +329,22 @@ class mpdBrowserBase:
             Update status bar message
         """
         try:
+            self.__statusBar.show ()
             self.__statusBar.push (self.__contId, info);
             self.__prefsButton.set_sensitive (True)
         except: 
             print "mpdBrowserBase::__statusCb():"
             print sys.exc_info ()
+              
                                 
-                                
+    def __progressCb (self, data, percent):
+        """
+            Scan progress bar
+        """
+        if percent >= 0.0 and percent <= 1.0:
+            self.__progressBar.set_fraction (percent)                     
+        
+        
     def __scannedCb (self, data, albums):
         """
             Add albums to iconview
@@ -342,6 +357,8 @@ class mpdBrowserBase:
                               self.__filterPattern.get_text (),
                               self.__filterCombo.get_active ())
         self.__prefsButton.set_sensitive (True)
+        self.__progressBar.hide ()
+        self.__statusBar.show ()
         self.__view.iconview.grab_focus ()
    
    

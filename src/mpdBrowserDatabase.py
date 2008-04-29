@@ -26,6 +26,9 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
             # status bar message
             "status": (
            gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, [gobject.TYPE_STRING]),
+            # progress bar percent
+            "progress": (
+           gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, [gobject.TYPE_FLOAT]),
             # Communication problem with mpd while looking at collection
             "exit": (
            gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, [])
@@ -43,8 +46,6 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
         self.__conn = connection
         self.__path = path
         self.__covers = mpdBrowserCovers (stylizedCovers, hideMissing)
-        self.__covers.connect ("cache_message", self.__cacheMessageCb)
-        self.__cacheMessage = ""
         
         
     def __cacheMessageCb (self, userData, info):
@@ -64,7 +65,8 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
             self.__covers.createDirs ()
             # Get albums list
             albums = self.__conn.list ('album')
-
+            
+            totalAlbums = len (albums)
             nbAlbums = 0
             for album in albums:
                 if self.__stopevent.isSet():
@@ -73,6 +75,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
                 tmpAlbums = self.__getAlbumInfos (album)
                 albumList += tmpAlbums
                 nbAlbums += len (tmpAlbums)
+                self.emit ("progress", float (nbAlbums) / float (totalAlbums))
 
             self.__conn.close ()
             self.emit ("scanned", albumList)

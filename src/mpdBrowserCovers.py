@@ -27,12 +27,6 @@ class MissingCover(Exception):
 
 
 class mpdBrowserCovers (IdleObject):
-
-    __gsignals__ =  { 
-            # Collection scanned
-            "cache_message": (
-             gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, [gobject.TYPE_STRING])
-            }
                    
     def __init__ (self, stylizedCovers, hideMissing):
         """
@@ -147,16 +141,12 @@ class mpdBrowserCovers (IdleObject):
             if self.__coverComp and not \
                os.access (shareDir + "/composite", os.F_OK):
                 os.mkdir (shareDir + "/composite")
-                self.emit ("cache_message", _("Creating covers cache: "))
                 
             if not self.__coverComp and not \
                os.access (shareDir + "/normal", os.F_OK):
                 os.mkdir (shareDir + "/normal")  
-                self.emit ("cache_message", _("Creating covers cache: "))
                 
-        except OSError:
-            self.emit ("cache_message", _("Can't access covers cache" + \
-                                        ", will be slow: "))
+        except OSError: pass
 
         self.__shareDir = shareDir
 
