@@ -23,7 +23,7 @@ from mpdBrowserCfg import *
 from mpdBrowserCfgDlg import *
 from mpdBrowserIPC import *
 from mpdBrowserConnection import *
-        
+   
 icon = sys.prefix + "/share/pixmaps/mpdBrowser.png"
 if not os.path.exists(icon): icon = "../images/mpdBrowser.png"
 
@@ -341,8 +341,7 @@ class mpdBrowserBase:
         """
             Scan progress bar
         """
-        if percent >= 0.0 and percent <= 1.0:
-            self.__progressBar.set_fraction (percent)                     
+        self.__progressBar.set_fraction (percent)
         
         
     def __scannedCb (self, data, albums):
@@ -359,6 +358,7 @@ class mpdBrowserBase:
         self.__prefsButton.set_sensitive (True)
         self.__progressBar.hide ()
         self.__statusBar.show ()
+        self.__progressBar.set_fraction (0.0)
         self.__view.iconview.grab_focus ()
    
    

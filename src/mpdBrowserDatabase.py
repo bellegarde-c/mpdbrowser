@@ -79,6 +79,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
                     self.emit ("progress", 
                                float (nbAlbums) / float (totalAlbums))
 
+            self.emit ("progress", 1.0)
             self.__conn.close ()
             self.emit ("scanned", albumList)
         except:
