@@ -95,6 +95,40 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
         self.__stopevent.set () 
 
 
+    def getSongs (self, artist, album):
+        """
+            Return song list for artist/album
+        """
+        list = []
+        self.__conn.open ()
+        infos = self.__conn.find ('album', album)
+
+        for i in range (len (infos)):
+            # Deal with missing tags
+            if 'artist' not in infos[i].keys ():
+                infos[i]['artist'] = _("Unknown")
+            if 'title' not in infos[i].keys():
+                infos[i]['title'] = _("Unknown")
+                
+            # Deal with multiple tags
+            # Force an Attribute Error to be raise
+            try:
+                infos[i]['artist'].sort ()
+                oneArtist = infos[i]['artist'][0]
+            except:
+                oneArtist = infos[i]['artist']
+            try:
+                infos[i]['title'].sort ()
+                title = infos[i]['title'][0]
+            except:
+                title = infos[i]['title']
+            
+            if oneArtist == artist:
+                list.append ((title, self.__path + infos[i]['file']))
+        self.__conn.close ()
+        return list
+                
+                
     def getAlbums (self):
         """
             get albums => (genre, artist, path, pixbuf)
@@ -106,7 +140,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
         """
             return album infos list (genre, artist, album, path, pixbuf)
         """
-        list=[]
+        list = []
         currentPath=""
 
         self.__conn.open ()
@@ -114,7 +148,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
         infos = self.__conn.find ('album', album)
 
         for i in range (len (infos)):
-            path = os.path.dirname ( self.__path + infos[i]['file'])
+            path = os.path.dirname (self.__path + infos[i]['file'])
             if currentPath != path: # We can have two albums with same name
                 try:
                     # Deal with missing tags

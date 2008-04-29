@@ -202,7 +202,15 @@ class mpdBrowserBase:
                 pos = self.__view.getRealItemPos (path)
                 iconview.unselect_all ()
                 if pos != -1:
-                    self.__playAlbum (pos, event.button)
+                    if (event.get_state() & gtk.gdk.CONTROL_MASK) != 0:
+                        action = MPD_ENQUEUE
+                    else:
+                        action = MPD_REPLACE
+                        
+                    if event.button == 3:
+                        self.__popupSongs (pos, action)
+                    else:
+                        self.__playAlbum (pos, event.button, action)
             elif event.type == gtk.gdk.MOTION_NOTIFY:
                 x,y = event.get_coords ()
                 path = iconview.get_path_at_pos (int (x), int (y))
@@ -330,13 +338,31 @@ class mpdBrowserBase:
         """
         try:
             self.__statusBar.show ()
+            self.__progressBar.hide ()
             self.__statusBar.push (self.__contId, info);
             self.__prefsButton.set_sensitive (True)
         except: 
             print "mpdBrowserBase::__statusCb():"
             print sys.exc_info ()
+           
               
-                                
+    def __menuItemCb (self, item, path, action):
+        """
+            Play selected song
+        """
+        try:
+            self.__conn.open ()
+            if action == MPD_REPLACE:
+                self.__conn.replace (path.replace (self.__path, ""))
+            else:
+                self.__conn.add (path.replace (self.__path, ""))
+            self.__conn.close ()
+        except:
+            print "mpdBrowserBase::__menuItemCb():"
+            print sys.exc_info ()
+            self.__statusBar.push (self.__contId, _("Can't contact mpd!"))
+            
+               
     def __progressCb (self, data, percent):
         """
             Scan progress bar
@@ -386,26 +412,43 @@ class mpdBrowserBase:
                 self.__currentStatusMessage = statusMessage
                 self.__statusBar.push (self.__contId, statusMessage);
         
-
-    def __playAlbum (self, pos, button):
+    
+    def __popupSongs (self, pos, action):
+        """
+            Popup menu with songs list
+        """
+        album = self.__albums[pos][ALBUM_NAME]
+        artist = self.__albums[pos][ALBUM_ARTIST]
+        popupMenu = gtk.Menu()
+        for song in self.__DB.getSongs (artist, album):
+            item =  gtk.MenuItem (song[0])
+            item.connect ("activate", self.__menuItemCb, song[1], action)
+            popupMenu.add (item)
+        popupMenu.show_all()
+        popupMenu.popup(None, None, None, 1, 0)
+                
+        
+    def __playAlbum (self, pos, button, action):
         """
             Play selected album
         """
         try:
             self.__conn.open ()
-            album = self.__albums[pos][ALBUM_PATH]  
+            album = self.__albums[pos][ALBUM_PATH]
             if button == 1:
-                self.__conn.replace (album.replace (self.__path, ""))
-            elif button == 3:
-                self.__conn.add (album.replace (self.__path, ""))
+                if action == MPD_REPLACE:
+                    self.__conn.replace (album.replace (self.__path, ""))
+                else:
+                    self.__conn.add (album.replace (self.__path, ""))
             else:
                 self.__conn.clear ()
             self.__conn.close ()
         except:
             print "mpdBrowserBase::__playAlbum():"
             print sys.exc_info ()
-            self.__statusBar.push (self.__contId, _("Can't contact mpd!"));
-
+            self.__statusBar.push (self.__contId, _("Can't contact mpd!"))
+            
+            
     def stopThreads(self):
         """
             Stop all running threads
