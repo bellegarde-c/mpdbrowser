@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-28 11:06+0200\n"
+"POT-Creation-Date: 2008-04-29 10:28+0200\n"
 "PO-Revision-Date: 2008-04-02 11:15+0200\n"
 "Last-Translator: Bellegarde Cedric <gnumdk@gmail.com>\n"
 "Language-Team: French\n"
@@ -17,42 +17,40 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/mpdBrowserBase.py:100
+#: src/mpdBrowserBase.py:103
 msgid "Filter"
 msgstr "Filtre"
 
-#: src/mpdBrowserBase.py:111
+#: src/mpdBrowserBase.py:114
 msgid "All"
 msgstr "Tout"
 
-#: src/mpdBrowserBase.py:112
+#: src/mpdBrowserBase.py:115
 msgid "Artist"
 msgstr "Artiste"
 
-#: src/mpdBrowserBase.py:113
+#: src/mpdBrowserBase.py:116
 msgid "Album"
 msgstr "Album"
 
-#: src/mpdBrowserBase.py:114
+#: src/mpdBrowserBase.py:117
 msgid "Genre"
 msgstr "Style"
 
-#: src/mpdBrowserBase.py:151 src/mpdBrowserBase.py:211
-#: src/mpdBrowserBase.py:294
+#: src/mpdBrowserBase.py:173
 msgid "Loading..."
 msgstr "Chargement..."
 
-#: src/mpdBrowserBase.py:153 src/mpdBrowserBase.py:213
-#: src/mpdBrowserBase.py:296
+#: src/mpdBrowserBase.py:175
 msgid "Loading albums... Please wait."
 msgstr "Chargement des albums... Veuillez patienter."
 
-#: src/mpdBrowserBase.py:339
+#: src/mpdBrowserBase.py:353
 #, python-format
 msgid "You have %i albums."
 msgstr "Vous avez %i albums."
 
-#: src/mpdBrowserBase.py:390 src/mpdBrowserDatabase.py:82
+#: src/mpdBrowserBase.py:407 src/mpdBrowserDatabase.py:88
 msgid "Can't contact mpd!"
 msgstr "Impossible de contacter mpd!"
 
@@ -132,15 +130,7 @@ msgstr "Appuyez sur F5"
 msgid "Informations"
 msgstr "Informations"
 
-#: src/mpdBrowserCovers.py:150 src/mpdBrowserCovers.py:155
-msgid "Creating covers cache: "
-msgstr "Creation du cache des pochettes: "
-
-#: src/mpdBrowserCovers.py:158
-msgid "Can't access covers cache"
-msgstr "Impossible d'accéder au cache des pochettes"
-
-#: src/mpdBrowserDatabase.py:113 src/mpdBrowserDatabase.py:115
-#: src/mpdBrowserDatabase.py:117
+#: src/mpdBrowserDatabase.py:122 src/mpdBrowserDatabase.py:124
+#: src/mpdBrowserDatabase.py:126
 msgid "Unknown"
 msgstr "Inconnu"
