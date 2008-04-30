@@ -160,8 +160,8 @@ class mpdBrowserBase:
         self.__scrolled.add (self.__view.iconview)
         vadjustement = self.__scrolled.get_vadjustment ()
         hadjustement = self.__scrolled.get_hadjustment ()
-        vadjustement.connect ("value-changed", self.__scrollEvent)
-        hadjustement.connect ("value-changed", self.__scrollEvent)
+        vadjustement.connect ("value-changed", self.__scrollEventCb)
+        hadjustement.connect ("value-changed", self.__scrollEventCb)
         
         vbox = gtk.VBox ()
         vbox.pack_start (self.__filterBox, False, True, 0)   
@@ -171,9 +171,6 @@ class mpdBrowserBase:
               
         self.__window.show_all ()        
     
-    
-    def __scrollEvent (self, data):
-        self.__view.update()
 
     def __scanning (self):
         """
@@ -346,7 +343,14 @@ class mpdBrowserBase:
         """
         self.__window.present ()
 
-    
+        
+    def __scrollEventCb (self, data):
+        """
+            On scroll, update view
+        """
+        self.__view.update()
+        
+        
     def __statusCb (self, data, info):
         """
             Update status bar message
