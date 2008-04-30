@@ -49,7 +49,7 @@ class mpdBrowserBase:
         self.__window.set_role ("mpdBrowser")
         pixbuf = gtk.gdk.pixbuf_new_from_file (icon)
         self.__window.set_icon (pixbuf)
-        self.__window.connect ("configure_event", self.__configEvent)
+        self.__window.connect ("configure_event", self.__configEventCb)
         self.__window.connect ("destroy", self.quit)
         
         # Create IPC service
@@ -386,7 +386,7 @@ class mpdBrowserBase:
         self.__view.iconview.grab_focus ()
    
    
-    def __configEvent (self, widget, allocation):
+    def __configEventCb (self, widget, allocation):
         """
             Track main window size/pos changes
         """
