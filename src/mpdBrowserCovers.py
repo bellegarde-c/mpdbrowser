@@ -91,8 +91,8 @@ class mpdBrowserCovers (IdleObject):
         path_ = path.replace ("/", "_")
         
         cover = self.__findCover (path)
-        if cover == empty and self.__hideMissing:
-            raise MissingCover
+        #if cover == empty and self.__hideMissing:
+        #    raise MissingCover
             
         if self.__coverComp:
             filePath = self.__shareDir + "/composite/" + path_ + ".jpg"

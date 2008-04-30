@@ -43,6 +43,7 @@ class mpdBrowserBase:
         self.__conf = mpdBrowserCfg ()
         self.__albums  = []
         self.__currentStatusMessage = ""
+        self.__updateViewOnExpose = False
         
         # Create main window        
         self.__window = gtk.Window (gtk.WINDOW_TOPLEVEL)
@@ -137,7 +138,9 @@ class mpdBrowserBase:
         
             
             self.__initDB ()
-            self.__view = mpdBrowserView (self.__conf.get ("shownames"))
+            self.__view = mpdBrowserView (self.__conf.get ("shownames"),
+                                          self.__conf.get ("stylizedcovers"),
+                                          self.__conf.get ("hidemissing"))
             self.__view.iconview.connect ("event-after", self.__eventsFilter)
             
         except:
@@ -155,6 +158,10 @@ class mpdBrowserBase:
         self.__DB.start ()        
         
         self.__scrolled.add (self.__view.iconview)
+        vadjustement = self.__scrolled.get_vadjustment ()
+        hadjustement = self.__scrolled.get_hadjustment ()
+        vadjustement.connect ("value-changed", self.__scrollEvent)
+        hadjustement.connect ("value-changed", self.__scrollEvent)
         
         vbox = gtk.VBox ()
         vbox.pack_start (self.__filterBox, False, True, 0)   
@@ -165,6 +172,9 @@ class mpdBrowserBase:
         self.__window.show_all ()        
     
     
+    def __scrollEvent (self, data):
+        self.__view.update()
+
     def __scanning (self):
         """
             Set widgets while scanning
@@ -214,7 +224,7 @@ class mpdBrowserBase:
             elif event.type == gtk.gdk.MOTION_NOTIFY:
                 x,y = event.get_coords ()
                 path = iconview.get_path_at_pos (int (x), int (y))
-                pos = self.__view.getRealItemPos (path)  
+                pos = self.__view.getRealItemPos (path)
                 self.__motionEvent (pos)
             elif event.type == gtk.gdk.KEY_RELEASE:
                 if event.keyval == gtk.keysyms.Return:
@@ -241,7 +251,11 @@ class mpdBrowserBase:
                             self.__filterPattern.grab_focus ()
                         else:
                             self.__filterHideCb (None)
-               
+            elif event.type == gtk.gdk.EXPOSE: # We need to update visible icons
+                if self.__updateViewOnExpose:
+                    self.__view.update ()
+                    self.__updateViewOnExpose = False
+                    
         except:
             print "mpdBrowserBase::__eventsFilter():"
             print sys.exc_info ()
@@ -268,6 +282,7 @@ class mpdBrowserBase:
             Filter view
         """
         self.__view.clear ()
+        self.__updateViewOnExpose = True
         self.__view.populate (self.__albums,
                               self.__filterPattern.get_text (),
                               self.__filterCombo.get_active ())
@@ -375,9 +390,11 @@ class mpdBrowserBase:
             Add albums to iconview
         """
         self.__window.set_title ("mpdBrowser")
-        self.__statusBar.push (self.__contId, 
+        self.__statusBar.push (self.__contId,
                                _("You have %i albums.") % len (albums))
         self.__albums = albums
+        self.__albums.sort ()
+        self.__updateViewOnExpose = True
         self.__view.populate (self.__albums,
                               self.__filterPattern.get_text (),
                               self.__filterCombo.get_active ())
