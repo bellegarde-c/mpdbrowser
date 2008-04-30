@@ -23,7 +23,7 @@ class mpdBrowserCfg:
         self.__options = {   
          "connection": ("mpdserver", "mpdport", "mpdpasswd", "collectionpath"),
          "window"    : ("x", "y","width","height"),
-         "options"   : ("stylizedcovers", "shownames", "hidemissing")
+         "options"   : ("stylizedcovers", "shownames")
                          }
         # Defaults values
         self.__defaults = {
@@ -36,8 +36,7 @@ class mpdBrowserCfg:
                             "width"         : 640,
                             "height"        : 480,
                             "stylizedcovers": True,
-                            "shownames"     : False,
-                            "hidemissing"   : False
+                            "shownames"     : False
                            }
         # Defaults types
         self.__types = {
@@ -47,8 +46,7 @@ class mpdBrowserCfg:
                             "width"         : "int",
                             "height"        : "int",
                             "stylizedcovers": "bool",
-                            "shownames"     : "bool",
-                            "hidemissing"   : "bool"
+                            "shownames"     : "bool"
                            }
                        
         self.__optionsValues = {}

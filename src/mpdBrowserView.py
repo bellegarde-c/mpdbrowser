@@ -18,16 +18,16 @@ from mpdBrowserCovers import *
 
 class mpdBrowserView:
 
-    def __init__ (self, showNames, stylizedCovers, hideMissing):
+    def __init__ (self, showNames, stylizedCovers):
         """
             Create icon view
         """
         self.iconview = gtk.IconView ()
 
-        self.__covers = mpdBrowserCovers (stylizedCovers, hideMissing)
+        self.__covers = mpdBrowserCovers (stylizedCovers)
         self.__covers.createDirs ()
         self.__emptyCover = gtk.gdk.pixbuf_new_from_file_at_size (empty, 128, 128)
-        
+        self.__case = gtk.gdk.pixbuf_new_from_file_at_size (case, 128, 128)
         self.__model = gtk.ListStore (gtk.gdk.Pixbuf, str)
         
         self.__albums = []
@@ -57,9 +57,13 @@ class mpdBrowserView:
                 if realPos not in self.__coverUpdated:
                     iter = self.__model.get_iter ((i,))
                     self.__coverUpdated.append (realPos)
-                    pixbuf = self.__covers.get (self.__albums[realPos]\
-                                                             [ALBUM_PATH])        
-                    self.__model.set_value (iter, 0, pixbuf)
+                    try:
+                        pixbuf = self.__covers.get (self.__albums[realPos]\
+                                                                 [ALBUM_PATH])
+                        self.__model.set_value (iter, 0, pixbuf)
+                    except: # No update, cover missing
+                        pass
+
 
         
     def updateColumns (self, showNames):

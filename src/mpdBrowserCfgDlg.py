@@ -75,11 +75,8 @@ class mpdBrowserCfgDlg (gobject.GObject):
         showNames.set_active (options["shownames"])
         stylizedCovers = gtk.CheckButton (_("Stylized covers"))
         stylizedCovers.set_active (options["stylizedcovers"])
-        hideMissing = gtk.CheckButton (_("Hide missing covers"))
-        hideMissing.set_active (options["hidemissing"])
         vboxOpt.pack_start (showNames, False, False, 0)
         vboxOpt.pack_start (stylizedCovers, False, False, 0)
-        vboxOpt.pack_start (hideMissing, False, False, 0)
         prefsOptFrame.add (vboxOpt)
         
         prefsCacheFrame = gtk.Frame (_("Cache:"))
@@ -152,17 +149,17 @@ class mpdBrowserCfgDlg (gobject.GObject):
                                                      gtk.RESPONSE_CLOSE)
         closeButton.connect ("clicked", self.__updateOpts, hostEntry, 
                              portEntry, passwordEntry, dirEntry, 
-                             showNames, stylizedCovers, hideMissing)
+                             showNames, stylizedCovers)
                              
         self.__prefsWindow.connect ("destroy", self.__updateOpts, hostEntry, 
                                     portEntry, passwordEntry, dirEntry, 
-                                    showNames, stylizedCovers, hideMissing)
+                                    showNames, stylizedCovers)
         self.__prefsWindow.vbox.pack_start (notebook, False, False, 0)
         self.__prefsWindow.show_all ()
         closeButton.grab_focus ()
         
     def __updateOpts (self, data, hostEntry, portEntry, passwordEntry, dirEntry, 
-                      showNames, stylizedCovers, hideMissing):
+                      showNames, stylizedCovers):
         """
             emit update_opt signal to update Options and reload view
         """
@@ -172,8 +169,7 @@ class mpdBrowserCfgDlg (gobject.GObject):
                             "mpdpasswd"     : passwordEntry.get_text (),
                             "collectionpath": dirEntry.get_text (),
                             "shownames"     : showNames.get_active (),
-                            "stylizedcovers": stylizedCovers.get_active (),
-                            "hidemissing"   : hideMissing.get_active()
+                            "stylizedcovers": stylizedCovers.get_active ()
                           }
         self.__prefsWindow.hide ()
         self.emit ("update_opts")

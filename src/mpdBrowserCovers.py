@@ -28,7 +28,7 @@ class MissingCover(Exception):
 
 class mpdBrowserCovers (IdleObject):
                    
-    def __init__ (self, stylizedCovers, hideMissing):
+    def __init__ (self, stylizedCovers):
         """
             Load composite effect file if needed
         """
@@ -39,13 +39,11 @@ class mpdBrowserCovers (IdleObject):
             self.__coverComp = True
         else:
             self.__coverComp = False
-    
-        self.__hideMissing = hideMissing
         
         
     def __findCover (self, dirPath):
         """
-            Search a cover in dir
+            Search a cover in dir, raise missingCover
         """
         try:
             for name in os.listdir (dirPath):
@@ -54,10 +52,10 @@ class mpdBrowserCovers (IdleObject):
                     or name.endswith (".png") or name.endswith (".gif"):
                         return dirPath + '/' + name
 
-            return empty
+            raise MissingCover
         except:
             print sys.exc_info ()
-            return empty
+            raise MissingCover
 
 
     def __coverComposite (self, cover, w, h):    # Thanks to Sonata devs ;)
@@ -86,13 +84,12 @@ class mpdBrowserCovers (IdleObject):
     def get (self, path):
         """
             Return pixbuf cover for album at path
+            raise missingCover
         """
         # cache file will be _complete_path_to_album.jpg
         path_ = path.replace ("/", "_")
         
         cover = self.__findCover (path)
-        #if cover == empty and self.__hideMissing:
-        #    raise MissingCover
             
         if self.__coverComp:
             filePath = self.__shareDir + "/composite/" + path_ + ".jpg"

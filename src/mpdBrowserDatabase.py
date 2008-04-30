@@ -33,7 +33,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
            gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, [])
             }
 
-    def __init__ (self, connection, path, stylizedCovers, hideMissing):
+    def __init__ (self, connection, path, stylizedCovers):
         """
             Read mpdBrowser conf, init connection and covers cache
         """

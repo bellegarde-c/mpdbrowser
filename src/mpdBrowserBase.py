@@ -139,8 +139,7 @@ class mpdBrowserBase:
             
             self.__initDB ()
             self.__view = mpdBrowserView (self.__conf.get ("shownames"),
-                                          self.__conf.get ("stylizedcovers"),
-                                          self.__conf.get ("hidemissing"))
+                                          self.__conf.get ("stylizedcovers"))
             self.__view.iconview.connect ("event-after", self.__eventsFilter)
             
         except:
@@ -188,8 +187,7 @@ class mpdBrowserBase:
         """
         self.__DB = mpdBrowserDatabase (self.__conn,
                                         self.__path,
-                                        self.__conf.get ("stylizedcovers"),
-                                        self.__conf.get ("hidemissing"))
+                                        self.__conf.get ("stylizedcovers"))
         self.__DB.connect ("scanned", self.__scannedCb)
         self.__DB.connect ("status", self.__statusCb)
         self.__DB.connect ("progress", self.__progressCb)
@@ -302,7 +300,7 @@ class mpdBrowserBase:
         """
         updateViewOpts = "shownames"
         updateDbOpts   =  ("mpdserver", "mpdport", "mpdpasswd", 
-                           "collectionpath", "stylizedcovers", "hidemissing")
+                           "collectionpath", "stylizedcovers")
         updateView = False
         updateDB = False
         
