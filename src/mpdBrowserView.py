@@ -92,6 +92,7 @@ class mpdBrowserView:
         self.__model.clear ()
         self.__realItemPos = []
         self.__coverUpdated = []
+        self.__albums = []
         
         
     def visibleItemsNb (self):
