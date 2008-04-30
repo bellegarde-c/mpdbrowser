@@ -14,6 +14,7 @@
 
 import os, threading, sys
 import gtk
+from mpdBrowserCovers import *
 from idleObject import *
 
 class mpdBrowserDatabase (threading.Thread, IdleObject):
@@ -33,7 +34,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
            gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, [])
             }
 
-    def __init__ (self, connection, path, stylizedCovers):
+    def __init__ (self, connection, path, stylizedCovers, hideMissing):
         """
             Read mpdBrowser conf, init connection and covers cache
         """
@@ -44,6 +45,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
 
         self.__conn = connection
         self.__path = path
+        self.__covers = mpdBrowserCovers (stylizedCovers, hideMissing)
         
         
     def __cacheMessageCb (self, userData, info):
@@ -60,6 +62,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
         try:
             albumList = []
             self.__conn.open ()
+            self.__covers.createDirs ()
             # Get albums list
             albums = self.__conn.list ('album')
             
@@ -72,7 +75,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
                 tmpAlbums = self.__getAlbumInfos (album)
                 albumList += tmpAlbums
                 nbAlbums += 1
-                if not nbAlbums % 10:
+                if not nbAlbums % 50: # Speed gain
                     self.emit ("progress", 
                                float (nbAlbums) / float (totalAlbums))
 
@@ -162,8 +165,9 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
                     except:
                         genre = infos[i]['genre']
                     
+                    pixbuf = self.__covers.get (path)
                     currentPath = path
-                    list.append ((genre, artist, album, path))
+                    list.append ((genre, artist, album, path, pixbuf))
                 except: # Missing cover
                     pass
 

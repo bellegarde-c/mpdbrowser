@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-30 15:16+0200\n"
+"POT-Creation-Date: 2008-04-29 13:03+0200\n"
 "PO-Revision-Date: 2008-04-02 11:15+0200\n"
 "Last-Translator: Bellegarde Cedric <gnumdk@gmail.com>\n"
 "Language-Team: French\n"
@@ -17,151 +17,153 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/mpdBrowserBase.py:104
+#: src/mpdBrowserBase.py:103
 msgid "Filter"
 msgstr "Filtre"
 
-#: src/mpdBrowserBase.py:115
+#: src/mpdBrowserBase.py:114
 msgid "All"
 msgstr "Tout"
 
-#: src/mpdBrowserBase.py:116
+#: src/mpdBrowserBase.py:115
 msgid "Artist"
 msgstr "Artiste"
 
-#: src/mpdBrowserBase.py:117
+#: src/mpdBrowserBase.py:116
 msgid "Album"
 msgstr "Album"
 
-#: src/mpdBrowserBase.py:118
+#: src/mpdBrowserBase.py:117
 msgid "Genre"
 msgstr "Style"
 
-#: src/mpdBrowserBase.py:179
+#: src/mpdBrowserBase.py:173
 msgid "Loading..."
 msgstr "Chargement..."
 
-#: src/mpdBrowserBase.py:181
+#: src/mpdBrowserBase.py:175
 msgid "Loading albums... Please wait."
 msgstr "Chargement des albums... Veuillez patienter."
 
-#: src/mpdBrowserBase.py:380 src/mpdBrowserBase.py:472
-#: src/mpdBrowserDatabase.py:85
+#: src/mpdBrowserBase.py:363 src/mpdBrowserBase.py:453
+#: src/mpdBrowserDatabase.py:88
 msgid "Can't contact mpd!"
 msgstr "Impossible de contacter mpd!"
 
-#: src/mpdBrowserBase.py:396
+#: src/mpdBrowserBase.py:379
 #, python-format
 msgid "You have %i albums."
 msgstr "Vous avez %i albums."
 
-#: src/mpdBrowserCfgDlg.py:35 src/mpdBrowserCfgDlg.py:143
+#: src/mpdBrowserCfgDlg.py:36 src/mpdBrowserCfgDlg.py:147
 msgid "Preferences"
 msgstr "Préférences"
 
-#: src/mpdBrowserCfgDlg.py:42
+#: src/mpdBrowserCfgDlg.py:43
 msgid "Host:"
 msgstr "Serveur:"
 
-#: src/mpdBrowserCfgDlg.py:46
+#: src/mpdBrowserCfgDlg.py:47
 msgid "Port:"
 msgstr "Port:"
 
-#: src/mpdBrowserCfgDlg.py:50
+#: src/mpdBrowserCfgDlg.py:51
 msgid "Password:"
 msgstr "Mot de passe:"
 
-#: src/mpdBrowserCfgDlg.py:55
+#: src/mpdBrowserCfgDlg.py:56
 msgid "Music dir:"
 msgstr "Répertoire de musique:"
 
-#: src/mpdBrowserCfgDlg.py:59
+#: src/mpdBrowserCfgDlg.py:60
 msgid "Connection:"
 msgstr "Connexion:"
 
-#: src/mpdBrowserCfgDlg.py:72
+#: src/mpdBrowserCfgDlg.py:73
 msgid "Options:"
 msgstr "Options: "
 
-#: src/mpdBrowserCfgDlg.py:74
+#: src/mpdBrowserCfgDlg.py:75
 msgid "Show albums names"
 msgstr "Montrer le nom des albums"
 
-#: src/mpdBrowserCfgDlg.py:76
+#: src/mpdBrowserCfgDlg.py:77
 msgid "Stylized covers"
 msgstr "Pochettes stylisées"
 
-#: src/mpdBrowserCfgDlg.py:82
+#: src/mpdBrowserCfgDlg.py:79
+msgid "Hide missing covers"
+msgstr "Cacher les pochettes manquantes"
+
+#: src/mpdBrowserCfgDlg.py:86
 msgid "Cache:"
 msgstr "Cache: "
 
-#: src/mpdBrowserCfgDlg.py:83
+#: src/mpdBrowserCfgDlg.py:87
 msgid "Clear:"
 msgstr "Effacer:"
 
-#: src/mpdBrowserCfgDlg.py:100
+#: src/mpdBrowserCfgDlg.py:104
 msgid "How play an album?"
 msgstr "Comment lire un album?"
 
-#: src/mpdBrowserCfgDlg.py:102
+#: src/mpdBrowserCfgDlg.py:106
 msgid "Just click on it"
 msgstr "Cliquez dessus"
 
-#: src/mpdBrowserCfgDlg.py:105
+#: src/mpdBrowserCfgDlg.py:109
 msgid "How enqueue an album?"
 msgstr "Comment ajouter un album?"
 
-#: src/mpdBrowserCfgDlg.py:107
+#: src/mpdBrowserCfgDlg.py:111
 msgid "Just click on it with <Ctrl> pressed"
 msgstr "Cliquez dessus en maintenant <Ctrl> enfoncé"
 
-#: src/mpdBrowserCfgDlg.py:110
+#: src/mpdBrowserCfgDlg.py:114
 msgid "How play a song?"
 msgstr "Comment lire un morceau?"
 
-#: src/mpdBrowserCfgDlg.py:112
+#: src/mpdBrowserCfgDlg.py:116
 msgid "Just right click on album, then select song"
 msgstr "Clique droit sur un album, puis selectionnez la chanson"
 
-#: src/mpdBrowserCfgDlg.py:115
+#: src/mpdBrowserCfgDlg.py:119
 msgid "How enqueue a song?"
 msgstr "Comment ajouter un morceau?"
 
-#: src/mpdBrowserCfgDlg.py:118
+#: src/mpdBrowserCfgDlg.py:122
 msgid "Just right click on album with <Ctrl> pressed, then select song"
-msgstr ""
-"Clique droit sur un album en maintenant <Ctrl> enfoncé, puis selectionnez la "
-"chanson"
+msgstr "Clique droit sur un album en maintenant <Ctrl> enfoncé, puis selectionnez la chanson"
 
-#: src/mpdBrowserCfgDlg.py:121
+#: src/mpdBrowserCfgDlg.py:125
 msgid "How to add a cover?"
 msgstr "Comment ajouter une pochette?"
 
-#: src/mpdBrowserCfgDlg.py:123
+#: src/mpdBrowserCfgDlg.py:127
 msgid "Just copy an image to album folder"
 msgstr "Copiez une image dans le répertoire de l'album"
 
-#: src/mpdBrowserCfgDlg.py:126
+#: src/mpdBrowserCfgDlg.py:130
 msgid "How to search for something?"
 msgstr "Comment faire une recherche?"
 
-#: src/mpdBrowserCfgDlg.py:128
+#: src/mpdBrowserCfgDlg.py:132
 msgid "Just press Ctrl + f"
 msgstr "Appuyez sur Ctrl + f"
 
-#: src/mpdBrowserCfgDlg.py:131
+#: src/mpdBrowserCfgDlg.py:135
 msgid "How to refresh view?"
 msgstr "Comment rafraichir la vue?"
 
-#: src/mpdBrowserCfgDlg.py:133
+#: src/mpdBrowserCfgDlg.py:137
 msgid "Just press F5"
 msgstr "Appuyez sur F5"
 
-#: src/mpdBrowserCfgDlg.py:145
+#: src/mpdBrowserCfgDlg.py:149
 msgid "Informations"
 msgstr "Informations"
 
-#: src/mpdBrowserDatabase.py:106 src/mpdBrowserDatabase.py:146
-#: src/mpdBrowserDatabase.py:148 src/mpdBrowserDatabase.py:150
+#: src/mpdBrowserDatabase.py:109 src/mpdBrowserDatabase.py:149
+#: src/mpdBrowserDatabase.py:151 src/mpdBrowserDatabase.py:153
 msgid "Unknown"
 msgstr "Inconnu"

@@ -28,23 +28,21 @@ class MissingCover(Exception):
 
 class mpdBrowserCovers (IdleObject):
                    
-    def __init__ (self, stylizedCovers):
+    def __init__ (self, stylizedCovers, hideMissing):
         """
             Load composite effect file if needed
         """
-        IdleObject.__init__(self) #TODO
+        IdleObject.__init__(self)
         
         if stylizedCovers == True:
             self.__case = gtk.gdk.pixbuf_new_from_file (case)
             self.__coverComp = True
-            self.__cacheDir = os.path.expanduser ("~") + \
-                              "/.local/share/mpdBrowser/composite/"
         else:
             self.__coverComp = False
-            self.__cacheDir = os.path.expanduser ("~") + \
-                              "/.local/share/mpdBrowser/normal/"
-
-
+    
+        self.__hideMissing = hideMissing
+        
+        
     def __findCover (self, dirPath):
         """
             Search a cover in dir
@@ -56,10 +54,10 @@ class mpdBrowserCovers (IdleObject):
                     or name.endswith (".png") or name.endswith (".gif"):
                         return dirPath + '/' + name
 
-            return None
+            return empty
         except:
             print sys.exc_info ()
-            return None
+            return empty
 
 
     def __coverComposite (self, cover, w, h):    # Thanks to Sonata devs ;)
@@ -88,16 +86,16 @@ class mpdBrowserCovers (IdleObject):
     def get (self, path):
         """
             Return pixbuf cover for album at path
-            raise missingCover
         """
         # cache file will be _complete_path_to_album.jpg
-        filePath = self.__cacheDir + path.replace ("/", "_") + ".jpg"
-        cover = self.__findCover (path)
+        path_ = path.replace ("/", "_")
         
-        if cover == None:
-            raise missingCover
-              
+        cover = self.__findCover (path)
+        if cover == empty and self.__hideMissing:
+            raise MissingCover
+            
         if self.__coverComp:
+            filePath = self.__shareDir + "/composite/" + path_ + ".jpg"
             if not os.access (filePath, os.F_OK):
                 pixbuf = gtk.gdk.pixbuf_new_from_file_at_size (cover,
                                                                128, 128)
@@ -114,6 +112,7 @@ class mpdBrowserCovers (IdleObject):
             else:
                 pixbuf = gtk.gdk.pixbuf_new_from_file (filePath)
         else:
+            filePath = self.__shareDir + "/normal/" + path_ + ".jpg"
             if not os.access (filePath, os.F_OK):
                 pixbuf = gtk.gdk.pixbuf_new_from_file_at_size (cover,
                                                                128, 128)
@@ -128,7 +127,7 @@ class mpdBrowserCovers (IdleObject):
         return pixbuf
     
         
-    def createCacheDirs (self):
+    def createDirs (self):
         """
             Create cache directories
         """
@@ -138,11 +137,17 @@ class mpdBrowserCovers (IdleObject):
                 shareDir += dir
                 if not os.access (shareDir, os.F_OK):
                     os.mkdir (shareDir)
-                        
-            if not os.access (shareDir + "/composite", os.F_OK):
+                    
+            if self.__coverComp and not \
+               os.access (shareDir + "/composite", os.F_OK):
                 os.mkdir (shareDir + "/composite")
                 
-            if not os.access (shareDir + "/normal", os.F_OK):
+            if not self.__coverComp and not \
+               os.access (shareDir + "/normal", os.F_OK):
                 os.mkdir (shareDir + "/normal")  
                 
         except OSError: pass
+
+        self.__shareDir = shareDir
+
+            

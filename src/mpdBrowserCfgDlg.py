@@ -11,10 +11,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor Boston, MA 02110-1301,  USA
-import gtk, pango, gobject
+import gtk, pango
 import os, sys
+from idleObject import *
+from mpdBrowserUtils import *
 
-class mpdBrowserCfgDlg (gobject.GObject):
+class mpdBrowserCfgDlg (IdleObject):
     
 
     __gsignals__ =  { 
@@ -29,7 +31,7 @@ class mpdBrowserCfgDlg (gobject.GObject):
     
         self.__options = {}
         
-        gobject.GObject.__init__ (self)
+        IdleObject.__init__ (self)
         
         self.__prefsWindow = gtk.Dialog (_("Preferences"), parent,
                                          flags=gtk.DIALOG_DESTROY_WITH_PARENT)
@@ -74,8 +76,11 @@ class mpdBrowserCfgDlg (gobject.GObject):
         showNames.set_active (options["shownames"])
         stylizedCovers = gtk.CheckButton (_("Stylized covers"))
         stylizedCovers.set_active (options["stylizedcovers"])
+        hideMissing = gtk.CheckButton (_("Hide missing covers"))
+        hideMissing.set_active (options["hidemissing"])
         vboxOpt.pack_start (showNames, False, False, 0)
         vboxOpt.pack_start (stylizedCovers, False, False, 0)
+        vboxOpt.pack_start (hideMissing, False, False, 0)
         prefsOptFrame.add (vboxOpt)
         
         prefsCacheFrame = gtk.Frame (_("Cache:"))
@@ -148,17 +153,17 @@ class mpdBrowserCfgDlg (gobject.GObject):
                                                      gtk.RESPONSE_CLOSE)
         closeButton.connect ("clicked", self.__updateOpts, hostEntry, 
                              portEntry, passwordEntry, dirEntry, 
-                             showNames, stylizedCovers)
+                             showNames, stylizedCovers, hideMissing)
                              
         self.__prefsWindow.connect ("destroy", self.__updateOpts, hostEntry, 
                                     portEntry, passwordEntry, dirEntry, 
-                                    showNames, stylizedCovers)
+                                    showNames, stylizedCovers, hideMissing)
         self.__prefsWindow.vbox.pack_start (notebook, False, False, 0)
         self.__prefsWindow.show_all ()
         closeButton.grab_focus ()
         
     def __updateOpts (self, data, hostEntry, portEntry, passwordEntry, dirEntry, 
-                      showNames, stylizedCovers):
+                      showNames, stylizedCovers, hideMissing):
         """
             emit update_opt signal to update Options and reload view
         """
@@ -168,7 +173,8 @@ class mpdBrowserCfgDlg (gobject.GObject):
                             "mpdpasswd"     : passwordEntry.get_text (),
                             "collectionpath": dirEntry.get_text (),
                             "shownames"     : showNames.get_active (),
-                            "stylizedcovers": stylizedCovers.get_active ()
+                            "stylizedcovers": stylizedCovers.get_active (),
+                            "hidemissing"   : hideMissing.get_active()
                           }
         self.__prefsWindow.hide ()
         self.emit ("update_opts")
@@ -177,16 +183,18 @@ class mpdBrowserCfgDlg (gobject.GObject):
         """
             Clear covers cache
         """
+        userDir = os.path.expanduser ("~")
+        dirList = getDirListing ("%s/.local/share/mpdBrowser" % userDir, True)
         try:
-            userDir = os.path.expanduser ("~")
-            for root, dirs, files in os.walk (
-                                 "%s/.local/share/mpdBrowser" % userDir, False):
-                for name in files:
-                    os.unlink (os.path.join (root, name))
+            for item in dirList:    
+                if os.path.isdir (item):
+                    os.rmdir (item)
+                else:
+                    os.unlink (item)
+            os.rmdir ("%s/.local/share/mpdBrowser" % userDir)
         except: 
             print "mpdBrowserCfgDlg::__clearCache(): "
             print sys.exc_info ()
-        
         
     def getUserOptions (self):
         """

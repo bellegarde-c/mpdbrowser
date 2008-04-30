@@ -14,23 +14,16 @@
 import os, sys
 import gtk
 from mpdBrowserDefine import *
-from mpdBrowserCovers import *
 
 class mpdBrowserView:
 
-    def __init__ (self, showNames, stylizedCovers):
+    def __init__ (self, showNames):
         """
             Create icon view
         """
         self.iconview = gtk.IconView ()
-
-        self.__covers = mpdBrowserCovers (stylizedCovers)
-        self.__covers.createCacheDirs ()
-        self.__emptyCover = gtk.gdk.pixbuf_new_from_file_at_size (empty, 128, 128)
-        self.__case = gtk.gdk.pixbuf_new_from_file_at_size (case, 128, 128)
-        self.__model = gtk.ListStore (gtk.gdk.Pixbuf, str)
         
-        self.__albums = []
+        self.__model = gtk.ListStore (gtk.gdk.Pixbuf, str)
         
         if showNames:
             self.iconview.set_text_column (1)
@@ -43,43 +36,8 @@ class mpdBrowserView:
         self.__realItemPos = [] # For filtered view
         self.__countItems = 0
         self.__showNames = showNames
-        self.__coverUpdated = []
 
-
-    def update (self):
-        """
-            Update covers in visible range
-        """
-        path = self.iconview.get_visible_range ()
-        if path != None:
-            for i in range (path[0][0], path[1][0] + 1):
-                realPos = self.getRealItemPos ((i, ))
-                if realPos not in self.__coverUpdated:
-                    iter = self.__model.get_iter ((i,))
-                    self.__coverUpdated.append (realPos)
-                    try:
-                        pixbuf = self.__covers.get (self.__albums[realPos]\
-                                                                 [ALBUM_PATH])
-                        self.__model.set_value (iter, 0, pixbuf)
-                    except: # No update, cover missing
-                        pass
-
-
-    def resetCovers (self):
-        """
-            Reset displayed covers
-        """
-        self.__coverUpdated = []
-
- 
-    def changeCoverType (self, stylizedCovers):
-        """
-            Change displayed cover type
-        """
-        self.__covers = mpdBrowserCovers (stylizedCovers)
-        self.__covers.createCacheDirs ()
         
- 
     def updateColumns (self, showNames):
         """
             Update iconview columns
@@ -109,8 +67,6 @@ class mpdBrowserView:
         self.__countItems = 0
         self.__model.clear ()
         self.__realItemPos = []
-        self.__coverUpdated = []
-        self.__albums = []
         
         
     def visibleItemsNb (self):
@@ -124,19 +80,20 @@ class mpdBrowserView:
         """
             Populate iconview
         """
-        self.__albums  = albums
+
         i = 0
         self.__countItems = 0
+        albums.sort ()
 
-        while i < len (self.__albums):
+        while i < len (albums):
             try:
                 if filter != "":
                     # Filter by Genre, Artist, Album
-                    if (filter.lower() not in albums[i][ALBUM_GENRE].lower() or\
+                    if (filter.lower() not in albums[i][ALBUM_GENRE].lower() or \
                         filterType not in (FILTER_ALL, FILTER_GENRE)) \
-                    and (filter.lower() not in albums[i][ALBUM_ARTIST].lower() or\
+                    and (filter.lower() not in albums[i][ALBUM_ARTIST].lower() or \
                          filterType not in (FILTER_ALL, FILTER_ARTIST)) \
-                    and (filter.lower() not in albums[i][ALBUM_NAME].lower() or\
+                    and (filter.lower() not in albums[i][ALBUM_NAME].lower() or \
                          filterType not in (FILTER_ALL, FILTER_ALBUM)): 
                         i+=1 
                         continue
@@ -146,7 +103,7 @@ class mpdBrowserView:
                 else:
                     name = albums[i][ALBUM_NAME]
       
-                self.__model.append ([self.__emptyCover, name])
+                self.__model.append ([albums[i][ALBUM_PIXBUF], name])
                 self.__realItemPos.append (i)
                 self.__countItems += 1
             except: 

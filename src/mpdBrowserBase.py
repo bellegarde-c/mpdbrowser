@@ -43,14 +43,13 @@ class mpdBrowserBase:
         self.__conf = mpdBrowserCfg ()
         self.__albums  = []
         self.__currentStatusMessage = ""
-        self.__updateViewOnExpose = False
         
         # Create main window        
         self.__window = gtk.Window (gtk.WINDOW_TOPLEVEL)
         self.__window.set_role ("mpdBrowser")
         pixbuf = gtk.gdk.pixbuf_new_from_file (icon)
         self.__window.set_icon (pixbuf)
-        self.__window.connect ("configure_event", self.__configEventCb)
+        self.__window.connect ("configure_event", self.__configEvent)
         self.__window.connect ("destroy", self.quit)
         
         # Create IPC service
@@ -138,8 +137,7 @@ class mpdBrowserBase:
         
             
             self.__initDB ()
-            self.__view = mpdBrowserView (self.__conf.get ("shownames"),
-                                          self.__conf.get ("stylizedcovers"))
+            self.__view = mpdBrowserView (self.__conf.get ("shownames"))
             self.__view.iconview.connect ("event-after", self.__eventsFilter)
             
         except:
@@ -157,10 +155,6 @@ class mpdBrowserBase:
         self.__DB.start ()        
         
         self.__scrolled.add (self.__view.iconview)
-        vadjustement = self.__scrolled.get_vadjustment ()
-        hadjustement = self.__scrolled.get_hadjustment ()
-        vadjustement.connect ("value-changed", self.__scrollEventCb)
-        hadjustement.connect ("value-changed", self.__scrollEventCb)
         
         vbox = gtk.VBox ()
         vbox.pack_start (self.__filterBox, False, True, 0)   
@@ -170,7 +164,7 @@ class mpdBrowserBase:
               
         self.__window.show_all ()        
     
-
+    
     def __scanning (self):
         """
             Set widgets while scanning
@@ -187,7 +181,8 @@ class mpdBrowserBase:
         """
         self.__DB = mpdBrowserDatabase (self.__conn,
                                         self.__path,
-                                        self.__conf.get ("stylizedcovers"))
+                                        self.__conf.get ("stylizedcovers"),
+                                        self.__conf.get ("hidemissing"))
         self.__DB.connect ("scanned", self.__scannedCb)
         self.__DB.connect ("status", self.__statusCb)
         self.__DB.connect ("progress", self.__progressCb)
@@ -219,7 +214,7 @@ class mpdBrowserBase:
             elif event.type == gtk.gdk.MOTION_NOTIFY:
                 x,y = event.get_coords ()
                 path = iconview.get_path_at_pos (int (x), int (y))
-                pos = self.__view.getRealItemPos (path)
+                pos = self.__view.getRealItemPos (path)  
                 self.__motionEvent (pos)
             elif event.type == gtk.gdk.KEY_RELEASE:
                 if event.keyval == gtk.keysyms.Return:
@@ -246,11 +241,7 @@ class mpdBrowserBase:
                             self.__filterPattern.grab_focus ()
                         else:
                             self.__filterHideCb (None)
-            elif event.type == gtk.gdk.EXPOSE: # We need to update visible icons
-                if self.__updateViewOnExpose:
-                    self.__view.update ()
-                    self.__updateViewOnExpose = False
-                    
+               
         except:
             print "mpdBrowserBase::__eventsFilter():"
             print sys.exc_info ()
@@ -277,7 +268,6 @@ class mpdBrowserBase:
             Filter view
         """
         self.__view.clear ()
-        self.__updateViewOnExpose = True
         self.__view.populate (self.__albums,
                               self.__filterPattern.get_text (),
                               self.__filterCombo.get_active ())
@@ -299,11 +289,9 @@ class mpdBrowserBase:
             Save options, update DB and/or View
         """
         updateViewOpts = "shownames"
-        updateCoversOpts = "stylizedcovers"
         updateDbOpts   =  ("mpdserver", "mpdport", "mpdpasswd", 
-                           "collectionpath")
+                           "collectionpath", "stylizedcovers", "hidemissing")
         updateView = False
-        updateCovers = False
         updateDB = False
         
         # search for change in options
@@ -314,8 +302,6 @@ class mpdBrowserBase:
                 self.__conf.set (option, options[option])
                 if option in updateViewOpts:
                     updateView = True
-                elif option in updateCoversOpts:
-                    updateCovers = True
                 elif option in updateDbOpts:
                     updateDB = True
         self.__conf.write ()
@@ -335,11 +321,6 @@ class mpdBrowserBase:
             
         if updateView:
             self.__view.updateColumns (self.__conf.get ("shownames"))
-        
-        if updateCovers:
-            self.__view.resetCovers ()
-            self.__view.changeCoverType (self.__conf.get ("stylizedcovers"))
-            self.__view.update ()
 
         self.__view.iconview.grab_focus ()
         
@@ -350,14 +331,7 @@ class mpdBrowserBase:
         """
         self.__window.present ()
 
-        
-    def __scrollEventCb (self, data):
-        """
-            On scroll, update view
-        """
-        self.__view.update()
-        
-        
+    
     def __statusCb (self, data, info):
         """
             Update status bar message
@@ -401,11 +375,9 @@ class mpdBrowserBase:
             Add albums to iconview
         """
         self.__window.set_title ("mpdBrowser")
-        self.__statusBar.push (self.__contId,
+        self.__statusBar.push (self.__contId, 
                                _("You have %i albums.") % len (albums))
         self.__albums = albums
-        self.__albums.sort ()
-        self.__updateViewOnExpose = True
         self.__view.populate (self.__albums,
                               self.__filterPattern.get_text (),
                               self.__filterCombo.get_active ())
@@ -416,7 +388,7 @@ class mpdBrowserBase:
         self.__view.iconview.grab_focus ()
    
    
-    def __configEventCb (self, widget, allocation):
+    def __configEvent (self, widget, allocation):
         """
             Track main window size/pos changes
         """
