@@ -61,26 +61,58 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
         """
         try:
             albumList = []
-            self.__conn.open ()
+            currentPath=""
             self.__covers.createDirs ()
             # Get albums list
-            albums = self.__conn.list ('album')
+            mpdCollection = self.__conn.search ('album', "")
+           # mpdCollection.sort ()
             
-            totalAlbums = len (albums)
-            nbAlbums = 0 # Will just represent albums with != names
-            for album in albums:
+            totalItems = len (mpdCollection)
+            nbItems = 0
+            for item in mpdCollection:
                 if self.__stopevent.isSet():
                     return
-                # Get album genre, artist, cover and path
-                tmpAlbums = self.__getAlbumInfos (album)
-                albumList += tmpAlbums
-                nbAlbums += 1
-                if not nbAlbums % 50: # Speed gain
-                    self.emit ("progress", 
-                               float (nbAlbums) / float (totalAlbums))
 
+                path = os.path.dirname (self.__path + item['file'])                  
+                if currentPath != path: # New album
+                    try:
+                        # Deal with missing tags
+                        if 'artist' not in item.keys ():
+                            item['artist'] = _("Unknown")
+                        if 'album' not in item.keys():
+                            item['album'] = _("Unknown") # Is that possible?
+                        if 'genre' not in item.keys():
+                            item['genre'] = _("Unknown")
+                
+                        # Deal with multiple tags
+                        # Force an Attribute Error to be raise
+                        try:
+                            item['artist'].sort ()
+                            artist = item['artist'][0]
+                        except:
+                            artist = item['artist']
+                        try:
+                            item['album'].sort ()
+                            album = item['album'][0]
+                        except:
+                            album = item['album']
+                        try:
+                            item['genre'].sort ()
+                            genre = item['genre'][0]
+                        except:
+                            genre = item['genre']
+                    
+                        pixbuf = self.__covers.get (path)
+                        currentPath = path
+                        albumList.append ((genre, artist, album, path, pixbuf))
+                        if not nbItems % 50: # Speed gain
+                            self.emit ("progress", 
+                                       float (nbItems) / float (totalItems))
+                    except: # Missing cover
+                        pass
+                nbItems += 1
+               
             self.emit ("progress", 1.0)
-            self.__conn.close ()
             self.emit ("scanned", albumList)
         except:
             print "mpdBrowserDataBase::run(): "
@@ -100,7 +132,6 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
             Return song list for artist/album
         """
         list = []
-        self.__conn.open ()
         infos = self.__conn.find ('album', album)
         
         for i in range (len (infos)):
@@ -118,7 +149,6 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
 
             if os.path.dirname (self.__path + infos[i]['file']) == path:
                 list.append ((title, self.__path + infos[i]['file']))
-        self.__conn.close ()
         return list
                 
                 
@@ -127,49 +157,3 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
             get albums => (genre, artist, path, pixbuf)
         """
         return self.__albums
-        
-        
-    def __getAlbumInfos (self, album):
-        """
-            return album infos list (genre, artist, album, path, pixbuf)
-        """
-        list = []
-        currentPath=""
-
-        self.__conn.open ()
-        # Search infos for album
-        infos = self.__conn.find ('album', album)
-
-        for i in range (len (infos)):
-            path = os.path.dirname (self.__path + infos[i]['file'])
-            if currentPath != path: # We can have two albums with same name
-                try:
-                    # Deal with missing tags
-                    if 'artist' not in infos[i].keys ():
-                        infos[i]['artist'] = _("Unknown")
-                    if 'album' not in infos[i].keys():
-                        infos[i]['album'] = _("Unknown") # Is that possible?
-                    if 'genre' not in infos[i].keys():
-                        infos[i]['genre'] = _("Unknown")
-                
-                    # Deal with multiple tags
-                    # Force an Attribute Error to be raise
-                    try:
-                        infos[i]['artist'].sort ()
-                        artist = infos[i]['artist'][0]
-                    except:
-                        artist = infos[i]['artist']
-                    try:
-                        infos[i]['genre'].sort ()
-                        genre = infos[i]['genre'][0]
-                    except:
-                        genre = infos[i]['genre']
-                    
-                    pixbuf = self.__covers.get (path)
-                    currentPath = path
-                    list.append ((genre, artist, album, path, pixbuf))
-                except: # Missing cover
-                    pass
-
-        self.__conn.close ()
-        return list

@@ -12,36 +12,28 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor Boston, MA 02110-1301,  USA
 
-from mpdlib import *
+import mpd
 
-class mpdBrowserConnection (MPDClient):
+class mpdBrowserConnection (mpd.MPDClient):
 
     def __init__ (self, server, port, passwd):
         """
             Set connection parameters
         """
-        self.__server = server
-        self.__port = port
-        self.__passwd = passwd
+        mpd.MPDClient.__init__(self)
+        self.connect (server, port)
+        if passwd != "":
+            self.password (passwd)
         
 
     def updateOpts (self, server, port, passwd):
         """
             Set connection parameters
         """
-        self.__server = server
-        self.__port = port
-        self.__passwd = passwd
-
-
-    def open (self):
-        """
-            Open connection, will raise an exception if fails
-        """
-        MPDClient.__init__(self)
-        self.connect (self.__server, self.__port)
+        self.close ()
+        self.connect (server, port)
         if self.__passwd != "":
-            self.password (self.__passwd)
+            self.password (passwd)
 
     
     def replace (self, item):
@@ -53,4 +45,3 @@ class mpdBrowserConnection (MPDClient):
         self.clear ()
         self.add (item)
         self.play ()
-        self.close ()

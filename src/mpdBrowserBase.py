@@ -349,12 +349,10 @@ class mpdBrowserBase:
             Play selected song
         """
         try:
-            self.__conn.open ()
             if action == MPD_REPLACE:
                 self.__conn.replace (path.replace (self.__path, ""))
             else:
                 self.__conn.add (path.replace (self.__path, ""))
-            self.__conn.close ()
         except:
             print "mpdBrowserBase::__menuItemCb():"
             print sys.exc_info ()
@@ -363,7 +361,7 @@ class mpdBrowserBase:
                
     def __progressCb (self, data, percent):
         """
-            Scan progress bar
+            update progress bar
         """
         self.__progressBar.set_fraction (percent)
         
@@ -435,7 +433,6 @@ class mpdBrowserBase:
             Play selected album
         """
         try:
-            self.__conn.open ()
             album = self.__albums[pos][ALBUM_PATH]
             if button == 1:
                 if action == MPD_REPLACE:
@@ -444,7 +441,6 @@ class mpdBrowserBase:
                     self.__conn.add (album.replace (self.__path, ""))
             else:
                 self.__conn.clear ()
-            self.__conn.close ()
         except:
             print "mpdBrowserBase::__playAlbum():"
             print sys.exc_info ()
