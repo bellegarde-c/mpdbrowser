@@ -299,9 +299,11 @@ class mpdBrowserBase:
             Save options, update DB and/or View
         """
         updateViewOpts = "shownames"
+        updateCoversOpts = "stylizedcovers"
         updateDbOpts   =  ("mpdserver", "mpdport", "mpdpasswd", 
-                           "collectionpath", "stylizedcovers")
+                           "collectionpath")
         updateView = False
+        updateCovers = False
         updateDB = False
         
         # search for change in options
@@ -312,6 +314,8 @@ class mpdBrowserBase:
                 self.__conf.set (option, options[option])
                 if option in updateViewOpts:
                     updateView = True
+                elif option in updateCoversOpts:
+                    updateCovers = True
                 elif option in updateDbOpts:
                     updateDB = True
         self.__conf.write ()
@@ -331,6 +335,11 @@ class mpdBrowserBase:
             
         if updateView:
             self.__view.updateColumns (self.__conf.get ("shownames"))
+        
+        if updateCovers:
+            self.__view.resetCovers ()
+            self.__view.changeCoverType (self.__conf.get ("stylizedcovers"))
+            self.__view.update ()
 
         self.__view.iconview.grab_focus ()
         

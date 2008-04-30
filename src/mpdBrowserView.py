@@ -25,7 +25,7 @@ class mpdBrowserView:
         self.iconview = gtk.IconView ()
 
         self.__covers = mpdBrowserCovers (stylizedCovers)
-        self.__covers.createDirs ()
+        self.__covers.createCacheDirs ()
         self.__emptyCover = gtk.gdk.pixbuf_new_from_file_at_size (empty, 128, 128)
         self.__case = gtk.gdk.pixbuf_new_from_file_at_size (case, 128, 128)
         self.__model = gtk.ListStore (gtk.gdk.Pixbuf, str)
@@ -65,7 +65,21 @@ class mpdBrowserView:
                         pass
 
 
+    def resetCovers (self):
+        """
+            Reset displayed covers
+        """
+        self.__coverUpdated = []
+
+ 
+    def changeCoverType (self, stylizedCovers):
+        """
+            Change displayed cover type
+        """
+        self.__covers = mpdBrowserCovers (stylizedCovers)
+        self.__covers.createCacheDirs ()
         
+ 
     def updateColumns (self, showNames):
         """
             Update iconview columns

@@ -13,7 +13,6 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor Boston, MA 02110-1301,  USA
 import gtk, pango, gobject
 import os, sys
-from mpdBrowserUtils import *
 
 class mpdBrowserCfgDlg (gobject.GObject):
     
@@ -178,18 +177,16 @@ class mpdBrowserCfgDlg (gobject.GObject):
         """
             Clear covers cache
         """
-        userDir = os.path.expanduser ("~")
-        dirList = getDirListing ("%s/.local/share/mpdBrowser" % userDir, True)
         try:
-            for item in dirList:    
-                if os.path.isdir (item):
-                    os.rmdir (item)
-                else:
-                    os.unlink (item)
-            os.rmdir ("%s/.local/share/mpdBrowser" % userDir)
+            userDir = os.path.expanduser ("~")
+            for root, dirs, files in os.walk (
+                                 "%s/.local/share/mpdBrowser" % userDir, False):
+                for name in files:
+                    os.unlink (os.path.join (root, name))
         except: 
             print "mpdBrowserCfgDlg::__clearCache(): "
             print sys.exc_info ()
+        
         
     def getUserOptions (self):
         """
