@@ -167,12 +167,10 @@ class mpdBrowserBase:
     
     def __scanning (self):
         """
-            Set widgets while scanning
+            Set widgets for scanning
         """
         self.__prefsButton.set_sensitive (False)
         self.__window.set_title (_("Loading..."))          
-        self.__statusBar.push (self.__contId, 
-                               _("Loading albums... Please wait."));
                                
                                         
     def __initDB (self):
