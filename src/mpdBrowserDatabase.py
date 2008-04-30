@@ -105,7 +105,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
                         pixbuf = self.__covers.get (path)
                         currentPath = path
                         albumList.append ((genre, artist, album, path, pixbuf))
-                        if not nbItems % 50: # Speed gain
+                        if not nbItems % 100: # Speed gain
                             self.emit ("progress", 
                                        float (nbItems) / float (totalItems))
                     except: # Missing cover
