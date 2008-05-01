@@ -20,20 +20,28 @@ class mpdBrowserConnection (mpd.MPDClient):
         """
             Set connection parameters
         """
-        mpd.MPDClient.__init__(self)
-        self.connect (server, port)
-        if passwd != "":
-            self.password (passwd)
+        self.__server = server
+        self.__port = port
+        self.__passwd = passwd
         
 
     def updateOpts (self, server, port, passwd):
         """
             Set connection parameters
         """
-        self.close ()
-        self.connect (server, port)
+        self.__server = server
+        self.__port = port
+        self.__passwd = passwd
+
+
+    def open (self):
+        """
+            Open connection, will raise an exception if fails
+        """
+        mpd.MPDClient.__init__(self)
+        self.connect (self.__server, self.__port)
         if self.__passwd != "":
-            self.password (passwd)
+            self.password (self.__passwd)
 
     
     def replace (self, item):
@@ -45,3 +53,4 @@ class mpdBrowserConnection (mpd.MPDClient):
         self.clear ()
         self.add (item)
         self.play ()
+        self.close ()
