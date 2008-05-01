@@ -45,7 +45,7 @@ class mpdBrowserCovers (IdleObject):
         
     def __findCover (self, dirPath):
         """
-            Search a cover in dir
+            Search a cover in dirPath
         """
         try:
             for name in os.listdir (dirPath):
