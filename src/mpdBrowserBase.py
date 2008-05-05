@@ -252,7 +252,7 @@ class mpdBrowserBase:
         """
         self.__prefsDialog = mpdBrowserCfgDlg (parent, 
                                                self.__conf.getAllOptions ())
-        self.__prefsDialog.connect ("update_opts", self.__updateOpts) 
+        self.__prefsDialog.connect ("update_opts", self.__updateOpts)
        
        
     def __filterClearCb (self, userData):

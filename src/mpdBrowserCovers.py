@@ -13,6 +13,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor Boston, MA 02110-1301,  USA
 
 import gtk, gobject
+import cairo, pangocairo, pango
 import sys, os
 from idleObject import *
 
@@ -21,6 +22,9 @@ if not os.path.exists (empty): empty = "../images/mpdBrowser_empty.png"
 case = sys.prefix + "/share/pixmaps/mpdBrowser_case.png"
 if not os.path.exists (case): case = "../images/mpdBrowser_case.png"
 
+COVER_SIZE = 128
+SPINE_RATIO = 60.0/600.0
+CAIRO_COVER = "/tmp/mpdBrowserCover.png"
 
 class MissingCover(Exception):
     pass
@@ -33,6 +37,14 @@ class mpdBrowserCovers (IdleObject):
             Load composite effect file if needed
         """
         IdleObject.__init__(self)
+        
+        self.__case = gtk.gdk.pixbuf_new_from_file_at_size (case,
+                                                            COVER_SIZE, 
+                                                            COVER_SIZE)
+        
+        self.__empty = gtk.gdk.pixbuf_new_from_file_at_size (empty,
+                                                             COVER_SIZE, 
+                                                             COVER_SIZE)
         
         if stylizedCovers == True:
             self.__case = gtk.gdk.pixbuf_new_from_file (case)
@@ -66,14 +78,14 @@ class mpdBrowserCovers (IdleObject):
             return empty
 
 
-    def __coverComposite (self, cover, w, h):    # Thanks to Sonata devs ;)
+    def __coverComposite (self, cover, pixbuf, w, h, spineRatio): 
+    # Thanks to Sonata devs ;)
         if float(w)/h > 0.5:
             # Rather than merely compositing the case on top of the artwork, 
             # we will scale the artwork so that it isn't covered by the case:
-            spineRatio = float (60)/600 # From original png
             spineWidth = int (w * spineRatio)
 
-            case = self.__case.scale_simple (w, h, gtk.gdk.INTERP_BILINEAR)
+            case = pixbuf.scale_simple (w, h, gtk.gdk.INTERP_BILINEAR)
             # Scale pix and shift to the right on a transparent pixbuf:
             cover = cover.scale_simple (w-spineWidth, h, 
                                         gtk.gdk.INTERP_BILINEAR)
@@ -89,7 +101,35 @@ class mpdBrowserCovers (IdleObject):
         return cover
 
 
-    def get (self, path):
+    def __coverCreateFromText (self, text): #TODO Center text verticaly
+        """
+            Create a cover from text
+        """
+        # Setup Cairo
+        surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, 
+                                     COVER_SIZE, COVER_SIZE)
+        ctx = cairo.Context(surface)
+
+        pcr = pangocairo.CairoContext (ctx)
+        layout = pcr.create_layout ()
+        layout.set_width (COVER_SIZE * 1000)
+        layout.set_wrap (pango.WRAP_WORD_CHAR)
+        layout.set_alignment (pango.ALIGN_CENTER)
+        ctx.move_to (0, 30)
+        
+        if len (text) > 40:
+           text  = text[:40] + "..."
+      
+        layout.set_markup (
+                 '''<span foreground="white" font_desc="Sans 12">%s</span>'''\
+                 % text.replace ("&", "&amp;")
+                          )
+        ctx.save ()
+        pcr.show_layout (layout)
+        surface.write_to_png(CAIRO_COVER)
+
+
+    def get (self, path, album):
         """
             Return pixbuf cover for album at path
         """
@@ -103,12 +143,28 @@ class mpdBrowserCovers (IdleObject):
                 if cover == empty and self.__hideMissing:
                     raise MissingCover
                     
-                pixbuf = gtk.gdk.pixbuf_new_from_file_at_size (cover,
-                                                               128, 128)
-                if cover != empty:
+                if cover != empty:  
+                    pixbuf = gtk.gdk.pixbuf_new_from_file_at_size (cover,
+                                                                   COVER_SIZE, 
+                                                                   COVER_SIZE)
                     w = pixbuf.get_width ()
-                    h = pixbuf.get_height ()
-                    pixbuf = self.__coverComposite (pixbuf, w, h)
+                    h = pixbuf.get_height() 
+                    pixbuf = self.__coverComposite (pixbuf, self.__case, 
+                                                    w, h, SPINE_RATIO)
+                else:
+                    self.__coverCreateFromText (album)
+                    cairoCover = gtk.gdk.pixbuf_new_from_file_at_size (
+                                                          CAIRO_COVER, 128, 128
+                                                                      )
+                    os.unlink (CAIRO_COVER)
+                    w = self.__empty.get_width ()
+                    h = self.__empty.get_height ()
+                    tmpPix = self.__coverComposite (self.__empty, cairoCover,
+                                                    w, h, 0.0)
+                    w = tmpPix.get_width ()
+                    h = tmpPix.get_height ()                             
+                    pixbuf = self.__coverComposite (tmpPix, self.__case,
+                                                    w, h, SPINE_RATIO)
                 try:
                     pixbuf.save(filePath, "jpeg", {"quality":"100"})
                 except: 
@@ -123,9 +179,21 @@ class mpdBrowserCovers (IdleObject):
                 cover = self.__findCover (path)
                 if cover == empty and self.__hideMissing:
                     raise MissingCover
-                    
-                pixbuf = gtk.gdk.pixbuf_new_from_file_at_size (cover,
-                                                               128, 128)
+                
+                if cover != empty:    
+                    pixbuf = gtk.gdk.pixbuf_new_from_file_at_size (cover,
+                                                                   COVER_SIZE, 
+                                                                   COVER_SIZE)
+                else:
+                    self.__coverCreateFromText (album)
+                    cairoCover = gtk.gdk.pixbuf_new_from_file_at_size (
+                                                          CAIRO_COVER, 128, 128
+                                                                      )
+                    os.unlink (CAIRO_COVER)
+                    w = self.__empty.get_width ()
+                    h = self.__empty.get_height ()
+                    pixbuf = self.__coverComposite (self.__empty, cairoCover,
+                                                    w, h, 0.0)    
                 try:
                     pixbuf.save(filePath, "jpeg", {"quality":"100"})
                 except: 

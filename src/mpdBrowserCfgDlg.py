@@ -31,6 +31,7 @@ class mpdBrowserCfgDlg (IdleObject):
     
         self.__options = {}
         self.__coverNameOrig = options["covername"]
+        self.__hideMissingOrig = options["hidemissing"]
         
         IdleObject.__init__ (self)
         
@@ -168,9 +169,7 @@ class mpdBrowserCfgDlg (IdleObject):
         
         closeButton = self.__prefsWindow.add_button (gtk.STOCK_CLOSE, 
                                                      gtk.RESPONSE_CLOSE)
-        closeButton.connect ("clicked", self.__updateOpts, hostEntry, 
-                             portEntry, passwordEntry, dirEntry, 
-                             showNames, stylizedCovers, hideMissing, coverName)
+        closeButton.connect ("clicked", self.__close)
                              
         self.__prefsWindow.connect ("destroy", self.__updateOpts, hostEntry, 
                                     portEntry, passwordEntry, dirEntry, 
@@ -179,6 +178,13 @@ class mpdBrowserCfgDlg (IdleObject):
         self.__prefsWindow.vbox.pack_start (notebook, False, False, 0)
         self.__prefsWindow.show_all ()
         closeButton.grab_focus ()
+        
+        
+    def __close (self, data):
+        """
+            close and destroy pref widget
+        """
+        self.__prefsWindow.destroy ()
         
         
     def __updateOpts (self, data, hostEntry, portEntry, passwordEntry, dirEntry, 
@@ -197,8 +203,10 @@ class mpdBrowserCfgDlg (IdleObject):
                             "covername"     : coverName.get_text()
                           }
         self.__prefsWindow.hide ()
-        # We need to clear cache if covername changed
-        if self.__coverNameOrig != coverName.get_text ():
+        # We need to clear cache
+        if self.__coverNameOrig != coverName.get_text () or  \
+                      (hideMissing.get_active () == True and \
+                       self.__hideMissingOrig != hideMissing.get_active ()):
             self.__clearCache (None)
         self.emit ("update_opts")
      
