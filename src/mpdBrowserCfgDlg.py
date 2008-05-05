@@ -30,6 +30,7 @@ class mpdBrowserCfgDlg (IdleObject):
         """
     
         self.__options = {}
+        self.__coverNameOrig = options["covername"]
         
         IdleObject.__init__ (self)
         
@@ -196,7 +197,11 @@ class mpdBrowserCfgDlg (IdleObject):
                             "covername"     : coverName.get_text()
                           }
         self.__prefsWindow.hide ()
+        # We need to clear cache if covername changed
+        if self.__coverNameOrig != coverName.get_text ():
+            self.__clearCache (None)
         self.emit ("update_opts")
+     
      
     def __clearCache (self, data):
         """
