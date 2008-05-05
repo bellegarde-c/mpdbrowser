@@ -202,7 +202,6 @@ class mpdBrowserCfgDlg (IdleObject):
                             "hidemissing"   : hideMissing.get_active(),
                             "covername"     : coverName.get_text()
                           }
-        self.__prefsWindow.hide ()
         # We need to clear cache
         if self.__coverNameOrig != coverName.get_text () or  \
                       (hideMissing.get_active () == True and \
