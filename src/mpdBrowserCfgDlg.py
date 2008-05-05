@@ -115,7 +115,7 @@ class mpdBrowserCfgDlg (IdleObject):
         buffer.create_tag ("bold", weight=pango.WEIGHT_BOLD)
         iter = buffer.get_iter_at_offset (0)
         buffer.insert_with_tags_by_name (iter,
-                            "Copyleft Bellegarde Cedric (gnumdk@gmail.com)",
+                            "Copyleft Cedric Bellegarde (gnumdk@gmail.com)",
                             "bold")
         buffer.insert (iter, "\n\n")  
         buffer.insert_with_tags_by_name (iter, _("How play an album?"), "bold")
