@@ -162,9 +162,11 @@ class mpdBrowserCovers (IdleObject):
                     tmpPix = self.__coverComposite (self.__empty, cairoCover,
                                                     w, h, 0.0)
                     w = tmpPix.get_width ()
-                    h = tmpPix.get_height ()                             
+                    h = tmpPix.get_height ()                  
                     pixbuf = self.__coverComposite (tmpPix, self.__case,
                                                     w, h, SPINE_RATIO)
+                    del tmpPix
+                    del cairoCover
                 try:
                     pixbuf.save(filePath, "jpeg", {"quality":"100"})
                 except: 
@@ -194,6 +196,7 @@ class mpdBrowserCovers (IdleObject):
                     h = self.__empty.get_height ()
                     pixbuf = self.__coverComposite (self.__empty, cairoCover,
                                                     w, h, 0.0)    
+                    del cairoCover
                 try:
                     pixbuf.save(filePath, "jpeg", {"quality":"100"})
                 except: 
