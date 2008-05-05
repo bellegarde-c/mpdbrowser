@@ -95,14 +95,14 @@ class mpdBrowserCovers (IdleObject):
         """
         # cache file will be _complete_path_to_album.jpg
         path_ = path.replace ("/", "_")
-        
-        cover = self.__findCover (path)
-        if cover == empty and self.__hideMissing:
-            raise MissingCover
             
         if self.__coverComp:
             filePath = self.__shareDir + "/composite/" + path_ + ".jpg"
             if not os.access (filePath, os.F_OK):
+                cover = self.__findCover (path)
+                if cover == empty and self.__hideMissing:
+                    raise MissingCover
+                    
                 pixbuf = gtk.gdk.pixbuf_new_from_file_at_size (cover,
                                                                128, 128)
                 if cover != empty:
@@ -120,6 +120,10 @@ class mpdBrowserCovers (IdleObject):
         else:
             filePath = self.__shareDir + "/normal/" + path_ + ".jpg"
             if not os.access (filePath, os.F_OK):
+                cover = self.__findCover (path)
+                if cover == empty and self.__hideMissing:
+                    raise MissingCover
+                    
                 pixbuf = gtk.gdk.pixbuf_new_from_file_at_size (cover,
                                                                128, 128)
                 try:
