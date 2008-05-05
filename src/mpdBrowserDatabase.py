@@ -34,7 +34,9 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
            gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, [])
             }
 
-    def __init__ (self, connection, path, stylizedCovers, hideMissing):
+
+    def __init__ (self, connection, path, stylizedCovers,
+                  hideMissing, coverName):
         """
             Read mpdBrowser conf, init connection and covers cache
         """
@@ -45,7 +47,8 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
 
         self.__conn = connection
         self.__path = path
-        self.__covers = mpdBrowserCovers (stylizedCovers, hideMissing)
+        self.__covers = mpdBrowserCovers (stylizedCovers, hideMissing, 
+                                          coverName)
         
         
     def __cacheMessageCb (self, userData, info):

@@ -78,9 +78,25 @@ class mpdBrowserCfgDlg (IdleObject):
         stylizedCovers.set_active (options["stylizedcovers"])
         hideMissing = gtk.CheckButton (_("Hide missing covers"))
         hideMissing.set_active (options["hidemissing"])
+        
+        hbox = gtk.HBox ()
+        customCoverName = gtk.CheckButton (_("Custom cover name:"))
+        if options["covername"] == "":
+            active = False
+        else:
+            active = True
+        customCoverName.set_active (active)
+        coverName = gtk.Entry ()
+        coverName.set_text (options["covername"])
+        coverName.set_sensitive (active)
+        customCoverName.connect ("clicked", self.__coverNameCb, coverName)
+        hbox.pack_start (customCoverName, False, False, 0)
+        hbox.pack_start (coverName, False, False, 0)
+        
         vboxOpt.pack_start (showNames, False, False, 0)
         vboxOpt.pack_start (stylizedCovers, False, False, 0)
         vboxOpt.pack_start (hideMissing, False, False, 0)
+        vboxOpt.pack_start (hbox, False, False, 0)
         prefsOptFrame.add (vboxOpt)
         
         prefsCacheFrame = gtk.Frame (_("Cache:"))
@@ -153,17 +169,19 @@ class mpdBrowserCfgDlg (IdleObject):
                                                      gtk.RESPONSE_CLOSE)
         closeButton.connect ("clicked", self.__updateOpts, hostEntry, 
                              portEntry, passwordEntry, dirEntry, 
-                             showNames, stylizedCovers, hideMissing)
+                             showNames, stylizedCovers, hideMissing, coverName)
                              
         self.__prefsWindow.connect ("destroy", self.__updateOpts, hostEntry, 
                                     portEntry, passwordEntry, dirEntry, 
-                                    showNames, stylizedCovers, hideMissing)
+                                    showNames, stylizedCovers, hideMissing,
+                                    coverName)
         self.__prefsWindow.vbox.pack_start (notebook, False, False, 0)
         self.__prefsWindow.show_all ()
         closeButton.grab_focus ()
         
+        
     def __updateOpts (self, data, hostEntry, portEntry, passwordEntry, dirEntry, 
-                      showNames, stylizedCovers, hideMissing):
+                      showNames, stylizedCovers, hideMissing, coverName):
         """
             emit update_opt signal to update Options and reload view
         """
@@ -174,7 +192,8 @@ class mpdBrowserCfgDlg (IdleObject):
                             "collectionpath": dirEntry.get_text (),
                             "shownames"     : showNames.get_active (),
                             "stylizedcovers": stylizedCovers.get_active (),
-                            "hidemissing"   : hideMissing.get_active()
+                            "hidemissing"   : hideMissing.get_active(),
+                            "covername"     : coverName.get_text()
                           }
         self.__prefsWindow.hide ()
         self.emit ("update_opts")
@@ -195,6 +214,18 @@ class mpdBrowserCfgDlg (IdleObject):
         except: 
             print "mpdBrowserCfgDlg::__clearCache(): "
             print sys.exc_info ()
+      
+      
+    def __coverNameCb (self, button, entry):
+        """
+            Enable cover name entry
+        """
+        if button.get_active():
+            entry.set_sensitive (True)
+        else:
+            entry.set_text ("")
+            entry.set_sensitive (False)
+        
         
     def getUserOptions (self):
         """

@@ -28,7 +28,7 @@ class MissingCover(Exception):
 
 class mpdBrowserCovers (IdleObject):
                    
-    def __init__ (self, stylizedCovers, hideMissing):
+    def __init__ (self, stylizedCovers, hideMissing, coverName):
         """
             Load composite effect file if needed
         """
@@ -41,6 +41,7 @@ class mpdBrowserCovers (IdleObject):
             self.__coverComp = False
     
         self.__hideMissing = hideMissing
+        self.__coverName = coverName
         
         
     def __findCover (self, dirPath):
@@ -49,9 +50,14 @@ class mpdBrowserCovers (IdleObject):
         """
         try:
             for name in os.listdir (dirPath):
-                    # Don't look at file content for speed
-                    if name.endswith (".jpg") or name.endswith (".jpeg") \
-                    or name.endswith (".png") or name.endswith (".gif"):
+                if name.endswith (".jpg") or name.endswith (".jpeg") or \
+                   name.endswith (".png") or name.endswith (".gif"):
+                    if (self.__coverName != ""):
+                        if name.startswith (self.__coverName):
+                            return dirPath + '/' + name
+                        else:
+                            return empty
+                    else:
                         return dirPath + '/' + name
 
             return empty

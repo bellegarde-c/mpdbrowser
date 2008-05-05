@@ -23,7 +23,8 @@ class mpdBrowserCfg:
         self.__options = {   
          "connection": ("mpdserver", "mpdport", "mpdpasswd", "collectionpath"),
          "window"    : ("x", "y","width","height"),
-         "options"   : ("stylizedcovers", "shownames", "hidemissing")
+         "options"   : ("stylizedcovers", "shownames", 
+                        "hidemissing", "covername")
                          }
         # Defaults values
         self.__defaults = {
@@ -37,7 +38,8 @@ class mpdBrowserCfg:
                             "height"        : 480,
                             "stylizedcovers": True,
                             "shownames"     : False,
-                            "hidemissing"   : False
+                            "hidemissing"   : False,
+                            "covername"     : ""
                            }
         # Defaults types
         self.__types = {
@@ -48,7 +50,8 @@ class mpdBrowserCfg:
                             "height"        : "int",
                             "stylizedcovers": "bool",
                             "shownames"     : "bool",
-                            "hidemissing"   : "bool"
+                            "hidemissing"   : "bool",
+                            "covername"     : "string"
                            }
                        
         self.__optionsValues = {}
@@ -107,6 +110,7 @@ class mpdBrowserCfg:
         """
         return self.__optionsValues[option]
      
+     
     def getAllOptions (self):
         """
             return options dict
@@ -123,6 +127,7 @@ class mpdBrowserCfg:
                 if opt == option:
                     return section
         return None
+        
         
     def set (self, option, value):
         """
