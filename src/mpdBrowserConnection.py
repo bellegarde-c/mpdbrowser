@@ -23,6 +23,7 @@ class mpdBrowserConnection (mpd.MPDClient):
         self.__server = server
         self.__port = port
         self.__passwd = passwd
+        mpd.MPDClient.__init__(self)
         
 
     def updateOpts (self, server, port, passwd):
@@ -38,7 +39,6 @@ class mpdBrowserConnection (mpd.MPDClient):
         """
             Open connection, will raise an exception if fails
         """
-        mpd.MPDClient.__init__(self)
         self.connect (self.__server, self.__port)
         if self.__passwd != "":
             self.password (self.__passwd)

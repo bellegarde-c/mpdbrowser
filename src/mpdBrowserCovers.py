@@ -78,7 +78,10 @@ class mpdBrowserCovers (IdleObject):
             return empty
 
 
-    def __coverComposite (self, cover, pixbuf, w, h, spineRatio): 
+    def __coverComposite (self, cover, pixbuf, w, h, spineRatio):
+        """
+            Compose cover with pixbuf
+        """
     # Thanks to Sonata devs ;)
         if float(w)/h > 0.5:
             # Rather than merely compositing the case on top of the artwork, 
@@ -138,12 +141,13 @@ class mpdBrowserCovers (IdleObject):
             
         if self.__coverComp:
             filePath = self.__shareDir + "/composite/" + path_ + ".jpg"
-            if not os.access (filePath, os.F_OK):
+            if not os.access (filePath, os.F_OK): # No cache
                 cover = self.__findCover (path)
+                
                 if cover == empty and self.__hideMissing:
                     raise MissingCover
                     
-                if cover != empty:  
+                if cover != empty: # get composited cover
                     pixbuf = gtk.gdk.pixbuf_new_from_file_at_size (cover,
                                                                    COVER_SIZE, 
                                                                    COVER_SIZE)
@@ -151,7 +155,7 @@ class mpdBrowserCovers (IdleObject):
                     h = pixbuf.get_height() 
                     pixbuf = self.__coverComposite (pixbuf, self.__case, 
                                                     w, h, SPINE_RATIO)
-                else:
+                else: # add album name to empty composited cover
                     self.__coverCreateFromText (album)
                     cairoCover = gtk.gdk.pixbuf_new_from_file_at_size (
                                                           CAIRO_COVER, 128, 128
@@ -177,16 +181,16 @@ class mpdBrowserCovers (IdleObject):
                 pixbuf = gtk.gdk.pixbuf_new_from_file (filePath)
         else:
             filePath = self.__shareDir + "/normal/" + path_ + ".jpg"
-            if not os.access (filePath, os.F_OK):
+            if not os.access (filePath, os.F_OK): # No cache
                 cover = self.__findCover (path)
                 if cover == empty and self.__hideMissing:
                     raise MissingCover
                 
-                if cover != empty:    
+                if cover != empty:  
                     pixbuf = gtk.gdk.pixbuf_new_from_file_at_size (cover,
                                                                    COVER_SIZE, 
                                                                    COVER_SIZE)
-                else:
+                else: # add album name to empty cover
                     self.__coverCreateFromText (album)
                     cairoCover = gtk.gdk.pixbuf_new_from_file_at_size (
                                                           CAIRO_COVER, 128, 128

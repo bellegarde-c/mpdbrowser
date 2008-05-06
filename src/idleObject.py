@@ -16,8 +16,8 @@ import gobject
 
 class IdleObject(gobject.GObject):
     """
-    Override gobject.GObject to always emit signals in the main thread
-    by emmitting on an idle handler
+        Override gobject.GObject to always emit signals in the main thread
+        by emmitting on an idle handler
     """
     def __init__(self):
         gobject.GObject.__init__(self)
