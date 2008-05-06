@@ -25,12 +25,11 @@ class mpdBrowserView:
         self.iconview = gtk.IconView ()
         
         self.__model = gtk.ListStore (gtk.gdk.Pixbuf, str)
-        
-        if showNames:
-            self.iconview.set_text_column (1)
        
         self.iconview.set_pixbuf_column (0)
-
+        if showNames:
+           self.iconview.set_text_column (1)
+           
         self.iconview.set_model (self.__model)    
         
         self.__items = []
