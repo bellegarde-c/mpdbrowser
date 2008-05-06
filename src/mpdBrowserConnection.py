@@ -15,7 +15,9 @@
 import mpd
 
 class mpdBrowserConnection (mpd.MPDClient):
-
+    """
+        Don't deal with mpd exceptions
+    """
     def __init__ (self, server, port, passwd):
         """
             Set connection parameters
@@ -28,7 +30,7 @@ class mpdBrowserConnection (mpd.MPDClient):
 
     def updateOpts (self, server, port, passwd):
         """
-            Set connection parameters
+            Update connection parameters
         """
         self.__server = server
         self.__port = port
@@ -37,18 +39,24 @@ class mpdBrowserConnection (mpd.MPDClient):
 
     def open (self):
         """
-            Open connection, will raise an exception if fails
+            Open connection
         """
         self.connect (self.__server, self.__port)
         if self.__passwd != "":
             self.password (self.__passwd)
 
-    
+
+    def close (self):
+        """
+            Close connection
+        """
+        mpd.MPDClient._docommand (self, 'close', [], None)
+        self.disconnect()    
+        
+        
     def replace (self, item):
         """
-            Replace current playlist with album
-            Play it
-            Will raise an exception if fails
+            Replace current playlist with album, play it
         """
         self.clear ()
         self.add (item)
