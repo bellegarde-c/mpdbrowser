@@ -1,0 +1,4 @@
+src/mpdBrowserBase.py
+src/mpdBrowserCfgDlg.py
+src/mpdBrowserDatabase.py
+mpdBrowser.desktop.in

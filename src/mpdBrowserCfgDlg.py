@@ -93,7 +93,7 @@ class mpdBrowserCfgDlg (IdleObject):
         coverName.set_sensitive (active)
         customCoverName.connect ("clicked", self.__coverNameCb, coverName)
         
-        coverSizeLabel = gtk.Label (_("Cover size:"))
+        coverSizeLabel = gtk.Label (_("Covers size:"))
         coverSize = gtk.HScale ()
         coverSize.set_range (64, 512)
         coverSize.set_increments (1, 1)

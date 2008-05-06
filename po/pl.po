@@ -1,33 +1,35 @@
-# French translations for PACKAGE package
-# Traductions françaises du paquet PACKAGE.
-# Copyright (C) 2008 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# Bellegarde Cedric <gnumdk@gmail.com>, 2008.
+# Polish translation of mpdBrowser.
+# Copyright (C) 2008 Tomasz Dominikowski
+# This file is distributed under the same license as the mpdBrowser package.
+# Tomasz Dominikowski <dominikowski@gmail.com>, 2008
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: mpdBrowser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-06 13:35+0200\n"
-"PO-Revision-Date: 2008-04-02 11:15+0200\n"
-"Last-Translator: Bellegarde Cedric <gnumdk@gmail.com>\n"
-"Language-Team: French\n"
+"POT-Creation-Date: 2008-05-06 13:37+0200\n"
+"PO-Revision-Date: 2008-05-05 17:25+0100\n"
+"Last-Translator: Tomasz Dominikowski <dominikowski@gmail.com>\n"
+"Language-Team: Tomasz Dominikowski (Aviary.pl) <dominikowski@gmail.com>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Poedit-Language: Polish\n"
+"X-Poedit-Country: Poland\n"
 
 #: ../src/mpdBrowserBase.py:103
 msgid "Filter"
-msgstr "Filtre"
+msgstr "Filtr"
 
 #: ../src/mpdBrowserBase.py:114
 msgid "All"
-msgstr "Tout"
+msgstr "Wszystkie"
 
 #: ../src/mpdBrowserBase.py:115
 msgid "Artist"
-msgstr "Artiste"
+msgstr "Wykonawca"
 
 #: ../src/mpdBrowserBase.py:116
 msgid "Album"
@@ -35,29 +37,29 @@ msgstr "Album"
 
 #: ../src/mpdBrowserBase.py:117
 msgid "Genre"
-msgstr "Style"
+msgstr "Gatunek"
 
 #: ../src/mpdBrowserBase.py:173
 msgid "Loading..."
-msgstr "Chargement..."
+msgstr "Wczytywanie..."
 
 #: ../src/mpdBrowserBase.py:364 ../src/mpdBrowserBase.py:454
 #: ../src/mpdBrowserDatabase.py:126
 msgid "Can't contact mpd!"
-msgstr "Impossible de contacter mpd!"
+msgstr "Nie można się połączyć z mpd!"
 
 #: ../src/mpdBrowserBase.py:380
 #, python-format
 msgid "You have %i albums."
-msgstr "Vous avez %i albums."
+msgstr "Ilość albumów: %i."
 
 #: ../src/mpdBrowserCfgDlg.py:39 ../src/mpdBrowserCfgDlg.py:179
 msgid "Preferences"
-msgstr "Préférences"
+msgstr "Preferencje"
 
 #: ../src/mpdBrowserCfgDlg.py:46
 msgid "Host:"
-msgstr "Serveur:"
+msgstr "Komputer:"
 
 #: ../src/mpdBrowserCfgDlg.py:50
 msgid "Port:"
@@ -65,119 +67,119 @@ msgstr "Port:"
 
 #: ../src/mpdBrowserCfgDlg.py:54
 msgid "Password:"
-msgstr "Mot de passe:"
+msgstr "Hasło:"
 
 #: ../src/mpdBrowserCfgDlg.py:59
 msgid "Music dir:"
-msgstr "Répertoire de musique:"
+msgstr "Folder z muzyką:"
 
 #: ../src/mpdBrowserCfgDlg.py:63
 msgid "Connection:"
-msgstr "Connexion:"
+msgstr "Połączenie:"
 
 #: ../src/mpdBrowserCfgDlg.py:76
 msgid "Options:"
-msgstr "Options:"
+msgstr "Opcje:"
 
 #: ../src/mpdBrowserCfgDlg.py:78
 msgid "Show albums names"
-msgstr "Montrer le nom des albums"
+msgstr "Wyświetlanie nazw albumów"
 
 #: ../src/mpdBrowserCfgDlg.py:80
 msgid "Stylized covers"
-msgstr "Pochettes stylisées"
+msgstr "Stylizowane okładki"
 
 #: ../src/mpdBrowserCfgDlg.py:82
 msgid "Hide missing covers"
-msgstr "Cacher les pochettes manquantes"
+msgstr "Ukrywanie brakujących okładek"
 
 #: ../src/mpdBrowserCfgDlg.py:85
 msgid "Custom cover name:"
-msgstr "Nom des pochettes:"
+msgstr "Własna nazwa okładki:"
 
 #: ../src/mpdBrowserCfgDlg.py:96
 msgid "Covers size:"
-msgstr "Taille des pochettes"
+msgstr ""
 
 #: ../src/mpdBrowserCfgDlg.py:117
 msgid "Cache:"
-msgstr "Cache:"
+msgstr "Bufor:"
 
 #: ../src/mpdBrowserCfgDlg.py:118
 msgid "Clear:"
-msgstr "Effacer:"
+msgstr "Wyczyść:"
 
 #: ../src/mpdBrowserCfgDlg.py:136
 msgid "How to play an album?"
-msgstr "Comment lire un album?"
+msgstr "Jak odtworzyć album?"
 
 #: ../src/mpdBrowserCfgDlg.py:138
 msgid "Just click on it"
-msgstr "Cliquez dessus"
+msgstr "Wystarczy go kliknąć"
 
 #: ../src/mpdBrowserCfgDlg.py:141
 msgid "How to enqueue an album?"
-msgstr "Comment ajouter un album?"
+msgstr "Jak zakolejkować album?"
 
 #: ../src/mpdBrowserCfgDlg.py:143
 msgid "Just click on it with <Ctrl> pressed"
-msgstr "Cliquez dessus en maintenant <Ctrl> enfoncé"
+msgstr "Wystarczy kliknąć z wciśniętym klawiszem <Ctrl>"
 
 #: ../src/mpdBrowserCfgDlg.py:146
 msgid "How to play a song?"
-msgstr "Comment lire un morceau?"
+msgstr "Jak odtworzyć utwór?"
 
 #: ../src/mpdBrowserCfgDlg.py:148
 msgid "Just right click on album, then select song"
-msgstr "Clique droit sur un album, puis selectionnez la chanson"
+msgstr "Prawym przyciskiem kliknąć album, następnie wybrać utwór"
 
 #: ../src/mpdBrowserCfgDlg.py:151
 msgid "How to enqueue a song?"
-msgstr "Comment ajouter un morceau?"
+msgstr "Jak zakolejkować utwór?"
 
 #: ../src/mpdBrowserCfgDlg.py:154
 msgid "Just right click on album with <Ctrl> pressed, then select song"
 msgstr ""
-"Clique droit sur un album en maintenant <Ctrl> enfoncé, puis selectionnez la "
-"chanson"
+"Prawym przyciskiem kliknąć album z wciśniętym klawiszem <Ctrl>, następnie "
+"wybrać utwór"
 
 #: ../src/mpdBrowserCfgDlg.py:157
 msgid "How to add a cover?"
-msgstr "Comment ajouter une pochette?"
+msgstr "Jak dodać okładkę?"
 
 #: ../src/mpdBrowserCfgDlg.py:159
 msgid "Just copy an image to album folder"
-msgstr "Copiez une image dans le répertoire de l'album"
+msgstr "Wystarczy skopiować obraz do folderu z albumem"
 
 #: ../src/mpdBrowserCfgDlg.py:162
 msgid "How to search for something?"
-msgstr "Comment faire une recherche?"
+msgstr "Jak rozpocząć wyszukiwanie?"
 
 #: ../src/mpdBrowserCfgDlg.py:164
 msgid "Just press Ctrl + f"
-msgstr "Appuyez sur Ctrl + f"
+msgstr "Wystarczy nacisnąć Ctrl + F"
 
 #: ../src/mpdBrowserCfgDlg.py:167
 msgid "How to refresh view?"
-msgstr "Comment rafraichir la vue?"
+msgstr "Jak odświeżyć widok?"
 
 #: ../src/mpdBrowserCfgDlg.py:169
 msgid "Just press F5"
-msgstr "Appuyez sur F5"
+msgstr "Wystarczy nacisnąć F5"
 
 #: ../src/mpdBrowserCfgDlg.py:181
 msgid "Informations"
-msgstr "Informations"
+msgstr "Informacje"
 
 #: ../src/mpdBrowserDatabase.py:86 ../src/mpdBrowserDatabase.py:88
 #: ../src/mpdBrowserDatabase.py:90 ../src/mpdBrowserDatabase.py:149
 msgid "Unknown"
-msgstr "Inconnu"
+msgstr "Nieznany"
 
 #: ../mpdBrowser.desktop.in.h:1
 msgid "MPD click & play client"
-msgstr "Client MPD orienté pochette"
+msgstr "Klient MPD \"kliknij i odtwórz\""
 
 #: ../mpdBrowser.desktop.in.h:2
 msgid "mpdBrowser"
-msgstr "mpdBrowser"
+msgstr "Klient MPD mpdBrowser"

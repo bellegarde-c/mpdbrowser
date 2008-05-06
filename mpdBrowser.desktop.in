@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+_Name=mpdBrowser
+_Comment=MPD click & play client
+Exec=mpdBrowser
+Icon=/usr/share/pixmaps/mpdBrowser.png
+Type=Application
+Categories=Application;AudioVideo;
