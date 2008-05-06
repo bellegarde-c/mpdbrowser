@@ -53,4 +53,3 @@ class mpdBrowserConnection (mpd.MPDClient):
         self.clear ()
         self.add (item)
         self.play ()
-        self.close ()

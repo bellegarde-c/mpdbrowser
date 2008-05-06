@@ -135,7 +135,7 @@ class mpdBrowserBase:
                                                 self.__conf.get ("mpdport"),
                                                 self.__conf.get ("mpdpasswd"))
         
-            
+            self.__conn.open ()
             self.__initDB ()
             self.__view = mpdBrowserView (self.__conf.get ("shownames"))
             self.__view.iconview.connect ("event-after", self.__eventsFilter)
@@ -351,12 +351,10 @@ class mpdBrowserBase:
             Play selected song
         """
         try:
-            self.__conn.open ()
             if action == MPD_REPLACE:
                 self.__conn.replace (path.replace (self.__path, ""))
             else:
                 self.__conn.add (path.replace (self.__path, ""))
-            self.__conn.close ()
         except:
             print "mpdBrowserBase::__menuItemCb():"
             print sys.exc_info ()
@@ -437,7 +435,6 @@ class mpdBrowserBase:
             Play selected album
         """
         try:
-            self.__conn.open ()
             album = self.__albums[pos][ALBUM_PATH]
             if button == 1:
                 if action == MPD_REPLACE:
@@ -446,7 +443,6 @@ class mpdBrowserBase:
                     self.__conn.add (album.replace (self.__path, ""))
             else:
                 self.__conn.clear ()
-            self.__conn.close ()
         except:
             print "mpdBrowserBase::__playAlbum():"
             print sys.exc_info ()
@@ -478,5 +474,6 @@ class mpdBrowserBase:
         self.__conf.set ("height", self.__height)
         self.__conf.set ("x", self.__x)        
         self.__conf.set ("y", self.__y)  
-        self.__conf.write ()      
+        self.__conf.write ()
+        self.__conn.close ()     
         gtk.main_quit ()

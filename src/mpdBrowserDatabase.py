@@ -67,9 +67,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
             currentPath=""
             self.__covers.createDirs ()
             # Get albums list
-            self.__conn.open ()
             mpdCollection = self.__conn.search ('album', "")
-            self.__conn.close ()
            # mpdCollection.sort ()
             
             totalItems = len (mpdCollection)
@@ -139,9 +137,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
         """
         list = []
         
-        self.__conn.open ()
         infos = self.__conn.find ('album', album)
-        self.__conn.close ()
         
         for i in range (len (infos)):
             # Deal with missing tags
