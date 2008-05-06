@@ -65,6 +65,8 @@ setup(name='mpdBrowser',
         data_files=[('share/mpdbrowser', ['README', 'CHANGELOG', 'TODO', 'TRANSLATORS']),
                     ('share/applications', ['mpdBrowser.desktop']),
                     ('share/locale/fr/LC_MESSAGES', ['mo/fr/mpdBrowser.mo']),
+                    ('share/locale/it/LC_MESSAGES', ['mo/it/mpdBrowser.mo']),
+                    ('share/locale/pl/LC_MESSAGES', ['mo/pl/mpdBrowser.mo']),
                     ('share/pixmaps', glob.glob('images/*'))],
         )
 
