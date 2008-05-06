@@ -181,7 +181,8 @@ class mpdBrowserBase:
                                         self.__path,
                                         self.__conf.get ("stylizedcovers"),
                                         self.__conf.get ("hidemissing"),
-                                        self.__conf.get ("covername"))
+                                        self.__conf.get ("covername"),
+                                        self.__conf.get ("coversize"))
         self.__DB.connect ("scanned", self.__scannedCb)
         self.__DB.connect ("status", self.__statusCb)
         self.__DB.connect ("progress", self.__progressCb)
@@ -290,7 +291,7 @@ class mpdBrowserBase:
         updateViewOpts = "shownames"
         updateDbOpts   =  ("mpdserver", "mpdport", "mpdpasswd", 
                            "collectionpath", "stylizedcovers", "hidemissing",
-                           "covername")
+                           "covername", "coversize")
         updateView = False
         updateDB = False
         

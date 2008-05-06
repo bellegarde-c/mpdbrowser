@@ -22,7 +22,6 @@ if not os.path.exists (empty): empty = "../images/mpdBrowser_empty.png"
 case = sys.prefix + "/share/pixmaps/mpdBrowser_case.png"
 if not os.path.exists (case): case = "../images/mpdBrowser_case.png"
 
-COVER_SIZE = 128
 SPINE_RATIO = 60.0/600.0
 CAIRO_COVER = "/tmp/mpdBrowserCover.png"
 
@@ -32,19 +31,19 @@ class MissingCover(Exception):
 
 class mpdBrowserCovers (IdleObject):
                    
-    def __init__ (self, stylizedCovers, hideMissing, coverName):
+    def __init__ (self, stylizedCovers, hideMissing, coverName, coverSize):
         """
             Load composite effect file if needed
         """
         IdleObject.__init__(self)
         
         self.__case = gtk.gdk.pixbuf_new_from_file_at_size (case,
-                                                            COVER_SIZE, 
-                                                            COVER_SIZE)
+                                                            coverSize, 
+                                                            coverSize)
         
         self.__empty = gtk.gdk.pixbuf_new_from_file_at_size (empty,
-                                                             COVER_SIZE, 
-                                                             COVER_SIZE)
+                                                             coverSize, 
+                                                             coverSize)
         
         if stylizedCovers == True:
             self.__case = gtk.gdk.pixbuf_new_from_file (case)
@@ -54,6 +53,7 @@ class mpdBrowserCovers (IdleObject):
     
         self.__hideMissing = hideMissing
         self.__coverName = coverName
+        self.__coverSize = coverSize
         
         
     def __findCover (self, dirPath):
@@ -112,12 +112,12 @@ class mpdBrowserCovers (IdleObject):
         """
         # Setup Cairo
         surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, 
-                                     COVER_SIZE, COVER_SIZE)
+                                     self.__coverSize, self.__coverSize)
         ctx = cairo.Context(surface)
 
         pcr = pangocairo.CairoContext (ctx)
         layout = pcr.create_layout ()
-        layout.set_width (COVER_SIZE * 1000)
+        layout.set_width (self.__coverSize * 1000)
         layout.set_wrap (pango.WRAP_WORD_CHAR)
         layout.set_alignment (pango.ALIGN_CENTER)
         ctx.move_to (0, 30)
@@ -150,9 +150,11 @@ class mpdBrowserCovers (IdleObject):
                     raise MissingCover
                     
                 if cover != empty: # get composited cover
-                    pixbuf = gtk.gdk.pixbuf_new_from_file_at_size (cover,
-                                                                   COVER_SIZE, 
-                                                                   COVER_SIZE)
+                    pixbuf = gtk.gdk.pixbuf_new_from_file_at_size (
+                                                               cover,
+                                                               self.__coverSize, 
+                                                               self.__coverSize
+                                                                  )
                     w = pixbuf.get_width ()
                     h = pixbuf.get_height() 
                     pixbuf = self.__coverComposite (pixbuf, self.__case, 
@@ -160,7 +162,9 @@ class mpdBrowserCovers (IdleObject):
                 else: # add album name to empty composited cover
                     self.__coverCreateFromText (album)
                     cairoCover = gtk.gdk.pixbuf_new_from_file_at_size (
-                                                          CAIRO_COVER, 128, 128
+                                                               CAIRO_COVER,
+                                                               self.__coverSize,
+                                                               self.__coverSize
                                                                       )
                     os.unlink (CAIRO_COVER)
                     w = self.__empty.get_width ()
@@ -189,13 +193,17 @@ class mpdBrowserCovers (IdleObject):
                     raise MissingCover
                 
                 if cover != empty:  
-                    pixbuf = gtk.gdk.pixbuf_new_from_file_at_size (cover,
-                                                                   COVER_SIZE, 
-                                                                   COVER_SIZE)
+                    pixbuf = gtk.gdk.pixbuf_new_from_file_at_size (
+                                                               cover,
+                                                               self.__coverSize, 
+                                                               self.__coverSize
+                                                                  )
                 else: # add album name to empty cover
                     self.__coverCreateFromText (album)
                     cairoCover = gtk.gdk.pixbuf_new_from_file_at_size (
-                                                          CAIRO_COVER, 128, 128
+                                                               CAIRO_COVER,
+                                                               self.__coverSize,
+                                                               self.__coverSize
                                                                       )
                     os.unlink (CAIRO_COVER)
                     w = self.__empty.get_width ()

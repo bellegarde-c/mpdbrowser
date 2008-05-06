@@ -32,6 +32,7 @@ class mpdBrowserCfgDlg (IdleObject):
         self.__options = {}
         self.__coverNameOrig = options["covername"]
         self.__hideMissingOrig = options["hidemissing"]
+        self.__coverSizeOrig = options["coversize"]
         
         IdleObject.__init__ (self)
         
@@ -81,7 +82,6 @@ class mpdBrowserCfgDlg (IdleObject):
         hideMissing = gtk.CheckButton (_("Hide missing covers"))
         hideMissing.set_active (options["hidemissing"])
         
-        hbox = gtk.HBox ()
         customCoverName = gtk.CheckButton (_("Custom cover name:"))
         if options["covername"] == "":
             active = False
@@ -92,13 +92,25 @@ class mpdBrowserCfgDlg (IdleObject):
         coverName.set_text (options["covername"])
         coverName.set_sensitive (active)
         customCoverName.connect ("clicked", self.__coverNameCb, coverName)
-        hbox.pack_start (customCoverName, False, False, 0)
-        hbox.pack_start (coverName, False, False, 0)
+        
+        coverSizeLabel = gtk.Label (_("Cover size:"))
+        coverSize = gtk.HScale ()
+        coverSize.set_range (64, 512)
+        coverSize.set_increments (1, 1)
+        coverSize.set_digits(0)
+        coverSize.set_value (options["coversize"])
+        
+        table = gtk.Table (4, 2, False)
+        table.set_col_spacings (3)
+        table.attach (customCoverName, 1, 2, 1, 2)
+        table.attach (coverName, 2, 3, 1, 2)
+        table.attach (coverSizeLabel, 1, 2, 2, 3)
+        table.attach (coverSize, 2, 3, 2, 3)
         
         vboxOpt.pack_start (showNames, False, False, 0)
         vboxOpt.pack_start (stylizedCovers, False, False, 0)
         vboxOpt.pack_start (hideMissing, False, False, 0)
-        vboxOpt.pack_start (hbox, False, False, 0)
+        vboxOpt.pack_start (table, False, False, 0)
         prefsOptFrame.add (vboxOpt)
         
         prefsCacheFrame = gtk.Frame (_("Cache:"))
@@ -175,7 +187,7 @@ class mpdBrowserCfgDlg (IdleObject):
         self.__prefsWindow.connect ("destroy", self.__updateOpts, hostEntry, 
                                     portEntry, passwordEntry, dirEntry, 
                                     showNames, stylizedCovers, hideMissing,
-                                    coverName)
+                                    coverName, coverSize)
         self.__prefsWindow.vbox.pack_start (notebook, False, False, 0)
         self.__prefsWindow.show_all ()
         closeButton.grab_focus ()
@@ -189,7 +201,8 @@ class mpdBrowserCfgDlg (IdleObject):
         
         
     def __updateOpts (self, data, hostEntry, portEntry, passwordEntry, dirEntry, 
-                      showNames, stylizedCovers, hideMissing, coverName):
+                      showNames, stylizedCovers, hideMissing, coverName,
+                      coverSize):
         """
             emit update_opt signal to update Options and reload view
         """
@@ -201,13 +214,15 @@ class mpdBrowserCfgDlg (IdleObject):
                             "shownames"     : showNames.get_active (),
                             "stylizedcovers": stylizedCovers.get_active (),
                             "hidemissing"   : hideMissing.get_active(),
-                            "covername"     : coverName.get_text()
+                            "covername"     : coverName.get_text(),
+                            "coversize"     : int (coverSize.get_value ())
                           }
         # We need to clear cache
         if (coverName.get_text () != "" and 
                        self.__coverNameOrig != coverName.get_text ()) or  \
            (hideMissing.get_active () == True and \
-                       self.__hideMissingOrig != hideMissing.get_active ()):
+                       self.__hideMissingOrig != hideMissing.get_active ()) or\
+                       self.__coverSizeOrig != int (coverSize.get_value ()):
             self.__clearCache (None)
         self.emit ("update_opts")
      
