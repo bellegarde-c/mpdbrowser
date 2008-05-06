@@ -117,17 +117,17 @@ class mpdBrowserCovers (IdleObject):
 
         pcr = pangocairo.CairoContext (ctx)
         layout = pcr.create_layout ()
-        layout.set_width (self.__coverSize * 1000)
+        layout.set_width (self.__coverSize * pango.SCALE)
         layout.set_wrap (pango.WRAP_WORD_CHAR)
         layout.set_alignment (pango.ALIGN_CENTER)
-        ctx.move_to (0, 30)
+        ctx.move_to (0, self.__coverSize/3)
         
         if len (text) > 40:
            text  = text[:40] + "..."
       
         layout.set_markup (
-                 '''<span foreground="white" font_desc="Sans 12">%s</span>'''\
-                 % text.replace ("&", "&amp;")
+                 '''<span foreground="white" font_desc="Sans %s">%s</span>'''\
+                 % (self.__coverSize/10, text.replace ("&", "&amp;"))
                           )
         ctx.save ()
         pcr.show_layout (layout)
