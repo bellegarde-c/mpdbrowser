@@ -95,7 +95,7 @@ class mpdBrowserCfgDlg (IdleObject):
         
         coverSizeLabel = gtk.Label (_("Covers size:"))
         coverSize = gtk.HScale ()
-        coverSize.set_range (64, 512)
+        coverSize.set_range (64, 256)
         coverSize.set_increments (1, 1)
         coverSize.set_digits(0)
         coverSize.set_value (options["coversize"])
