@@ -97,7 +97,7 @@ msgstr "Nom des pochettes:"
 
 #: ../src/mpdBrowserCfgDlg.py:96
 msgid "Covers size:"
-msgstr "Taille des pochettes"
+msgstr "Taille des pochettes:"
 
 #: ../src/mpdBrowserCfgDlg.py:117
 msgid "Cache:"
