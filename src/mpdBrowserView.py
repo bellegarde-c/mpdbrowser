@@ -14,6 +14,7 @@
 import os, sys
 import gtk
 from mpdBrowserDefine import *
+from mpdBrowserUtils import *
 
 class mpdBrowserView:
 
@@ -31,7 +32,7 @@ class mpdBrowserView:
         self.iconview.set_pixbuf_column (0)
 
         self.iconview.set_model (self.__model)    
-
+        
         self.__items = []
         self.__realItemPos = [] # For filtered view
         self.__countItems = 0
@@ -97,11 +98,8 @@ class mpdBrowserView:
                          filterType not in (FILTER_ALL, FILTER_ALBUM)): 
                         i+=1 
                         continue
-
-                if len (albums[i][ALBUM_NAME]) > 25:
-                    name = albums[i][ALBUM_NAME][:25] + "..."
-                else:
-                    name = albums[i][ALBUM_NAME]
+                
+                name = cutStringAtSize (albums[i][ALBUM_NAME], 10, 40)
       
                 self.__model.append ([albums[i][ALBUM_PIXBUF], name])
                 self.__realItemPos.append (i)

@@ -14,6 +14,30 @@
   
 import os
 
+
+def cutStringAtSize (string, size, totalSize):
+    """
+        Format string for an iconview
+        \n if string > size
+        ... if string > totalSize
+    """
+    if len (string) > totalSize:
+        string = string[:totalSize] + "..."
+        
+    newString = ""
+    lastSpace = -1
+    i = 0
+    sub = 0
+    while i < len (string):
+        if sub > size and string[i] == " ":
+            newString += '\n'
+            sub = 0
+        else:
+            newString += string[i]
+        sub += 1
+        i += 1
+    return newString     
+            
 def getDirListing (dirPath, revert):
     """
         Return a list with dir content

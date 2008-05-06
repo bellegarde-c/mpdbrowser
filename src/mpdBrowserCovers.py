@@ -82,7 +82,7 @@ class mpdBrowserCovers (IdleObject):
         """
             Compose cover with pixbuf
         """
-    # Thanks to Sonata devs ;)
+        # Thanks to Sonata devs ;)
         if float(w)/h > 0.5:
             # Rather than merely compositing the case on top of the artwork, 
             # we will scale the artwork so that it isn't covered by the case:
