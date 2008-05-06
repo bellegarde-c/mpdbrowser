@@ -73,6 +73,9 @@ print "Cleaning up..."
 try:
 	removeall("build/")
 	os.rmdir("build/")
+	removeall("mo/")
+	os.rmdir("mo/")
+	os.unlink("mpdBrowser.desktop")
 except:
 	pass
 try:
