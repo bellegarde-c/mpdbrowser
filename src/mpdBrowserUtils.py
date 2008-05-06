@@ -38,6 +38,7 @@ def cutStringAtSize (string, size, totalSize):
         i += 1
     return newString     
             
+            
 def getDirListing (dirPath, revert):
     """
         Return a list with dir content
