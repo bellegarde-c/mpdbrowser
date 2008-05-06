@@ -87,7 +87,9 @@ class mpdBrowserCovers (IdleObject):
             # Rather than merely compositing the case on top of the artwork, 
             # we will scale the artwork so that it isn't covered by the case:
             spineWidth = int (w * spineRatio)
-
+            if h >= w - spineWidth:
+                h -= spineWidth
+                
             case = pixbuf.scale_simple (w, h, gtk.gdk.INTERP_BILINEAR)
             # Scale pix and shift to the right on a transparent pixbuf:
             cover = cover.scale_simple (w-spineWidth, h, 
