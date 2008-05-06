@@ -32,6 +32,7 @@ def rmgeneric(path, __func__):
 	except OSError, (errno, strerror):
 		pass
 		
+os.system("intltool-merge -d -u   po mpdBrowser.desktop.in mpdBrowser.desktop")
 # Create mo files:
 if not os.path.exists("mo/"):
 	os.mkdir("mo/")

@@ -119,22 +119,23 @@ class mpdBrowserCfgDlg (IdleObject):
                             "Copyleft Cedric Bellegarde (gnumdk@gmail.com)",
                             "bold")
         buffer.insert (iter, "\n\n")  
-        buffer.insert_with_tags_by_name (iter, _("How play an album?"), "bold")
+        buffer.insert_with_tags_by_name (iter, 
+                                         _("How to play an album?"), "bold")
         buffer.insert (iter, "\n")
         buffer.insert (iter, _("Just click on it"))
         buffer.insert (iter, "\n\n")
         buffer.insert_with_tags_by_name (iter, 
-                                         _("How enqueue an album?"), "bold")
+                                         _("How to enqueue an album?"), "bold")
         buffer.insert (iter, "\n")
         buffer.insert (iter, _("Just click on it with <Ctrl> pressed"))
         buffer.insert (iter, "\n\n")
 
-        buffer.insert_with_tags_by_name (iter, _("How play a song?"), "bold")
+        buffer.insert_with_tags_by_name (iter, _("How to play a song?"), "bold")
         buffer.insert (iter, "\n")
         buffer.insert (iter, _("Just right click on album, then select song"))
         buffer.insert (iter, "\n\n")
         buffer.insert_with_tags_by_name (iter, 
-                                         _("How enqueue a song?"), "bold")
+                                         _("How to enqueue a song?"), "bold")
         buffer.insert (iter, "\n")
         buffer.insert (iter, 
            _("Just right click on album with <Ctrl> pressed, then select song"))
