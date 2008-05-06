@@ -18,8 +18,8 @@ import os
 def cutStringAtSize (string, size, totalSize):
     """
         Format string for an iconview
-        \n if string > size
-        ... if string > totalSize
+        replace ' ' by '\n' every size char
+        terminate string with ... if len > totalSize
     """
     if len (string) > totalSize:
         string = string[:totalSize] + "..."
