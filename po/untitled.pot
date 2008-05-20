@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-20 11:49+0200\n"
+"POT-Creation-Date: 2008-05-20 11:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -79,7 +79,7 @@ msgid "Options:"
 msgstr ""
 
 #: ../src/mpdBrowserCfgDlg.py:78
-msgid "Update database at startup"
+msgid "Update collection at startup"
 msgstr ""
 
 #: ../src/mpdBrowserCfgDlg.py:80
@@ -174,9 +174,9 @@ msgstr ""
 msgid "Informations"
 msgstr ""
 
-#. wait for update finishing
+#. wait for update to finish
 #: ../src/mpdBrowserDatabase.py:72
-msgid "Updating MPD database..."
+msgid "Updating MPD collection..."
 msgstr ""
 
 #: ../src/mpdBrowserDatabase.py:89

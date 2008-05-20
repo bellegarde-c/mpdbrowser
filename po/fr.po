@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-20 11:49+0200\n"
+"POT-Creation-Date: 2008-05-20 11:59+0200\n"
 "PO-Revision-Date: 2008-04-02 11:15+0200\n"
 "Last-Translator: Bellegarde Cedric <gnumdk@gmail.com>\n"
 "Language-Team: French\n"
@@ -80,8 +80,8 @@ msgid "Options:"
 msgstr "Options:"
 
 #: ../src/mpdBrowserCfgDlg.py:78
-msgid "Update database at startup"
-msgstr "Mise à jour de la base au démarrage"
+msgid "Update collection at startup"
+msgstr "Mise à jour de la bibliothèque au démarrage"
 
 #: ../src/mpdBrowserCfgDlg.py:80
 msgid "Show albums names"
@@ -177,10 +177,10 @@ msgstr "Appuyez sur F5"
 msgid "Informations"
 msgstr "Informations"
 
-#. wait for update finishing
+#. wait for update to finish
 #: ../src/mpdBrowserDatabase.py:72
-msgid "Updating MPD database..."
-msgstr "Mise à jours de la base MPD..."
+msgid "Updating MPD collection..."
+msgstr "Mise à jour de la bibliothèque MPD..."
 
 #: ../src/mpdBrowserDatabase.py:89
 msgid "Loading albums..."

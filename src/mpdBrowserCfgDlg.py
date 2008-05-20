@@ -75,7 +75,7 @@ class mpdBrowserCfgDlg (IdleObject):
 
         prefsOptFrame = gtk.Frame (_("Options:"))
         vboxOpt = gtk.VBox ()
-        upStart = gtk.CheckButton (_("Update database at startup"))
+        upStart = gtk.CheckButton (_("Update collection at startup"))
         upStart.set_active (options["upstart"])
         showNames = gtk.CheckButton (_("Show albums names"))
         showNames.set_active (options["shownames"])

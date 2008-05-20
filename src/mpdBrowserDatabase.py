@@ -68,8 +68,8 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
             currentPath=""
             self.__covers.createDirs ()
             
-            if self.__upstart: #wait for update finishing
-                self.emit ("status", _("Updating MPD database..."))
+            if self.__upstart: #wait for update to finish
+                self.emit ("status", _("Updating MPD collection..."))
                 try:
                     while True:
                         self.__conn.open ()
