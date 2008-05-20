@@ -71,7 +71,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
             self.__conn.open ()
             mpdCollection = self.__conn.search ('album', "")
             self.__conn.close ()
-            
+
             totalItems = len (mpdCollection)
             nbItems = 0
             for item in mpdCollection:

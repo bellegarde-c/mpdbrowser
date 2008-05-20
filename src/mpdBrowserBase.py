@@ -119,13 +119,17 @@ class mpdBrowserBase:
         self.__filterCombo.connect ("changed", self.__filterInsCb)
         self.__filterBox.pack_start (self.__filterCombo, False, False, 0)
         
-        filterCloseButton = gtk.Button ()
-        filterCloseButton.set_image (gtk.image_new_from_stock (gtk.STOCK_CLOSE,   
-		                                                    gtk.ICON_SIZE_MENU))
-        filterCloseButton.connect ("clicked", self.__filterHideCb)
-        self.__filterBox.pack_start (filterCloseButton, False, False, 0)
+        self.__filterCloseButton = gtk.Button ()
+        self.__filterCloseButton.set_image (
+                                      gtk.image_new_from_stock (gtk.STOCK_CLOSE,   
+		                              gtk.ICON_SIZE_MENU)
+                                           )
+        self.__filterCloseButton.connect ("clicked", self.__filterHideCb)
+        self.__filterBox.pack_start (self.__filterCloseButton, False, False, 0)
         
-        self.__filterBox.set_no_show_all (True)
+        alwaysFiltering = self.__conf.get ("alwaysFiltering")
+        self.__filterCloseButton.set_no_show_all (alwaysFiltering)
+        self.__filterBox.set_no_show_all (not alwaysFiltering)
         
         # Try to load others options
         # Create Connection, DB and Iconview
@@ -292,8 +296,10 @@ class mpdBrowserBase:
         updateDbOpts   =  ("mpdserver", "mpdport", "mpdpasswd", 
                            "collectionpath", "stylizedcovers", "hidemissing",
                            "covername", "coversize")
+        updateUiOpts = "alwaysFiltering"
         updateView = False
-        updateDB = False
+        updateDb = False
+        updateUi = False
         
         # search for change in options
         options = self.__prefsDialog.getUserOptions ()
@@ -304,10 +310,12 @@ class mpdBrowserBase:
                 if option in updateViewOpts:
                     updateView = True
                 elif option in updateDbOpts:
-                    updateDB = True
+                    updateDb = True
+                elif option in updateUiOpts:
+                    updateUi = True
         self.__conf.write ()
         
-        if updateDB:
+        if updateDb:
             self.__scanning ()
             self.__path = self.__conf.get("collectionpath") + "/"
 
@@ -322,6 +330,17 @@ class mpdBrowserBase:
             
         if updateView:
             self.__view.updateColumns (self.__conf.get ("shownames"))
+        
+        if updateUi:
+            alwaysFiltering = self.__conf.get ("alwaysFiltering")
+            self.__filterCloseButton.set_no_show_all (alwaysFiltering)
+            self.__filterBox.set_no_show_all (not alwaysFiltering)
+            if alwaysFiltering:
+                self.__filterCloseButton.hide ()
+                self.__filterBox.show_all ()
+            else:
+                self.__filterCloseButton.show ()
+                self.__filterBox.hide ()
 
         self.__view.iconview.grab_focus ()
         

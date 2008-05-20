@@ -81,6 +81,8 @@ class mpdBrowserCfgDlg (IdleObject):
         stylizedCovers.set_active (options["stylizedcovers"])
         hideMissing = gtk.CheckButton (_("Hide missing covers"))
         hideMissing.set_active (options["hidemissing"])
+        alwaysFiltering = gtk.CheckButton (_("Always show filter bar"))
+        alwaysFiltering.set_active (options["alwaysFiltering"])
         
         customCoverName = gtk.CheckButton (_("Custom cover name:"))
         if options["covername"] == "":
@@ -111,6 +113,7 @@ class mpdBrowserCfgDlg (IdleObject):
         vboxOpt.pack_start (showNames, False, False, 0)
         vboxOpt.pack_start (stylizedCovers, False, False, 0)
         vboxOpt.pack_start (hideMissing, False, False, 0)
+        vboxOpt.pack_start (alwaysFiltering, False, False, 0)
         vboxOpt.pack_start (table, False, False, 0)
         prefsOptFrame.add (vboxOpt)
         
@@ -188,7 +191,7 @@ class mpdBrowserCfgDlg (IdleObject):
         self.__prefsWindow.connect ("destroy", self.__updateOpts, hostEntry, 
                                     portEntry, passwordEntry, dirEntry, 
                                     showNames, stylizedCovers, hideMissing,
-                                    coverName, coverSize)
+                                    alwaysFiltering, coverName, coverSize)
         self.__prefsWindow.vbox.pack_start (notebook, False, False, 0)
         self.__prefsWindow.show_all ()
         closeButton.grab_focus ()
@@ -202,21 +205,22 @@ class mpdBrowserCfgDlg (IdleObject):
         
         
     def __updateOpts (self, data, hostEntry, portEntry, passwordEntry, dirEntry, 
-                      showNames, stylizedCovers, hideMissing, coverName,
-                      coverSize):
+                      showNames, stylizedCovers, hideMissing, alwaysFiltering,
+                      coverName, coverSize):
         """
             emit update_opt signal to update Options and reload view
         """
         self.__options = {
-                            "mpdserver"     : hostEntry.get_text (),
-                            "mpdport"       : int (portEntry.get_text ()),
-                            "mpdpasswd"     : passwordEntry.get_text (),
-                            "collectionpath": dirEntry.get_text (),
-                            "shownames"     : showNames.get_active (),
-                            "stylizedcovers": stylizedCovers.get_active (),
-                            "hidemissing"   : hideMissing.get_active(),
-                            "covername"     : coverName.get_text(),
-                            "coversize"     : int (coverSize.get_value ())
+                            "mpdserver"      : hostEntry.get_text (),
+                            "mpdport"        : int (portEntry.get_text ()),
+                            "mpdpasswd"      : passwordEntry.get_text (),
+                            "collectionpath" : dirEntry.get_text (),
+                            "shownames"      : showNames.get_active (),
+                            "stylizedcovers" : stylizedCovers.get_active (),
+                            "hidemissing"    : hideMissing.get_active (),
+                            "alwaysFiltering": alwaysFiltering.get_active (),
+                            "covername"      : coverName.get_text (),
+                            "coversize"      : int (coverSize.get_value ())
                           }
         # We need to clear cache
         if (coverName.get_text () != "" and 

@@ -23,37 +23,39 @@ class mpdBrowserCfg:
         self.__options = {   
          "connection": ("mpdserver", "mpdport", "mpdpasswd", "collectionpath"),
          "window"    : ("x", "y","width","height"),
-         "options"   : ("stylizedcovers", "shownames", 
-                        "hidemissing", "covername", "coversize")
+         "options"   : ("stylizedcovers", "shownames", "hidemissing",
+                        "covername", "coversize", "alwaysFiltering")
                          }
         # Defaults values
         self.__defaults = {
-                            "mpdserver"     : "localhost",
-                            "mpdport"       : 6600,
-                            "mpdpasswd"     : "",
-                            "collectionpath": "/var/lib/mpd/music",
-                            "x"             : "",
-                            "y"             : "",
-                            "width"         : 640,
-                            "height"        : 480,
-                            "stylizedcovers": True,
-                            "shownames"     : False,
-                            "hidemissing"   : False,
-                            "covername"     : "",
-                            "coversize"     : 128
+                            "mpdserver"      : "localhost",
+                            "mpdport"        : 6600,
+                            "mpdpasswd"      : "",
+                            "collectionpath" : "/var/lib/mpd/music",
+                            "x"              : "",
+                            "y"              : "",
+                            "width"          : 640,
+                            "height"         : 480,
+                            "stylizedcovers" : True,
+                            "shownames"      : False,
+                            "hidemissing"    : False,
+                            "covername"      : "",
+                            "coversize"      : 128,
+                            "alwaysFiltering": False  
                            }
         # Defaults types
         self.__types = {
-                            "mpdport"       : "int",
-                            "x"             : "int",
-                            "y"             : "int",
-                            "width"         : "int",
-                            "height"        : "int",
-                            "stylizedcovers": "bool",
-                            "shownames"     : "bool",
-                            "hidemissing"   : "bool",
-                            "covername"     : "string",
-                            "coversize"     : "int"
+                            "mpdport"        : "int",
+                            "x"              : "int",
+                            "y"              : "int",
+                            "width"          : "int",
+                            "height"         : "int",
+                            "stylizedcovers" : "bool",
+                            "shownames"      : "bool",
+                            "hidemissing"    : "bool",
+                            "covername"      : "string",
+                            "coversize"      : "int",
+                            "alwaysFiltering": "bool" 
                            }
                        
         self.__optionsValues = {}
