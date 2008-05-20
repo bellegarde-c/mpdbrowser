@@ -137,6 +137,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
             print "mpdBrowserDataBase::run(): "
             print sys.exc_info ()
             self.emit("status", _("Can't contact mpd!"))
+            self.emit ("scanned", None)
         
         
     def stop (self):

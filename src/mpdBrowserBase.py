@@ -363,7 +363,7 @@ class mpdBrowserBase:
             Update status/progress bar message
         """
         try:
-            if len (self.__albums) == 0:
+            if not len (self.__albums): # Progress bar visible
                 self.__progressBar.set_text (info)
             else:
                 self.__statusBar.show ()
@@ -403,20 +403,23 @@ class mpdBrowserBase:
         """
             Add albums to iconview
         """
-        self.__progressBar.set_text ("")
+        if albums != None: # We have albums!
+            self.__progressBar.set_text ("")
+            self.__window.set_title ("mpdBrowser")
+            self.__statusBar.push (self.__contId, 
+                                   _("You have %i albums.") % len (albums))
+            self.__albums = albums
+            self.__view.populate (self.__albums,
+                                  self.__filterPattern.get_text (),
+                                  self.__filterCombo.get_active ())
+            self.__progressBar.hide ()
+            self.__statusBar.show ()
+            self.__progressBar.set_fraction (0.0)
+            self.__view.iconview.grab_focus ()
+
         self.__window.set_title ("mpdBrowser")
-        self.__statusBar.push (self.__contId, 
-                               _("You have %i albums.") % len (albums))
-        self.__albums = albums
-        self.__view.populate (self.__albums,
-                              self.__filterPattern.get_text (),
-                              self.__filterCombo.get_active ())
         self.__prefsButton.set_sensitive (True)
-        self.__progressBar.hide ()
-        self.__statusBar.show ()
-        self.__progressBar.set_fraction (0.0)
-        self.__view.iconview.grab_focus ()
-   
+        
    
     def __configEventCb (self, widget, allocation):
         """
