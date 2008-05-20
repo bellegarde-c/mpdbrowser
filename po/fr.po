@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-20 15:33+0200\n"
+"POT-Creation-Date: 2008-05-20 15:50+0200\n"
 "PO-Revision-Date: 2008-04-02 11:15+0200\n"
 "Last-Translator: Bellegarde Cedric <gnumdk@gmail.com>\n"
 "Language-Team: French\n"
@@ -42,7 +42,7 @@ msgid "Loading..."
 msgstr "Chargement..."
 
 #: ../src/mpdBrowserBase.py:401 ../src/mpdBrowserBase.py:495
-#: ../src/mpdBrowserDatabase.py:139
+#: ../src/mpdBrowserDatabase.py:140
 msgid "Can't contact mpd!"
 msgstr "Impossible de contacter mpd!"
 
@@ -190,12 +190,17 @@ msgstr "Informations"
 msgid "Updating MPD collection..."
 msgstr "Mise à jour de la bibliothèque MPD..."
 
-#: ../src/mpdBrowserDatabase.py:89
+#. update finished
+#: ../src/mpdBrowserDatabase.py:82
+msgid "Connecting to MPD..."
+msgstr "Connexion à MPD..."
+
+#: ../src/mpdBrowserDatabase.py:90
 msgid "Loading albums..."
 msgstr "Chargement des albums..."
 
-#: ../src/mpdBrowserDatabase.py:99 ../src/mpdBrowserDatabase.py:101
-#: ../src/mpdBrowserDatabase.py:103 ../src/mpdBrowserDatabase.py:163
+#: ../src/mpdBrowserDatabase.py:100 ../src/mpdBrowserDatabase.py:102
+#: ../src/mpdBrowserDatabase.py:104 ../src/mpdBrowserDatabase.py:164
 msgid "Unknown"
 msgstr "Inconnu"
 

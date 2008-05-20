@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mpdBrowser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-20 15:34+0200\n"
+"POT-Creation-Date: 2008-05-20 15:50+0200\n"
 "PO-Revision-Date: 2008-05-05 17:25+0100\n"
 "Last-Translator: Tomasz Dominikowski <dominikowski@gmail.com>\n"
 "Language-Team: Tomasz Dominikowski (Aviary.pl) <dominikowski@gmail.com>\n"
@@ -44,7 +44,7 @@ msgid "Loading..."
 msgstr "Wczytywanie..."
 
 #: ../src/mpdBrowserBase.py:401 ../src/mpdBrowserBase.py:495
-#: ../src/mpdBrowserDatabase.py:139
+#: ../src/mpdBrowserDatabase.py:140
 msgid "Can't contact mpd!"
 msgstr "Nie można się połączyć z mpd!"
 
@@ -194,13 +194,18 @@ msgstr "Informacje"
 msgid "Updating MPD collection..."
 msgstr ""
 
-#: ../src/mpdBrowserDatabase.py:89
+#. update finished
+#: ../src/mpdBrowserDatabase.py:82
+msgid "Connecting to MPD..."
+msgstr ""
+
+#: ../src/mpdBrowserDatabase.py:90
 #, fuzzy
 msgid "Loading albums..."
 msgstr "Wczytywanie..."
 
-#: ../src/mpdBrowserDatabase.py:99 ../src/mpdBrowserDatabase.py:101
-#: ../src/mpdBrowserDatabase.py:103 ../src/mpdBrowserDatabase.py:163
+#: ../src/mpdBrowserDatabase.py:100 ../src/mpdBrowserDatabase.py:102
+#: ../src/mpdBrowserDatabase.py:104 ../src/mpdBrowserDatabase.py:164
 msgid "Unknown"
 msgstr "Nieznany"
 
