@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mpdBrowser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-06 13:37+0200\n"
+"POT-Creation-Date: 2008-05-20 10:07+0200\n"
 "PO-Revision-Date: 2008-05-05 17:25+0100\n"
 "Last-Translator: Tomasz Dominikowski <dominikowski@gmail.com>\n"
 "Language-Team: Tomasz Dominikowski (Aviary.pl) <dominikowski@gmail.com>\n"
@@ -39,21 +39,21 @@ msgstr "Album"
 msgid "Genre"
 msgstr "Gatunek"
 
-#: ../src/mpdBrowserBase.py:173
+#: ../src/mpdBrowserBase.py:177
 msgid "Loading..."
 msgstr "Wczytywanie..."
 
-#: ../src/mpdBrowserBase.py:364 ../src/mpdBrowserBase.py:454
+#: ../src/mpdBrowserBase.py:384 ../src/mpdBrowserBase.py:474
 #: ../src/mpdBrowserDatabase.py:126
 msgid "Can't contact mpd!"
 msgstr "Nie można się połączyć z mpd!"
 
-#: ../src/mpdBrowserBase.py:380
+#: ../src/mpdBrowserBase.py:400
 #, python-format
 msgid "You have %i albums."
 msgstr "Ilość albumów: %i."
 
-#: ../src/mpdBrowserCfgDlg.py:39 ../src/mpdBrowserCfgDlg.py:179
+#: ../src/mpdBrowserCfgDlg.py:39 ../src/mpdBrowserCfgDlg.py:182
 msgid "Preferences"
 msgstr "Preferencje"
 
@@ -93,81 +93,85 @@ msgstr "Stylizowane okładki"
 msgid "Hide missing covers"
 msgstr "Ukrywanie brakujących okładek"
 
-#: ../src/mpdBrowserCfgDlg.py:85
+#: ../src/mpdBrowserCfgDlg.py:84
+msgid "Always show filter bar"
+msgstr ""
+
+#: ../src/mpdBrowserCfgDlg.py:87
 msgid "Custom cover name:"
 msgstr "Własna nazwa okładki:"
 
-#: ../src/mpdBrowserCfgDlg.py:96
+#: ../src/mpdBrowserCfgDlg.py:98
 msgid "Covers size:"
 msgstr ""
 
-#: ../src/mpdBrowserCfgDlg.py:117
+#: ../src/mpdBrowserCfgDlg.py:120
 msgid "Cache:"
 msgstr "Bufor:"
 
-#: ../src/mpdBrowserCfgDlg.py:118
+#: ../src/mpdBrowserCfgDlg.py:121
 msgid "Clear:"
 msgstr "Wyczyść:"
 
-#: ../src/mpdBrowserCfgDlg.py:136
+#: ../src/mpdBrowserCfgDlg.py:139
 msgid "How to play an album?"
 msgstr "Jak odtworzyć album?"
 
-#: ../src/mpdBrowserCfgDlg.py:138
+#: ../src/mpdBrowserCfgDlg.py:141
 msgid "Just click on it"
 msgstr "Wystarczy go kliknąć"
 
-#: ../src/mpdBrowserCfgDlg.py:141
+#: ../src/mpdBrowserCfgDlg.py:144
 msgid "How to enqueue an album?"
 msgstr "Jak zakolejkować album?"
 
-#: ../src/mpdBrowserCfgDlg.py:143
+#: ../src/mpdBrowserCfgDlg.py:146
 msgid "Just click on it with <Ctrl> pressed"
 msgstr "Wystarczy kliknąć z wciśniętym klawiszem <Ctrl>"
 
-#: ../src/mpdBrowserCfgDlg.py:146
+#: ../src/mpdBrowserCfgDlg.py:149
 msgid "How to play a song?"
 msgstr "Jak odtworzyć utwór?"
 
-#: ../src/mpdBrowserCfgDlg.py:148
+#: ../src/mpdBrowserCfgDlg.py:151
 msgid "Just right click on album, then select song"
 msgstr "Prawym przyciskiem kliknąć album, następnie wybrać utwór"
 
-#: ../src/mpdBrowserCfgDlg.py:151
+#: ../src/mpdBrowserCfgDlg.py:154
 msgid "How to enqueue a song?"
 msgstr "Jak zakolejkować utwór?"
 
-#: ../src/mpdBrowserCfgDlg.py:154
+#: ../src/mpdBrowserCfgDlg.py:157
 msgid "Just right click on album with <Ctrl> pressed, then select song"
 msgstr ""
 "Prawym przyciskiem kliknąć album z wciśniętym klawiszem <Ctrl>, następnie "
 "wybrać utwór"
 
-#: ../src/mpdBrowserCfgDlg.py:157
+#: ../src/mpdBrowserCfgDlg.py:160
 msgid "How to add a cover?"
 msgstr "Jak dodać okładkę?"
 
-#: ../src/mpdBrowserCfgDlg.py:159
+#: ../src/mpdBrowserCfgDlg.py:162
 msgid "Just copy an image to album folder"
 msgstr "Wystarczy skopiować obraz do folderu z albumem"
 
-#: ../src/mpdBrowserCfgDlg.py:162
+#: ../src/mpdBrowserCfgDlg.py:165
 msgid "How to search for something?"
 msgstr "Jak rozpocząć wyszukiwanie?"
 
-#: ../src/mpdBrowserCfgDlg.py:164
+#: ../src/mpdBrowserCfgDlg.py:167
 msgid "Just press Ctrl + f"
 msgstr "Wystarczy nacisnąć Ctrl + F"
 
-#: ../src/mpdBrowserCfgDlg.py:167
+#: ../src/mpdBrowserCfgDlg.py:170
 msgid "How to refresh view?"
 msgstr "Jak odświeżyć widok?"
 
-#: ../src/mpdBrowserCfgDlg.py:169
+#: ../src/mpdBrowserCfgDlg.py:172
 msgid "Just press F5"
 msgstr "Wystarczy nacisnąć F5"
 
-#: ../src/mpdBrowserCfgDlg.py:181
+#: ../src/mpdBrowserCfgDlg.py:184
 msgid "Informations"
 msgstr "Informacje"
 
