@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-20 10:07+0200\n"
+"POT-Creation-Date: 2008-05-20 11:49+0200\n"
 "PO-Revision-Date: 2008-04-02 11:15+0200\n"
 "Last-Translator: Bellegarde Cedric <gnumdk@gmail.com>\n"
 "Language-Team: French\n"
@@ -37,21 +37,21 @@ msgstr "Album"
 msgid "Genre"
 msgstr "Style"
 
-#: ../src/mpdBrowserBase.py:177
+#: ../src/mpdBrowserBase.py:181
 msgid "Loading..."
 msgstr "Chargement..."
 
-#: ../src/mpdBrowserBase.py:384 ../src/mpdBrowserBase.py:474
-#: ../src/mpdBrowserDatabase.py:126
+#: ../src/mpdBrowserBase.py:392 ../src/mpdBrowserBase.py:483
+#: ../src/mpdBrowserDatabase.py:139
 msgid "Can't contact mpd!"
 msgstr "Impossible de contacter mpd!"
 
-#: ../src/mpdBrowserBase.py:400
+#: ../src/mpdBrowserBase.py:409
 #, python-format
 msgid "You have %i albums."
 msgstr "Vous avez %i albums."
 
-#: ../src/mpdBrowserCfgDlg.py:39 ../src/mpdBrowserCfgDlg.py:182
+#: ../src/mpdBrowserCfgDlg.py:39 ../src/mpdBrowserCfgDlg.py:185
 msgid "Preferences"
 msgstr "Préférences"
 
@@ -80,101 +80,114 @@ msgid "Options:"
 msgstr "Options:"
 
 #: ../src/mpdBrowserCfgDlg.py:78
+msgid "Update database at startup"
+msgstr "Mise à jour de la base au démarrage"
+
+#: ../src/mpdBrowserCfgDlg.py:80
 msgid "Show albums names"
 msgstr "Montrer le nom des albums"
 
-#: ../src/mpdBrowserCfgDlg.py:80
+#: ../src/mpdBrowserCfgDlg.py:82
 msgid "Stylized covers"
 msgstr "Pochettes stylisées"
 
-#: ../src/mpdBrowserCfgDlg.py:82
+#: ../src/mpdBrowserCfgDlg.py:84
 msgid "Hide missing covers"
 msgstr "Cacher les pochettes manquantes"
 
-#: ../src/mpdBrowserCfgDlg.py:84
+#: ../src/mpdBrowserCfgDlg.py:86
 msgid "Always show filter bar"
 msgstr "Toujours afficher la barre de filtre"
 
-#: ../src/mpdBrowserCfgDlg.py:87
+#: ../src/mpdBrowserCfgDlg.py:89
 msgid "Custom cover name:"
 msgstr "Nom des pochettes:"
 
-#: ../src/mpdBrowserCfgDlg.py:98
+#: ../src/mpdBrowserCfgDlg.py:100
 msgid "Covers size:"
 msgstr "Taille des pochettes:"
 
-#: ../src/mpdBrowserCfgDlg.py:120
+#: ../src/mpdBrowserCfgDlg.py:123
 msgid "Cache:"
 msgstr "Cache:"
 
-#: ../src/mpdBrowserCfgDlg.py:121
+#: ../src/mpdBrowserCfgDlg.py:124
 msgid "Clear:"
 msgstr "Effacer:"
 
-#: ../src/mpdBrowserCfgDlg.py:139
+#: ../src/mpdBrowserCfgDlg.py:142
 msgid "How to play an album?"
 msgstr "Comment lire un album?"
 
-#: ../src/mpdBrowserCfgDlg.py:141
+#: ../src/mpdBrowserCfgDlg.py:144
 msgid "Just click on it"
 msgstr "Cliquez dessus"
 
-#: ../src/mpdBrowserCfgDlg.py:144
+#: ../src/mpdBrowserCfgDlg.py:147
 msgid "How to enqueue an album?"
 msgstr "Comment ajouter un album?"
 
-#: ../src/mpdBrowserCfgDlg.py:146
+#: ../src/mpdBrowserCfgDlg.py:149
 msgid "Just click on it with <Ctrl> pressed"
 msgstr "Cliquez dessus en maintenant <Ctrl> enfoncé"
 
-#: ../src/mpdBrowserCfgDlg.py:149
+#: ../src/mpdBrowserCfgDlg.py:152
 msgid "How to play a song?"
 msgstr "Comment lire un morceau?"
 
-#: ../src/mpdBrowserCfgDlg.py:151
+#: ../src/mpdBrowserCfgDlg.py:154
 msgid "Just right click on album, then select song"
 msgstr "Clique droit sur un album, puis selectionnez la chanson"
 
-#: ../src/mpdBrowserCfgDlg.py:154
+#: ../src/mpdBrowserCfgDlg.py:157
 msgid "How to enqueue a song?"
 msgstr "Comment ajouter un morceau?"
 
-#: ../src/mpdBrowserCfgDlg.py:157
+#: ../src/mpdBrowserCfgDlg.py:160
 msgid "Just right click on album with <Ctrl> pressed, then select song"
 msgstr ""
 "Clique droit sur un album en maintenant <Ctrl> enfoncé, puis selectionnez la "
 "chanson"
 
-#: ../src/mpdBrowserCfgDlg.py:160
+#: ../src/mpdBrowserCfgDlg.py:163
 msgid "How to add a cover?"
 msgstr "Comment ajouter une pochette?"
 
-#: ../src/mpdBrowserCfgDlg.py:162
+#: ../src/mpdBrowserCfgDlg.py:165
 msgid "Just copy an image to album folder"
 msgstr "Copiez une image dans le répertoire de l'album"
 
-#: ../src/mpdBrowserCfgDlg.py:165
+#: ../src/mpdBrowserCfgDlg.py:168
 msgid "How to search for something?"
 msgstr "Comment faire une recherche?"
 
-#: ../src/mpdBrowserCfgDlg.py:167
+#: ../src/mpdBrowserCfgDlg.py:170
 msgid "Just press Ctrl + f"
 msgstr "Appuyez sur Ctrl + f"
 
-#: ../src/mpdBrowserCfgDlg.py:170
+#: ../src/mpdBrowserCfgDlg.py:173
 msgid "How to refresh view?"
 msgstr "Comment rafraichir la vue?"
 
-#: ../src/mpdBrowserCfgDlg.py:172
+#: ../src/mpdBrowserCfgDlg.py:175
 msgid "Just press F5"
 msgstr "Appuyez sur F5"
 
-#: ../src/mpdBrowserCfgDlg.py:184
+#: ../src/mpdBrowserCfgDlg.py:187
 msgid "Informations"
 msgstr "Informations"
 
-#: ../src/mpdBrowserDatabase.py:86 ../src/mpdBrowserDatabase.py:88
-#: ../src/mpdBrowserDatabase.py:90 ../src/mpdBrowserDatabase.py:149
+#. wait for update finishing
+#: ../src/mpdBrowserDatabase.py:72
+msgid "Updating MPD database..."
+msgstr "Mise à jours de la base MPD..."
+
+#: ../src/mpdBrowserDatabase.py:89
+msgid "Loading albums..."
+msgstr "Chargement des albums..."
+
+#: ../src/mpdBrowserDatabase.py:99 ../src/mpdBrowserDatabase.py:101
+#: ../src/mpdBrowserDatabase.py:103 ../src/mpdBrowserDatabase.py:162
 msgid "Unknown"
 msgstr "Inconnu"
 

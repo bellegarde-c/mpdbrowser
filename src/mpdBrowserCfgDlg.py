@@ -75,6 +75,8 @@ class mpdBrowserCfgDlg (IdleObject):
 
         prefsOptFrame = gtk.Frame (_("Options:"))
         vboxOpt = gtk.VBox ()
+        upStart = gtk.CheckButton (_("Update database at startup"))
+        upStart.set_active (options["upstart"])
         showNames = gtk.CheckButton (_("Show albums names"))
         showNames.set_active (options["shownames"])
         stylizedCovers = gtk.CheckButton (_("Stylized covers"))
@@ -83,10 +85,7 @@ class mpdBrowserCfgDlg (IdleObject):
         hideMissing.set_active (options["hidemissing"])
         alwaysFiltering = gtk.CheckButton (_("Always show filter bar"))
         alwaysFiltering.set_active (options["alwaysFiltering"])
-        upStart = gtk.CheckButton (_("Update database at startup"))
-        upStart.set_active (options["upstart"])
-
-        
+                
         customCoverName = gtk.CheckButton (_("Custom cover name:"))
         if options["covername"] == "":
             active = False
@@ -113,11 +112,11 @@ class mpdBrowserCfgDlg (IdleObject):
         table.attach (coverSizeLabel, 0, 1, 1, 2)
         table.attach (coverSize, 1, 2, 1, 2)
         
+        vboxOpt.pack_start (upStart, False, False, 0)
         vboxOpt.pack_start (showNames, False, False, 0)
         vboxOpt.pack_start (stylizedCovers, False, False, 0)
         vboxOpt.pack_start (hideMissing, False, False, 0)
         vboxOpt.pack_start (alwaysFiltering, False, False, 0)
-        vboxOpt.pack_start (upStart, False, False, 0)
         vboxOpt.pack_start (table, False, False, 0)
         prefsOptFrame.add (vboxOpt)
         
