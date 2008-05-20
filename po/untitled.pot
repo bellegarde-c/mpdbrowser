@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-20 11:59+0200\n"
+"POT-Creation-Date: 2008-05-20 15:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,17 +40,17 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
-#: ../src/mpdBrowserBase.py:392 ../src/mpdBrowserBase.py:483
+#: ../src/mpdBrowserBase.py:401 ../src/mpdBrowserBase.py:495
 #: ../src/mpdBrowserDatabase.py:139
 msgid "Can't contact mpd!"
 msgstr ""
 
-#: ../src/mpdBrowserBase.py:409
+#: ../src/mpdBrowserBase.py:419
 #, python-format
 msgid "You have %i albums."
 msgstr ""
 
-#: ../src/mpdBrowserCfgDlg.py:39 ../src/mpdBrowserCfgDlg.py:185
+#: ../src/mpdBrowserCfgDlg.py:39 ../src/mpdBrowserCfgDlg.py:190
 msgid "Preferences"
 msgstr ""
 
@@ -170,7 +170,15 @@ msgstr ""
 msgid "Just press F5"
 msgstr ""
 
-#: ../src/mpdBrowserCfgDlg.py:187
+#: ../src/mpdBrowserCfgDlg.py:178
+msgid "How to refresh collection?"
+msgstr ""
+
+#: ../src/mpdBrowserCfgDlg.py:180
+msgid "Just press Ctrl + F5"
+msgstr ""
+
+#: ../src/mpdBrowserCfgDlg.py:192
 msgid "Informations"
 msgstr ""
 
@@ -184,7 +192,7 @@ msgid "Loading albums..."
 msgstr ""
 
 #: ../src/mpdBrowserDatabase.py:99 ../src/mpdBrowserDatabase.py:101
-#: ../src/mpdBrowserDatabase.py:103 ../src/mpdBrowserDatabase.py:162
+#: ../src/mpdBrowserDatabase.py:103 ../src/mpdBrowserDatabase.py:163
 msgid "Unknown"
 msgstr ""
 

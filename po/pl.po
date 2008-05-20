@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mpdBrowser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-20 11:59+0200\n"
+"POT-Creation-Date: 2008-05-20 15:34+0200\n"
 "PO-Revision-Date: 2008-05-05 17:25+0100\n"
 "Last-Translator: Tomasz Dominikowski <dominikowski@gmail.com>\n"
 "Language-Team: Tomasz Dominikowski (Aviary.pl) <dominikowski@gmail.com>\n"
@@ -43,17 +43,17 @@ msgstr "Gatunek"
 msgid "Loading..."
 msgstr "Wczytywanie..."
 
-#: ../src/mpdBrowserBase.py:392 ../src/mpdBrowserBase.py:483
+#: ../src/mpdBrowserBase.py:401 ../src/mpdBrowserBase.py:495
 #: ../src/mpdBrowserDatabase.py:139
 msgid "Can't contact mpd!"
 msgstr "Nie można się połączyć z mpd!"
 
-#: ../src/mpdBrowserBase.py:409
+#: ../src/mpdBrowserBase.py:419
 #, python-format
 msgid "You have %i albums."
 msgstr "Ilość albumów: %i."
 
-#: ../src/mpdBrowserCfgDlg.py:39 ../src/mpdBrowserCfgDlg.py:185
+#: ../src/mpdBrowserCfgDlg.py:39 ../src/mpdBrowserCfgDlg.py:190
 msgid "Preferences"
 msgstr "Preferencje"
 
@@ -175,7 +175,17 @@ msgstr "Jak odświeżyć widok?"
 msgid "Just press F5"
 msgstr "Wystarczy nacisnąć F5"
 
-#: ../src/mpdBrowserCfgDlg.py:187
+#: ../src/mpdBrowserCfgDlg.py:178
+#, fuzzy
+msgid "How to refresh collection?"
+msgstr "Jak odświeżyć widok?"
+
+#: ../src/mpdBrowserCfgDlg.py:180
+#, fuzzy
+msgid "Just press Ctrl + F5"
+msgstr "Wystarczy nacisnąć Ctrl + F"
+
+#: ../src/mpdBrowserCfgDlg.py:192
 msgid "Informations"
 msgstr "Informacje"
 
@@ -190,7 +200,7 @@ msgid "Loading albums..."
 msgstr "Wczytywanie..."
 
 #: ../src/mpdBrowserDatabase.py:99 ../src/mpdBrowserDatabase.py:101
-#: ../src/mpdBrowserDatabase.py:103 ../src/mpdBrowserDatabase.py:162
+#: ../src/mpdBrowserDatabase.py:103 ../src/mpdBrowserDatabase.py:163
 msgid "Unknown"
 msgstr "Nieznany"
 
