@@ -142,7 +142,9 @@ class mpdBrowserBase:
                 self.__conn.open () 
                 self.__conn.update ("/")
                 self.__conn.close ()
-            self.__initDB ()
+                self.__initDB (True)
+            else:
+                self.__initDB (False)
             self.__view = mpdBrowserView (self.__conf.get ("shownames"))
             self.__view.iconview.connect ("event-after", self.__eventsFilter)
             
@@ -179,18 +181,19 @@ class mpdBrowserBase:
         self.__window.set_title (_("Loading..."))          
                                
                                         
-    def __initDB (self):
+    def __initDB (self, upstart):
         """
             Init DB object
         """
         self.__DB = mpdBrowserDatabase (self.__conn,
                                         self.__path,
+                                        upstart,
                                         self.__conf.get ("stylizedcovers"),
                                         self.__conf.get ("hidemissing"),
                                         self.__conf.get ("covername"),
                                         self.__conf.get ("coversize"))
         self.__DB.connect ("scanned", self.__scannedCb)
-        self.__DB.connect ("status", self.__statusCb)
+        self.__DB.connect ("status", self.__messageCb)
         self.__DB.connect ("progress", self.__progressCb)
         self.__DB.connect ("exit", self.quit)
         self.__statusBar.hide ()
@@ -327,7 +330,7 @@ class mpdBrowserBase:
                                     self.__conf.get ("mpdpasswd"))
             self.__view.clear ()
             self.__DB.stop ()
-            self.__initDB ()
+            self.__initDB (False)
             self.__albums = []
             self.__DB.start ()
             
@@ -355,9 +358,9 @@ class mpdBrowserBase:
         self.__window.present ()
 
     
-    def __statusCb (self, data, info):
+    def __messageCb (self, data, info):
         """
-            Update status bar message
+            Update status/progress bar message
         """
         try:
             self.__statusBar.show ()

@@ -12,7 +12,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor Boston, MA 02110-1301,  USA
 
-import os, threading, sys
+import os, threading, sys, time
 import gtk
 from mpdBrowserCovers import *
 from idleObject import *
@@ -35,7 +35,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
             }
 
 
-    def __init__ (self, connection, path, stylizedCovers,
+    def __init__ (self, connection, path, upstart, stylizedCovers,
                   hideMissing, coverName, coverSize):
         """
             Read mpdBrowser conf, init connection and covers cache
@@ -49,6 +49,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
         self.__path = path
         self.__covers = mpdBrowserCovers (stylizedCovers, hideMissing, 
                                           coverName, coverSize)
+        self.__upstart = upstart
         
         
     def __cacheMessageCb (self, userData, info):
@@ -67,6 +68,17 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
             currentPath=""
             self.__covers.createDirs ()
             
+            if self.__upstart: #wait for update finishing
+                self.emit ("status", _("Updating MPD database..."))
+                try:
+                    while True:
+                        self.__conn.open ()
+                        self.__conn.status () ['updating_db']
+                        self.__conn.close ()
+                        time.sleep (1)
+                except: 
+                    self.__conn.close ()# update finished
+
             # Get albums list
             self.__conn.open ()
             mpdCollection = self.__conn.search ('album', "")
@@ -74,6 +86,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
 
             totalItems = len (mpdCollection)
             nbItems = 0
+            self.emit ("status", _("Loading albums..."))
             for item in mpdCollection:
                 if self.__stopevent.isSet():
                     return
