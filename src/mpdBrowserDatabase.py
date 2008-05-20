@@ -79,6 +79,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
                 except: 
                     self.__conn.close ()# update finished
 
+            self.emit ("status", _("Connecting to MPD..."))
             # Get albums list
             self.__conn.open ()
             mpdCollection = self.__conn.search ('album', "")
