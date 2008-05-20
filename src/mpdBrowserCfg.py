@@ -21,7 +21,8 @@ class mpdBrowserCfg:
         
         # Sections and options
         self.__options = {   
-         "connection": ("mpdserver", "mpdport", "mpdpasswd", "collectionpath"),
+         "connection": ("mpdserver", "mpdport", "mpdpasswd",
+                        "collectionpath", "upstart"),
          "window"    : ("x", "y","width","height"),
          "options"   : ("stylizedcovers", "shownames", "hidemissing",
                         "alwaysFiltering", "covername", "coversize")
@@ -32,6 +33,7 @@ class mpdBrowserCfg:
                             "mpdport"        : 6600,
                             "mpdpasswd"      : "",
                             "collectionpath" : "/var/lib/mpd/music",
+                            "upstart"        : False,
                             "x"              : "",
                             "y"              : "",
                             "width"          : 640,
@@ -45,7 +47,10 @@ class mpdBrowserCfg:
                            }
         # Defaults types
         self.__types = {
+                            "mpdserver"      : "string",
                             "mpdport"        : "int",
+                            "mpdpasswd"      : "string",
+                            "upstart"        : "bool",
                             "x"              : "int",
                             "y"              : "int",
                             "width"          : "int",
@@ -81,7 +86,7 @@ class mpdBrowserCfg:
                     return True
                 else:
                     return False
-            else:
+            else: # string
                 return value
         except:
             return value

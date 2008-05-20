@@ -83,6 +83,9 @@ class mpdBrowserCfgDlg (IdleObject):
         hideMissing.set_active (options["hidemissing"])
         alwaysFiltering = gtk.CheckButton (_("Always show filter bar"))
         alwaysFiltering.set_active (options["alwaysFiltering"])
+        upStart = gtk.CheckButton (_("Update database at startup"))
+        upStart.set_active (options["upstart"])
+
         
         customCoverName = gtk.CheckButton (_("Custom cover name:"))
         if options["covername"] == "":
@@ -114,6 +117,7 @@ class mpdBrowserCfgDlg (IdleObject):
         vboxOpt.pack_start (stylizedCovers, False, False, 0)
         vboxOpt.pack_start (hideMissing, False, False, 0)
         vboxOpt.pack_start (alwaysFiltering, False, False, 0)
+        vboxOpt.pack_start (upStart, False, False, 0)
         vboxOpt.pack_start (table, False, False, 0)
         prefsOptFrame.add (vboxOpt)
         
@@ -189,7 +193,7 @@ class mpdBrowserCfgDlg (IdleObject):
         closeButton.connect ("clicked", self.__close)
                              
         self.__prefsWindow.connect ("destroy", self.__updateOpts, hostEntry, 
-                                    portEntry, passwordEntry, dirEntry, 
+                                    portEntry, passwordEntry, dirEntry, upStart,
                                     showNames, stylizedCovers, hideMissing,
                                     alwaysFiltering, coverName, coverSize)
         self.__prefsWindow.vbox.pack_start (notebook, False, False, 0)
@@ -204,9 +208,9 @@ class mpdBrowserCfgDlg (IdleObject):
         self.__prefsWindow.destroy ()
         
         
-    def __updateOpts (self, data, hostEntry, portEntry, passwordEntry, dirEntry, 
-                      showNames, stylizedCovers, hideMissing, alwaysFiltering,
-                      coverName, coverSize):
+    def __updateOpts (self, data, hostEntry, portEntry, passwordEntry, dirEntry,
+                      upStart, showNames, stylizedCovers, hideMissing, 
+                      alwaysFiltering, coverName, coverSize):
         """
             emit update_opt signal to update Options and reload view
         """
@@ -215,6 +219,7 @@ class mpdBrowserCfgDlg (IdleObject):
                             "mpdport"        : int (portEntry.get_text ()),
                             "mpdpasswd"      : passwordEntry.get_text (),
                             "collectionpath" : dirEntry.get_text (),
+                            "upstart"        : upStart.get_active (),
                             "shownames"      : showNames.get_active (),
                             "stylizedcovers" : stylizedCovers.get_active (),
                             "hidemissing"    : hideMissing.get_active (),

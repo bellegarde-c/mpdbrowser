@@ -138,8 +138,10 @@ class mpdBrowserBase:
             self.__conn = mpdBrowserConnection (self.__conf.get ("mpdserver"),
                                                 self.__conf.get ("mpdport"),
                                                 self.__conf.get ("mpdpasswd"))
-        
-            
+            if self.__conf.get ("upstart"):
+                self.__conn.open () 
+                self.__conn.update ("/")
+                self.__conn.close ()
             self.__initDB ()
             self.__view = mpdBrowserView (self.__conf.get ("shownames"))
             self.__view.iconview.connect ("event-after", self.__eventsFilter)
