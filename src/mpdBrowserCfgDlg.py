@@ -173,6 +173,11 @@ class mpdBrowserCfgDlg (IdleObject):
                                       _("How to refresh view?"), "bold")
         buffer.insert (iter, "\n")
         buffer.insert (iter, _("Just press F5"))
+        buffer.insert (iter, "\n\n")
+        buffer.insert_with_tags_by_name (iter, 
+                                      _("How to refresh collection?"), "bold")
+        buffer.insert (iter, "\n")
+        buffer.insert (iter, _("Just press Ctrl + F5"))
     
         text.set_editable (False)
         text.set_buffer (buffer)
