@@ -127,9 +127,9 @@ class mpdBrowserBase:
         self.__filterCloseButton.connect ("clicked", self.__filterHideCb)
         self.__filterBox.pack_start (self.__filterCloseButton, False, False, 0)
         
-        alwaysFiltering = self.__conf.get ("alwaysFiltering")
-        self.__filterCloseButton.set_no_show_all (alwaysFiltering)
-        self.__filterBox.set_no_show_all (not alwaysFiltering)
+        self.__alwaysFiltering = self.__conf.get ("alwaysFiltering")
+        self.__filterCloseButton.set_no_show_all (self.__alwaysFiltering)
+        self.__filterBox.set_no_show_all (not self.__alwaysFiltering)
         
         # Try to load others options
         # Create Connection, DB and Iconview
@@ -237,7 +237,8 @@ class mpdBrowserBase:
                     self.__scanning ()
                     self.__DB.start ()
                 elif (event.get_state() & gtk.gdk.CONTROL_MASK) != 0:
-                    if event.keyval == gtk.keysyms.f:
+                    if event.keyval == gtk.keysyms.f and not \
+                       self.__alwaysFiltering:
                         if self.__filterBox.get_no_show_all ():
                             self.__motionEvent (-1)
                             self.__filterBox.set_no_show_all (False)
@@ -332,10 +333,10 @@ class mpdBrowserBase:
             self.__view.updateColumns (self.__conf.get ("shownames"))
         
         if updateUi:
-            alwaysFiltering = self.__conf.get ("alwaysFiltering")
-            self.__filterCloseButton.set_no_show_all (alwaysFiltering)
-            self.__filterBox.set_no_show_all (not alwaysFiltering)
-            if alwaysFiltering:
+            self.__alwaysFiltering = self.__conf.get ("alwaysFiltering")
+            self.__filterCloseButton.set_no_show_all (self.__alwaysFiltering)
+            self.__filterBox.set_no_show_all (not self.__alwaysFiltering)
+            if self.__alwaysFiltering:
                 self.__filterCloseButton.hide ()
                 self.__filterBox.show_all ()
             else:
