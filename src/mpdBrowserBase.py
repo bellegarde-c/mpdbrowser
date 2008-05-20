@@ -181,13 +181,13 @@ class mpdBrowserBase:
         self.__window.set_title (_("Loading..."))          
                                
                                         
-    def __initDB (self, upstart):
+    def __initDB (self, update):
         """
             Init DB object
         """
         self.__DB = mpdBrowserDatabase (self.__conn,
                                         self.__path,
-                                        upstart,
+                                        update,
                                         self.__conf.get ("stylizedcovers"),
                                         self.__conf.get ("hidemissing"),
                                         self.__conf.get ("covername"),
@@ -202,7 +202,7 @@ class mpdBrowserBase:
     
     def __eventsFilter (self, iconview, event):
         """
-            event filter...
+            events filter...
         """
         try:
             if event.type == gtk.gdk.BUTTON_RELEASE:
@@ -234,13 +234,6 @@ class mpdBrowserBase:
                         if pos != -1:
                             self.__playAlbum (pos, 1)
                     except: pass # no cursor
-                elif event.keyval == gtk.keysyms.F5:
-                    self.__view.clear ()
-                    self.__DB.stop ()
-                    self.__initDB (False)
-                    self.__albums = []
-                    self.__scanning ()
-                    self.__DB.start ()
                 elif (event.get_state() & gtk.gdk.CONTROL_MASK) != 0:
                     if event.keyval == gtk.keysyms.f and not \
                        self.__alwaysFiltering:
@@ -251,7 +244,23 @@ class mpdBrowserBase:
                             self.__filterPattern.grab_focus ()
                         else:
                             self.__filterHideCb (None)
-               
+                    elif event.keyval == gtk.keysyms.F5:
+                        self.__view.clear ()
+                        self.__DB.stop ()
+                        self.__conn.open () 
+                        self.__conn.update ("/")
+                        self.__conn.close ()
+                        self.__initDB (True)
+                        self.__albums = []
+                        self.__scanning ()
+                        self.__DB.start ()
+                elif event.keyval == gtk.keysyms.F5:
+                    self.__view.clear ()
+                    self.__DB.stop ()
+                    self.__initDB (False)
+                    self.__albums = []
+                    self.__scanning ()
+                    self.__DB.start ()
         except:
             print "mpdBrowserBase::__eventsFilter():"
             print sys.exc_info ()

@@ -35,7 +35,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
             }
 
 
-    def __init__ (self, connection, path, upstart, stylizedCovers,
+    def __init__ (self, connection, path, update, stylizedCovers,
                   hideMissing, coverName, coverSize):
         """
             Read mpdBrowser conf, init connection and covers cache
@@ -49,7 +49,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
         self.__path = path
         self.__covers = mpdBrowserCovers (stylizedCovers, hideMissing, 
                                           coverName, coverSize)
-        self.__upstart = upstart
+        self.__update = update
         
         
     def __cacheMessageCb (self, userData, info):
@@ -68,7 +68,8 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
             currentPath=""
             self.__covers.createDirs ()
             
-            if self.__upstart: #wait for update to finish
+            print self.__update
+            if self.__update: #wait for update to finish
                 self.emit ("status", _("Updating MPD collection..."))
                 try:
                     while True:
