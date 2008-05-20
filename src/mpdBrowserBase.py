@@ -237,7 +237,7 @@ class mpdBrowserBase:
                 elif event.keyval == gtk.keysyms.F5:
                     self.__view.clear ()
                     self.__DB.stop ()
-                    self.__initDB ()
+                    self.__initDB (False)
                     self.__albums = []
                     self.__scanning ()
                     self.__DB.start ()
@@ -363,10 +363,13 @@ class mpdBrowserBase:
             Update status/progress bar message
         """
         try:
-            self.__statusBar.show ()
-            self.__progressBar.hide ()
-            self.__statusBar.push (self.__contId, info);
-            self.__prefsButton.set_sensitive (True)
+            if len (self.__albums) == 0:
+                self.__progressBar.set_text (info)
+            else:
+                self.__statusBar.show ()
+                self.__progressBar.hide ()
+                self.__statusBar.push (self.__contId, info);
+                self.__prefsButton.set_sensitive (True)
         except: 
             print "mpdBrowserBase::__statusCb():"
             print sys.exc_info ()
@@ -400,6 +403,7 @@ class mpdBrowserBase:
         """
             Add albums to iconview
         """
+        self.__progressBar.set_text ("")
         self.__window.set_title ("mpdBrowser")
         self.__statusBar.push (self.__contId, 
                                _("You have %i albums.") % len (albums))
