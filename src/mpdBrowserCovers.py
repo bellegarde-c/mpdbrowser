@@ -67,8 +67,6 @@ class mpdBrowserCovers (IdleObject):
                     if (self.__coverName != ""):
                         if name.startswith (self.__coverName):
                             return dirPath + '/' + name
-                        else:
-                            return empty
                     else:
                         return dirPath + '/' + name
 
