@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-20 15:50+0200\n"
+"POT-Creation-Date: 2008-05-21 08:45+0200\n"
 "PO-Revision-Date: 2008-04-02 11:15+0200\n"
 "Last-Translator: Bellegarde Cedric <gnumdk@gmail.com>\n"
 "Language-Team: French\n"
@@ -128,8 +128,8 @@ msgid "How to enqueue an album?"
 msgstr "Comment ajouter un album?"
 
 #: ../src/mpdBrowserCfgDlg.py:149
-msgid "Just click on it with <Ctrl> pressed"
-msgstr "Cliquez dessus en maintenant <Ctrl> enfoncé"
+msgid "Just click on it with Ctrl pressed"
+msgstr "Cliquez dessus en maintenant Ctrl enfoncé"
 
 #: ../src/mpdBrowserCfgDlg.py:152
 msgid "How to play a song?"
@@ -144,9 +144,9 @@ msgid "How to enqueue a song?"
 msgstr "Comment ajouter un morceau?"
 
 #: ../src/mpdBrowserCfgDlg.py:160
-msgid "Just right click on album with <Ctrl> pressed, then select song"
+msgid "Just right click on album with Ctrl pressed, then select song"
 msgstr ""
-"Clique droit sur un album en maintenant <Ctrl> enfoncé, puis selectionnez la "
+"Clique droit sur un album en maintenant Ctrl enfoncé, puis selectionnez la "
 "chanson"
 
 #: ../src/mpdBrowserCfgDlg.py:163

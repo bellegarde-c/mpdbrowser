@@ -146,7 +146,7 @@ class mpdBrowserCfgDlg (IdleObject):
         buffer.insert_with_tags_by_name (iter, 
                                          _("How to enqueue an album?"), "bold")
         buffer.insert (iter, "\n")
-        buffer.insert (iter, _("Just click on it with <Ctrl> pressed"))
+        buffer.insert (iter, _("Just click on it with Ctrl pressed"))
         buffer.insert (iter, "\n\n")
 
         buffer.insert_with_tags_by_name (iter, _("How to play a song?"), "bold")
@@ -157,7 +157,7 @@ class mpdBrowserCfgDlg (IdleObject):
                                          _("How to enqueue a song?"), "bold")
         buffer.insert (iter, "\n")
         buffer.insert (iter, 
-           _("Just right click on album with <Ctrl> pressed, then select song"))
+           _("Just right click on album with Ctrl pressed, then select song"))
         buffer.insert (iter, "\n\n")
         
         buffer.insert_with_tags_by_name (iter, _("How to add a cover?"), "bold")

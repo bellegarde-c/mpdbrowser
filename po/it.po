@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-20 15:50+0200\n"
+"POT-Creation-Date: 2008-05-21 08:45+0200\n"
 "PO-Revision-Date: 2008-05-05 21:55+0200\n"
 "Last-Translator: bautz <bautz@email.com>\n"
 "Language-Team: Italian\n"
@@ -129,8 +129,8 @@ msgid "How to enqueue an album?"
 msgstr "Come mettere in coda un album?"
 
 #: ../src/mpdBrowserCfgDlg.py:149
-msgid "Just click on it with <Ctrl> pressed"
-msgstr "Cliccaci sopra tenendo premuto <Ctrl>"
+msgid "Just click on it with Ctrl pressed"
+msgstr "Cliccaci sopra tenendo premuto Ctrl"
 
 #: ../src/mpdBrowserCfgDlg.py:152
 msgid "How to play a song?"
@@ -145,9 +145,9 @@ msgid "How to enqueue a song?"
 msgstr "Come mettere in coda una canzone?"
 
 #: ../src/mpdBrowserCfgDlg.py:160
-msgid "Just right click on album with <Ctrl> pressed, then select song"
+msgid "Just right click on album with Ctrl pressed, then select song"
 msgstr ""
-"Clicca col destro sull'album tenendo premuto <Ctrl>, poi seleziona la canzone"
+"Clicca col destro sull'album tenendo premuto Ctrl, poi seleziona la canzone"
 
 #: ../src/mpdBrowserCfgDlg.py:163
 msgid "How to add a cover?"
@@ -174,14 +174,12 @@ msgid "Just press F5"
 msgstr "Premi F5"
 
 #: ../src/mpdBrowserCfgDlg.py:178
-#, fuzzy
 msgid "How to refresh collection?"
-msgstr "Come aggiornare la visualizzazione?"
+msgstr ""
 
 #: ../src/mpdBrowserCfgDlg.py:180
-#, fuzzy
 msgid "Just press Ctrl + F5"
-msgstr "Premi Ctrl + f"
+msgstr "Premi Ctrl + F5"
 
 #: ../src/mpdBrowserCfgDlg.py:192
 msgid "Informations"
@@ -198,9 +196,8 @@ msgid "Connecting to MPD..."
 msgstr ""
 
 #: ../src/mpdBrowserDatabase.py:90
-#, fuzzy
 msgid "Loading albums..."
-msgstr "Caricamento..."
+msgstr "Caricamento album..."
 
 #: ../src/mpdBrowserDatabase.py:100 ../src/mpdBrowserDatabase.py:102
 #: ../src/mpdBrowserDatabase.py:104 ../src/mpdBrowserDatabase.py:164
