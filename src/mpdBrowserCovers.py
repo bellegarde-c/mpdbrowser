@@ -190,7 +190,7 @@ class mpdBrowserCovers (IdleObject):
                 if cover == empty and self.__hideMissing:
                     raise MissingCover
                 
-                if cover != empty:  
+                if cover != empty: # get cover 
                     pixbuf = gtk.gdk.pixbuf_new_from_file_at_size (
                                                                cover,
                                                                self.__coverSize, 
