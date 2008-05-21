@@ -232,8 +232,7 @@ class mpdBrowserCfgDlg (IdleObject):
                             "coversize"      : int (coverSize.get_value ())
                           }
         # We need to clear cache
-        if (coverName.get_text () != "" and 
-                       self.__coverNameOrig != coverName.get_text ()) or  \
+        if (self.__coverNameOrig != coverName.get_text ()) or  \
            (hideMissing.get_active () == True and \
                        self.__hideMissingOrig != hideMissing.get_active ()) or\
                        self.__coverSizeOrig != int (coverSize.get_value ()):

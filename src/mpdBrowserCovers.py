@@ -54,6 +54,7 @@ class mpdBrowserCovers (IdleObject):
         self.__hideMissing = hideMissing
         self.__coverName = coverName
         self.__coverSize = coverSize
+        self.__createDirs ()
         
         
     def __findCover (self, dirPath):
@@ -130,6 +131,29 @@ class mpdBrowserCovers (IdleObject):
         ctx.save ()
         pcr.show_layout (layout)
         surface.write_to_png(CAIRO_COVER)
+
+    def __createDirs (self):
+        """
+            Create cache directories
+        """
+        try:
+            shareDir = os.path.expanduser ("~")
+            for dir in ("/.local", "/share", "/mpdBrowser"):
+                shareDir += dir
+                if not os.access (shareDir, os.F_OK):
+                    os.mkdir (shareDir)
+                    
+            if self.__coverComp and not \
+               os.access (shareDir + "/composite", os.F_OK):
+                os.mkdir (shareDir + "/composite")
+                
+            if not self.__coverComp and not \
+               os.access (shareDir + "/normal", os.F_OK):
+                os.mkdir (shareDir + "/normal")  
+                
+        except OSError: pass
+
+        self.__shareDir = shareDir
 
 
     def get (self, path, album):
@@ -218,29 +242,4 @@ class mpdBrowserCovers (IdleObject):
                 pixbuf = gtk.gdk.pixbuf_new_from_file (filePath)
 
         return pixbuf
-    
-        
-    def createDirs (self):
-        """
-            Create cache directories
-        """
-        try:
-            shareDir = os.path.expanduser ("~")
-            for dir in ("/.local", "/share", "/mpdBrowser"):
-                shareDir += dir
-                if not os.access (shareDir, os.F_OK):
-                    os.mkdir (shareDir)
-                    
-            if self.__coverComp and not \
-               os.access (shareDir + "/composite", os.F_OK):
-                os.mkdir (shareDir + "/composite")
-                
-            if not self.__coverComp and not \
-               os.access (shareDir + "/normal", os.F_OK):
-                os.mkdir (shareDir + "/normal")  
-                
-        except OSError: pass
-
-        self.__shareDir = shareDir
-
             

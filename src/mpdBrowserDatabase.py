@@ -66,7 +66,6 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
         try:
             albumList = []
             currentPath=""
-            self.__covers.createDirs ()
             
             if self.__update: #wait for update to finish
                 self.emit ("status", _("Updating MPD collection..."))
