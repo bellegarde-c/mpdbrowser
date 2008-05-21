@@ -97,7 +97,8 @@ class mpdBrowserView:
                         i+=1 
                         continue
                 
-                name = cutStringAtSize (albums[i][ALBUM_NAME], 10, 40)
+                name = cutStringAtSize (albums[i][ALBUM_NAME], 
+                                        STRING_SIZE, STRING_TOTAL_SIZE)
       
                 self.__model.append ([albums[i][ALBUM_PIXBUF], name])
                 self.__realItemPos.append (i)
