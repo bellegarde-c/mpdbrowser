@@ -195,14 +195,19 @@ class mpdBrowserBase:
         self.__DB.connect ("scanned", self.__scannedCb)
         self.__DB.connect ("status", self.__messageCb)
         self.__DB.connect ("progress", self.__progressCb)
-        self.__DB.connect ("exit", self.quit)
         self.__statusBar.hide ()
         self.__progressBar.show ()
 
     
     def __eventsFilter (self, iconview, event):
         """
-            events filter...
+            events filter:
+                - Left click    -> play/enqueue album
+                - Right click   -> popup song list
+                - Middle click  -> clear playlist
+                - F5            -> update view
+                - Ctrl F5       -> update collection
+                - Ctrl f        -> show filter bar
         """
         try:
             if event.type == gtk.gdk.BUTTON_RELEASE:
@@ -218,7 +223,11 @@ class mpdBrowserBase:
                         
                     if event.button == 3:
                         self.__popupSongs (pos, action)
-                    else:
+                    elif event.button == 2:
+                        self.__conn.open ()
+                        self.__conn.clear ()
+                        self.__conn.close ()
+                    elif event.button == 1:
                         self.__playAlbum (pos, event.button, action)
             elif event.type == gtk.gdk.MOTION_NOTIFY:
                 x,y = event.get_coords ()
@@ -481,13 +490,10 @@ class mpdBrowserBase:
         try:
             self.__conn.open ()
             album = self.__albums[pos][ALBUM_PATH]
-            if button == 1:
-                if action == MPD_REPLACE:
-                    self.__conn.replace (album.replace (self.__path, ""))
-                else:
-                    self.__conn.add (album.replace (self.__path, ""))
+            if action == MPD_REPLACE:
+                self.__conn.replace (album.replace (self.__path, ""))
             else:
-                self.__conn.clear ()
+                self.__conn.add (album.replace (self.__path, ""))
             self.__conn.close ()
         except:
             print "mpdBrowserBase::__playAlbum():"

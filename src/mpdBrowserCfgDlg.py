@@ -232,10 +232,11 @@ class mpdBrowserCfgDlg (IdleObject):
                             "coversize"      : int (coverSize.get_value ())
                           }
         # We need to clear cache
-        if (self.__coverNameOrig != coverName.get_text ()) or  \
-           (hideMissing.get_active () == True and \
-                       self.__hideMissingOrig != hideMissing.get_active ()) or\
-                       self.__coverSizeOrig != int (coverSize.get_value ()):
+        if self.__coverNameOrig != coverName.get_text ()        or \
+           self.__coverSizeOrig != int (coverSize.get_value ()) or \
+           (hideMissing.get_active () == True and self.__hideMissingOrig != \
+                                                     hideMissing.get_active ()):
+           
             self.__clearCache (None)
         self.emit ("update_opts")
      

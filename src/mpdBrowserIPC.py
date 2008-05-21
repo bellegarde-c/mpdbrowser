@@ -34,7 +34,8 @@ class mpdBrowserIPC_S(threading.Thread, IdleObject):
 
     def run (self):
         """
-            Create mpd socket, bind it and listen to events
+            Create mpdBrowser socket, bind it and listen to events
+            If receive start => emit present signal
         """
         if os.path.exists ("/tmp/mpdBrowser-%s" % os.getuid ()): 
             os.remove ("/tmp/mpdBrowser-%s" % os.getuid ())
@@ -49,8 +50,12 @@ class mpdBrowserIPC_S(threading.Thread, IdleObject):
                 else:
                     break
             except: print sys.exc_info ()
+        self.__server.close ()
 
     def stop (self):
+        """
+            Stop thread
+        """
         self.__stopevent.set ()         
     
 class mpdBrowserIPC_C:        
@@ -62,3 +67,4 @@ class mpdBrowserIPC_C:
         client = socket.socket (socket.AF_UNIX, socket.SOCK_RAW)
         client.connect("/tmp/mpdBrowser-%s" % os.getuid ())  
         client.send (message)
+        client.close ()

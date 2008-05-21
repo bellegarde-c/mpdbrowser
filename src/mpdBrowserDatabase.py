@@ -28,10 +28,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
            gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, [gobject.TYPE_STRING]),
             # progress bar percent
             "progress": (
-           gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, [gobject.TYPE_FLOAT]),
-            # Communication problem with mpd while looking at collection
-            "exit": (
-           gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, [])
+           gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, [gobject.TYPE_FLOAT])
             }
 
 
@@ -50,13 +47,6 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
         self.__covers = mpdBrowserCovers (stylizedCovers, hideMissing, 
                                           coverName, coverSize)
         self.__update = update
-        
-        
-    def __cacheMessageCb (self, userData, info):
-        """
-            Update status bar message
-        """
-        self.__cacheMessage = info 
         
             
     def run (self):
@@ -78,15 +68,17 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
                 except: 
                     self.__conn.close ()# update finished
 
-            self.emit ("status", _("Connecting to MPD..."))
             # Get albums list
+            self.emit ("status", _("Connecting to MPD..."))
             self.__conn.open ()
             mpdCollection = self.__conn.search ('album', "")
             self.__conn.close ()
 
-            totalItems = len (mpdCollection)
-            nbItems = 0
+            # Create internal DB
+            totalItems = float (len (mpdCollection))
+            nbItems = 0.0
             self.emit ("status", _("Loading albums..."))
+
             for item in mpdCollection:
                 if self.__stopevent.isSet():
                     return
@@ -127,8 +119,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
                     except: # Missing cover
                         pass
                 if not nbItems % 100: # Speed gain
-                   self.emit ("progress", 
-                              float (nbItems) / float (totalItems))        
+                   self.emit ("progress", nbItems / totalItems)        
                 nbItems += 1
             
             # List is already sorted by genre, artist, album
