@@ -118,15 +118,15 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
                         
                     except: # Missing cover
                         pass
-                if not nbItems % 100: # Speed gain
-                   self.emit ("progress", nbItems / totalItems)        
+                if nbItems > totalItems - 50: # Want progress bar to go to 100%
+                   self.emit ("progress", 1.0)
+                elif not nbItems % 100: # Speed gain
+                   self.emit ("progress", nbItems / totalItems)
                 nbItems += 1
             
             # List is already sorted by genre, artist, album
             # Uncomment if mpd behaviour change
             #albumList.sort ()
-   
-            self.emit ("progress", 1.0)
             self.emit ("scanned", albumList)
         except:
             print "mpdBrowserDataBase::run(): "
