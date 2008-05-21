@@ -254,9 +254,7 @@ class mpdBrowserCfgDlg (IdleObject):
                 else:
                     os.unlink (item)
             os.rmdir ("%s/.local/share/mpdBrowser" % userDir)
-        except: 
-            print "mpdBrowserCfgDlg::__clearCache(): "
-            print sys.exc_info ()
+        except: pass
       
       
     def __coverNameCb (self, button, entry):
