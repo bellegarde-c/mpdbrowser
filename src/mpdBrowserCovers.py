@@ -105,7 +105,7 @@ class mpdBrowserCovers (IdleObject):
         return cover
 
 
-    def __coverCreateFromText (self, text): #TODO Center text verticaly
+    def __coverCreateFromText (self, text): #TODO: Really put text at good place
         """
             Create a cover from text
         """
@@ -119,14 +119,14 @@ class mpdBrowserCovers (IdleObject):
         layout.set_width (self.__coverSize * pango.SCALE)
         layout.set_wrap (pango.WRAP_WORD_CHAR)
         layout.set_alignment (pango.ALIGN_CENTER)
-        ctx.move_to (0, self.__coverSize/3)
+        ctx.move_to (0, 30)
         
         if len (text) > 40:
            text  = text[:40] + "..."
       
         layout.set_markup (
                  '''<span foreground="white" font_desc="Sans %s">%s</span>'''\
-                 % (self.__coverSize/10, text.replace ("&", "&amp;"))
+                 % (self.__coverSize/12, text.replace ("&", "&amp;"))
                           )
         ctx.save ()
         pcr.show_layout (layout)
@@ -156,9 +156,10 @@ class mpdBrowserCovers (IdleObject):
         self.__shareDir = shareDir
 
 
-    def get (self, path, album):
+    def get (self, path, album, artist):
         """
             Return pixbuf cover for album at path
+            Write artist and album into a pixbuf if no cover
         """
         # cache file will be _complete_path_to_album.jpg
         path_ = path.replace ("/", "_")
@@ -182,7 +183,8 @@ class mpdBrowserCovers (IdleObject):
                     pixbuf = self.__coverComposite (pixbuf, self.__case, 
                                                     w, h, SPINE_RATIO)
                 else: # add album name to empty composited cover
-                    self.__coverCreateFromText (album)
+                    self.__coverCreateFromText ("<b>" + artist + \
+                                                "</b>\n\n" + album)
                     cairoCover = gtk.gdk.pixbuf_new_from_file_at_size (
                                                                CAIRO_COVER,
                                                                self.__coverSize,
@@ -221,7 +223,8 @@ class mpdBrowserCovers (IdleObject):
                                                                self.__coverSize
                                                                   )
                 else: # add album name to empty cover
-                    self.__coverCreateFromText (album)
+                    self.__coverCreateFromText ("<b>" + artist + \
+                                                "</b>\n\n" + album)
                     cairoCover = gtk.gdk.pixbuf_new_from_file_at_size (
                                                                CAIRO_COVER,
                                                                self.__coverSize,
