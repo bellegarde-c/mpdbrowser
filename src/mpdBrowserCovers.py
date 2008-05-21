@@ -120,7 +120,10 @@ class mpdBrowserCovers (IdleObject):
         layout.set_width (self.__coverSize * pango.SCALE)
         layout.set_wrap (pango.WRAP_WORD_CHAR)
         layout.set_alignment (pango.ALIGN_CENTER)
-        ctx.move_to (0, self.__coverSize/4)
+        ctx.move_to (0, self.__coverSize/5)
+        
+        if len (text) > 70:
+            text = text[:67] + "..."
         
         layout.set_markup (
                  '''<span foreground="black" font_desc="Sans %s">%s</span>'''\
