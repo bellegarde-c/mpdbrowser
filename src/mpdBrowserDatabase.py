@@ -130,7 +130,11 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
                    self.emit ("progress", 
                               float (nbItems) / float (totalItems))        
                 nbItems += 1
-               
+            
+            # List is already sorted by genre, artist, album
+            # Uncomment if mpd behaviour change
+            #albumList.sort ()
+   
             self.emit ("progress", 1.0)
             self.emit ("scanned", albumList)
         except:

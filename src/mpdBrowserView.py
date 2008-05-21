@@ -83,7 +83,6 @@ class mpdBrowserView:
 
         i = 0
         self.__countItems = 0
-        albums.sort ()
 
         while i < len (albums):
             try:

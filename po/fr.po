@@ -175,7 +175,7 @@ msgstr "Appuyez sur F5"
 
 #: ../src/mpdBrowserCfgDlg.py:178
 msgid "How to refresh collection?"
-msgstr "Comment rafraichir la collection?"
+msgstr "Comment rafraichir la bibliothèque?"
 
 #: ../src/mpdBrowserCfgDlg.py:180
 msgid "Just press Ctrl + F5"
