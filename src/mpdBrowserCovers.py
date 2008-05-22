@@ -19,8 +19,6 @@ from mpdBrowserUtils import *
 from mpdBrowserDefine import *
 from idleObject import *
 
-empty = sys.prefix + "/share/pixmaps/mpdBrowser_empty.png"
-if not os.path.exists (empty): empty = "../images/mpdBrowser_empty.png"
 case = sys.prefix + "/share/pixmaps/mpdBrowser_case.png"
 if not os.path.exists (case): case = "../images/mpdBrowser_case.png"
 
@@ -43,10 +41,6 @@ class mpdBrowserCovers (IdleObject):
                                                             coverSize, 
                                                             coverSize)
         
-        self.__empty = gtk.gdk.pixbuf_new_from_file_at_size (empty,
-                                                             coverSize, 
-                                                             coverSize)
-        
         if stylizedCovers == True:
             self.__case = gtk.gdk.pixbuf_new_from_file (case)
             self.__coverComp = True
@@ -57,8 +51,24 @@ class mpdBrowserCovers (IdleObject):
         self.__coverName = coverName
         self.__coverSize = coverSize
         self.__createDirs ()
+        self.__initEmpty ()
         
-        
+    
+    def __initEmpty (self):
+        """
+            Reinitialise empty cover path
+        """   
+        self.__emptyPath = os.path.expanduser ("~") + \
+                       "/.local/share/mpdBrowser/empty.png"
+        if not os.path.exists (self.__emptyPath):
+            self.__emptyPath = sys.prefix + "/share/pixmaps/mpdBrowser_empty.png"
+            if not os.path.exists (self.__emptyPath): 
+                self.__emptyPath = "../images/mpdBrowser_empty.png"
+
+        self.__empty = gtk.gdk.pixbuf_new_from_file_at_size (self.__emptyPath,
+                                                             self.__coverSize, 
+                                                             self.__coverSize)
+
     def __findCover (self, dirPath):
         """
             Search a cover in dirPath
@@ -73,10 +83,10 @@ class mpdBrowserCovers (IdleObject):
                     else:
                         return dirPath + '/' + name
 
-            return empty
+            return self.__emptyPath
         except:
             print sys.exc_info ()
-            return empty
+            return self.__emptyPath
 
 
     def __coverComposite (self, cover, pixbuf, w, h, spineRatio):
@@ -172,10 +182,10 @@ class mpdBrowserCovers (IdleObject):
             if not os.access (filePath, os.F_OK): # No cache
                 cover = self.__findCover (path)
                 
-                if cover == empty and self.__hideMissing:
+                if cover == self.__emptyPath and self.__hideMissing:
                     raise MissingCover
                     
-                if cover != empty: # get composited cover
+                if cover != self.__emptyPath: # get composited cover
                     pixbuf = gtk.gdk.pixbuf_new_from_file_at_size (
                                                                cover,
                                                                self.__coverSize, 
@@ -216,10 +226,10 @@ class mpdBrowserCovers (IdleObject):
             filePath = self.__shareDir + "/normal/" + path_ + ".jpg"
             if not os.access (filePath, os.F_OK): # No cache
                 cover = self.__findCover (path)
-                if cover == empty and self.__hideMissing:
+                if cover == self.__emptyPath and self.__hideMissing:
                     raise MissingCover
                 
-                if cover != empty: # get cover 
+                if cover != self.__emptyPath: # get cover 
                     pixbuf = gtk.gdk.pixbuf_new_from_file_at_size (
                                                                cover,
                                                                self.__coverSize, 

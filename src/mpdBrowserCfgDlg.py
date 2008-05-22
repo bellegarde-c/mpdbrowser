@@ -246,15 +246,17 @@ class mpdBrowserCfgDlg (IdleObject):
             Clear covers cache
         """
         userDir = os.path.expanduser ("~")
-        dirList = getDirListing ("%s/.local/share/mpdBrowser" % userDir, True)
-        try:
-            for item in dirList:    
-                if os.path.isdir (item):
-                    os.rmdir (item)
-                else:
-                    os.unlink (item)
-            os.rmdir ("%s/.local/share/mpdBrowser" % userDir)
-        except: pass
+        for coverType in ["composite", "normal"]:
+            dirList = getDirListing (
+                    "%s/.local/share/mpdBrowser/%s" % (userDir, coverType), True
+                                    )
+            try:
+                for item in dirList:    
+                    if os.path.isdir (item):
+                        os.rmdir (item)
+                    else:
+                        os.unlink (item)
+            except: pass
       
       
     def __coverNameCb (self, button, entry):

@@ -111,7 +111,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
                             genre = item['genre'][0]
                         except:
                             genre = item['genre']
-                    
+
                         pixbuf = self.__covers.get (path, album, artist)
                         currentPath = path
                         albumList.append ((genre, artist, album, path, pixbuf))
