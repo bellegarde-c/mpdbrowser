@@ -16,6 +16,7 @@ import gtk, gobject
 import cairo, pangocairo, pango
 import sys, os
 from mpdBrowserUtils import *
+from mpdBrowserDefine import *
 from idleObject import *
 
 empty = sys.prefix + "/share/pixmaps/mpdBrowser_empty.png"
@@ -120,15 +121,15 @@ class mpdBrowserCovers (IdleObject):
         layout.set_width (self.__coverSize * pango.SCALE)
         layout.set_wrap (pango.WRAP_WORD_CHAR)
         layout.set_alignment (pango.ALIGN_CENTER)
-        ctx.move_to (0, self.__coverSize/5)
         
-        if len (text) > 70:
-            text = text[:67] + "..."
-        
+        if len (text) > COVER_LENGTH:
+            text = text[:COVER_LENGTH-3] + "..."
+
         layout.set_markup (
                  '''<span foreground="black" font_desc="Sans %s">%s</span>'''\
                  % (self.__coverSize/12, text.replace ("&", "&amp;"))
                           )
+        ctx.move_to (0, self.__coverSize/layout.get_line_count())
         ctx.save ()
         pcr.show_layout (layout)
         surface.write_to_png(CAIRO_COVER)
