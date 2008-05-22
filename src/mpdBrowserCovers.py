@@ -231,7 +231,7 @@ class mpdBrowserCovers (IdleObject):
                 
                 if coverPath != self.__emptyPath: # get cover 
                     pixbuf = gtk.gdk.pixbuf_new_from_file_at_size (
-                                                               cover,
+                                                               coverPath,
                                                                self.__coverSize, 
                                                                self.__coverSize
                                                                   )
