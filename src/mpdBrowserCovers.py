@@ -56,7 +56,7 @@ class mpdBrowserCovers (IdleObject):
     
     def __initEmpty (self):
         """
-            Reinitialise empty cover path
+            Initialise empty cover path
         """   
         self.__emptyPath = os.path.expanduser ("~") + \
                        "/.local/share/mpdBrowser/empty.png"
@@ -180,14 +180,14 @@ class mpdBrowserCovers (IdleObject):
         if self.__coverComp:
             filePath = self.__shareDir + "/composite/" + path_ + ".jpg"
             if not os.access (filePath, os.F_OK): # No cache
-                cover = self.__findCover (path)
+                coverPath = self.__findCover (path)
                 
-                if cover == self.__emptyPath and self.__hideMissing:
+                if coverPath == self.__emptyPath and self.__hideMissing:
                     raise MissingCover
                     
-                if cover != self.__emptyPath: # get composited cover
+                if coverPath != self.__emptyPath: # get composited cover
                     pixbuf = gtk.gdk.pixbuf_new_from_file_at_size (
-                                                               cover,
+                                                               coverPath,
                                                                self.__coverSize, 
                                                                self.__coverSize
                                                                   )
@@ -225,11 +225,11 @@ class mpdBrowserCovers (IdleObject):
         else:
             filePath = self.__shareDir + "/normal/" + path_ + ".jpg"
             if not os.access (filePath, os.F_OK): # No cache
-                cover = self.__findCover (path)
-                if cover == self.__emptyPath and self.__hideMissing:
+                coverPath = self.__findCover (path)
+                if coverPath == self.__emptyPath and self.__hideMissing:
                     raise MissingCover
                 
-                if cover != self.__emptyPath: # get cover 
+                if coverPath != self.__emptyPath: # get cover 
                     pixbuf = gtk.gdk.pixbuf_new_from_file_at_size (
                                                                cover,
                                                                self.__coverSize, 
