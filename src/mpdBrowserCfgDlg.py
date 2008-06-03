@@ -44,47 +44,47 @@ class mpdBrowserCfgDlg (IdleObject):
         self.__prefsWindow.set_has_separator (False)
         
         hostLabel = gtk.Label (_("Host:"))
-        hostEntry = gtk.Entry ()
-        hostEntry.set_text (options["mpdserver"])
+        self.__hostEntry = gtk.Entry ()
+        self.__hostEntry.set_text (options["mpdserver"])
         
         portLabel = gtk.Label (_("Port:"))
-        portEntry = gtk.Entry ()
-        portEntry.set_text (str (options["mpdport"]))
+        self.__portEntry = gtk.Entry ()
+        self.__portEntry.set_text (str (options["mpdport"]))
         
         passwordLabel = gtk.Label (_("Password:"))
-        passwordEntry = gtk.Entry ()
-        passwordEntry.set_text (options["mpdpasswd"])
-        passwordEntry.set_visibility (False)
+        self.__passwordEntry = gtk.Entry ()
+        self.__passwordEntry.set_text (options["mpdpasswd"])
+        self.__passwordEntry.set_visibility (False)
         
         dirLabel = gtk.Label (_("Music dir:"))
-        dirEntry = gtk.Entry ()
-        dirEntry.set_text (options["collectionpath"])
+        self.__dirEntry = gtk.Entry ()
+        self.__dirEntry.set_text (options["collectionpath"])
 
         prefsConnFrame = gtk.Frame (_("Connection:"))
         table = gtk.Table (4, 2, False)
         table.set_col_spacings (3)
         table.attach (hostLabel, 0, 1, 0, 1)
-        table.attach (hostEntry, 1, 2, 0, 1)
+        table.attach (self.__hostEntry, 1, 2, 0, 1)
         table.attach (portLabel, 0, 1, 1, 2)
-        table.attach (portEntry, 1, 2, 1, 2)
+        table.attach (self.__portEntry, 1, 2, 1, 2)
         table.attach (passwordLabel, 0, 1, 2, 3)        
-        table.attach (passwordEntry, 1, 2, 2, 3)
+        table.attach (self.__passwordEntry, 1, 2, 2, 3)
         table.attach (dirLabel, 0, 1, 3, 4)        
-        table.attach (dirEntry, 1, 2, 3, 4)
+        table.attach (self.__dirEntry, 1, 2, 3, 4)
         prefsConnFrame.add (table)
 
         prefsOptFrame = gtk.Frame (_("Options:"))
         vboxOpt = gtk.VBox ()
-        upStart = gtk.CheckButton (_("Update collection at startup"))
-        upStart.set_active (options["upstart"])
-        showNames = gtk.CheckButton (_("Show albums names"))
-        showNames.set_active (options["shownames"])
-        stylizedCovers = gtk.CheckButton (_("Stylized covers"))
-        stylizedCovers.set_active (options["stylizedcovers"])
-        hideMissing = gtk.CheckButton (_("Hide missing covers"))
-        hideMissing.set_active (options["hidemissing"])
-        alwaysFiltering = gtk.CheckButton (_("Always show filter bar"))
-        alwaysFiltering.set_active (options["alwaysFiltering"])
+        self.__upStart = gtk.CheckButton (_("Update collection at startup"))
+        self.__upStart.set_active (options["upstart"])
+        self.__showNames = gtk.CheckButton (_("Show albums names"))
+        self.__showNames.set_active (options["shownames"])
+        self.__stylizedCovers = gtk.CheckButton (_("Stylized covers"))
+        self.__stylizedCovers.set_active (options["stylizedcovers"])
+        self.__hideMissing = gtk.CheckButton (_("Hide missing covers"))
+        self.__hideMissing.set_active (options["hidemissing"])
+        self.__alwaysFiltering = gtk.CheckButton (_("Always show filter bar"))
+        self.__alwaysFiltering.set_active (options["alwaysFiltering"])
                 
         customCoverName = gtk.CheckButton (_("Custom cover name:"))
         if options["covername"] == "":
@@ -92,31 +92,32 @@ class mpdBrowserCfgDlg (IdleObject):
         else:
             active = True
         customCoverName.set_active (active)
-        coverName = gtk.Entry ()
-        coverName.set_text (options["covername"])
-        coverName.set_sensitive (active)
-        customCoverName.connect ("clicked", self.__coverNameCb, coverName)
+        self.__coverName = gtk.Entry ()
+        self.__coverName.set_text (options["covername"])
+        self.__coverName.set_sensitive (active)
+        customCoverName.connect ("clicked", self.__coverNameCb, 
+                                            self.__coverName)
         
         coverSizeLabel = gtk.Label (_("Covers size:"))
-        coverSize = gtk.HScale ()
-        coverSize.set_range (64, 256)
-        coverSize.set_increments (1, 1)
-        coverSize.set_digits(0)
-        coverSize.set_value (options["coversize"])
+        self.__coverSize = gtk.HScale ()
+        self.__coverSize.set_range (64, 256)
+        self.__coverSize.set_increments (1, 1)
+        self.__coverSize.set_digits(0)
+        self.__coverSize.set_value (options["coversize"])
         
         table = gtk.Table (2, 2, False)
         table.set_homogeneous (True)
         table.set_col_spacings (3)
         table.attach (customCoverName, 0, 1, 0, 1)
-        table.attach (coverName, 1, 2, 0, 1)
+        table.attach (self.__coverName, 1, 2, 0, 1)
         table.attach (coverSizeLabel, 0, 1, 1, 2)
-        table.attach (coverSize, 1, 2, 1, 2)
+        table.attach (self.__coverSize, 1, 2, 1, 2)
         
-        vboxOpt.pack_start (upStart, False, False, 0)
-        vboxOpt.pack_start (showNames, False, False, 0)
-        vboxOpt.pack_start (stylizedCovers, False, False, 0)
-        vboxOpt.pack_start (hideMissing, False, False, 0)
-        vboxOpt.pack_start (alwaysFiltering, False, False, 0)
+        vboxOpt.pack_start (self.__upStart, False, False, 0)
+        vboxOpt.pack_start (self.__showNames, False, False, 0)
+        vboxOpt.pack_start (self.__stylizedCovers, False, False, 0)
+        vboxOpt.pack_start (self.__hideMissing, False, False, 0)
+        vboxOpt.pack_start (self.__alwaysFiltering, False, False, 0)
         vboxOpt.pack_start (table, False, False, 0)
         prefsOptFrame.add (vboxOpt)
         
@@ -196,10 +197,7 @@ class mpdBrowserCfgDlg (IdleObject):
                                                      gtk.RESPONSE_CLOSE)
         closeButton.connect ("clicked", self.__close)
                              
-        self.__prefsWindow.connect ("destroy", self.__updateOpts, hostEntry, 
-                                    portEntry, passwordEntry, dirEntry, upStart,
-                                    showNames, stylizedCovers, hideMissing,
-                                    alwaysFiltering, coverName, coverSize)
+        self.__prefsWindow.connect ("destroy", self.__updateOpts)
         self.__prefsWindow.vbox.pack_start (notebook, False, False, 0)
         self.__prefsWindow.show_all ()
         closeButton.grab_focus ()
@@ -212,32 +210,34 @@ class mpdBrowserCfgDlg (IdleObject):
         self.__prefsWindow.destroy ()
         
         
-    def __updateOpts (self, data, hostEntry, portEntry, passwordEntry, dirEntry,
-                      upStart, showNames, stylizedCovers, hideMissing, 
-                      alwaysFiltering, coverName, coverSize):
+    def __updateOpts (self, data):
         """
             emit update_opt signal to update Options and reload view
         """
         self.__options = {
-                            "mpdserver"      : hostEntry.get_text (),
-                            "mpdport"        : int (portEntry.get_text ()),
-                            "mpdpasswd"      : passwordEntry.get_text (),
-                            "collectionpath" : dirEntry.get_text (),
-                            "upstart"        : upStart.get_active (),
-                            "shownames"      : showNames.get_active (),
-                            "stylizedcovers" : stylizedCovers.get_active (),
-                            "hidemissing"    : hideMissing.get_active (),
-                            "alwaysFiltering": alwaysFiltering.get_active (),
-                            "covername"      : coverName.get_text (),
-                            "coversize"      : int (coverSize.get_value ())
+                        "mpdserver"      : self.__hostEntry.get_text (),
+                        "mpdport"        : int (self.__portEntry.get_text ()),
+                        "mpdpasswd"      : self.__passwordEntry.get_text (),
+                        "collectionpath" : self.__dirEntry.get_text (),
+                        "upstart"        : self.__upStart.get_active (),
+                        "shownames"      : self.__showNames.get_active (),
+                        "stylizedcovers" : self.__stylizedCovers.get_active (),
+                        "hidemissing"    : self.__hideMissing.get_active (),
+                        "alwaysFiltering": self.__alwaysFiltering.get_active (),
+                        "covername"      : self.__coverName.get_text (),
+                        "coversize"      : int (self.__coverSize.get_value ())
                           }
+                          
         # We need to clear cache
-        if self.__coverNameOrig != coverName.get_text ()        or \
-           self.__coverSizeOrig != int (coverSize.get_value ()) or \
-           (hideMissing.get_active () == True and self.__hideMissingOrig != \
-                                                     hideMissing.get_active ()):
+        if self.__coverNameOrig != self.__coverName.get_text () \
+           or \
+           self.__coverSizeOrig != int (self.__coverSize.get_value ()) \
+           or \
+          (self.__hideMissing.get_active () == True and 
+           self.__hideMissingOrig != self.__hideMissing.get_active ()):
            
             self.__clearCache (None)
+            
         self.emit ("update_opts")
      
      
