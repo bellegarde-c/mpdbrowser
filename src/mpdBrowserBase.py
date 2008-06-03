@@ -139,8 +139,10 @@ class mpdBrowserBase:
                                                 self.__conf.get ("mpdport"),
                                                 self.__conf.get ("mpdpasswd"))
             if self.__conf.get ("upstart"):
-                self.__conn.open () 
-                self.__conn.update ("/")
+                self.__conn.open ()
+                try:
+                    self.__conn.update ("/")
+                except: pass # Already updating
                 self.__conn.close ()
                 self.__initDB (True)
             else:
