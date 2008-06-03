@@ -17,7 +17,6 @@ from idleObject import *
 from mpdBrowserUtils import *
 
 class mpdBrowserCfgDlg (IdleObject):
-    
 
     __gsignals__ =  { 
             "update_opts": (    # update options
