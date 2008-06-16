@@ -84,6 +84,8 @@ class mpdBrowserCfgDlg (IdleObject):
         self.__hideMissing.set_active (options["hidemissing"])
         self.__alwaysFiltering = gtk.CheckButton (_("Always show filter bar"))
         self.__alwaysFiltering.set_active (options["alwaysFiltering"])
+        self.__queueByDefault = gtk.CheckButton (_("Queue by default"))
+        self.__queueByDefault.set_active (options["queuebydefault"])
                 
         customCoverName = gtk.CheckButton (_("Custom cover name:"))
         if options["covername"] == "":
@@ -117,6 +119,7 @@ class mpdBrowserCfgDlg (IdleObject):
         vboxOpt.pack_start (self.__stylizedCovers, False, False, 0)
         vboxOpt.pack_start (self.__hideMissing, False, False, 0)
         vboxOpt.pack_start (self.__alwaysFiltering, False, False, 0)
+        vboxOpt.pack_start (self.__queueByDefault, False, False, 0)
         vboxOpt.pack_start (table, False, False, 0)
         prefsOptFrame.add (vboxOpt)
         
@@ -224,7 +227,8 @@ class mpdBrowserCfgDlg (IdleObject):
                         "hidemissing"    : self.__hideMissing.get_active (),
                         "alwaysFiltering": self.__alwaysFiltering.get_active (),
                         "covername"      : self.__coverName.get_text (),
-                        "coversize"      : int (self.__coverSize.get_value ())
+                        "coversize"      : int (self.__coverSize.get_value ()),
+                        "queuebydefault" : self.__queueByDefault.get_active ()
                           }
                           
         # We need to clear cache

@@ -25,7 +25,8 @@ class mpdBrowserCfg:
                         "collectionpath", "upstart"),
          "window"    : ("x", "y","width","height"),
          "options"   : ("stylizedcovers", "shownames", "hidemissing",
-                        "alwaysFiltering", "covername", "coversize")
+                        "alwaysFiltering", "covername", "coversize",
+                        "queuebydefault")
                          }
         # Defaults values
         self.__defaults = {
@@ -44,6 +45,7 @@ class mpdBrowserCfg:
                             "alwaysFiltering": True,
                             "covername"      : "",
                             "coversize"      : 128,
+                            "queuebydefault" : False
                            }
         # Defaults types
         self.__types = {
@@ -60,7 +62,8 @@ class mpdBrowserCfg:
                             "hidemissing"    : "bool",
                             "alwaysFiltering": "bool",
                             "covername"      : "string",
-                            "coversize"      : "int"
+                            "coversize"      : "int",
+                            "queuebydefault" : "bool"
                            }
                        
         self.__optionsValues = {}

@@ -219,10 +219,15 @@ class mpdBrowserBase:
                 iconview.unselect_all ()
                 if pos != -1:
                     if (event.get_state() & gtk.gdk.CONTROL_MASK) != 0:
-                        action = MPD_ENQUEUE
+                        if self.__conf.get ("queuebydefault"):
+                            action = MPD_REPLACE
+                        else:
+                            action = MPD_ENQUEUE
                     else:
-                        action = MPD_REPLACE
-                        
+                         if self.__conf.get ("queuebydefault"):
+                            action = MPD_ENQUEUE
+                         else:
+                            action = MPD_REPLACE
                     if event.button == 3:
                         self.__popupSongs (pos, action)
                     elif event.button == 2:
