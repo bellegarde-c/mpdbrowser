@@ -101,7 +101,7 @@ msgstr "Toujours afficher la barre de filtre"
 
 #: ../src/mpdBrowserCfgDlg.py:87
 msgid "Queue by default"
-msgstr "Ajouter sans remplacer par défaut"
+msgstr "Ne pas remplacer par défaut"
 
 #: ../src/mpdBrowserCfgDlg.py:90
 msgid "Custom cover name:"
