@@ -270,6 +270,8 @@ class mpdBrowserBase:
                         self.__albums = []
                         self.__scanning ()
                         self.__DB.start ()
+                    elif event.keyval == gtk.keysyms.q:
+                        self.quit (None)
                 elif event.keyval == gtk.keysyms.F5:
                     self.__view.clear ()
                     self.__DB.stop ()
