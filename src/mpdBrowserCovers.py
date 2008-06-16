@@ -37,10 +37,6 @@ class mpdBrowserCovers (IdleObject):
         """
         IdleObject.__init__(self)
         
-        self.__case = gtk.gdk.pixbuf_new_from_file_at_size (case,
-                                                            coverSize, 
-                                                            coverSize)
-        
         if stylizedCovers == True:
             self.__case = gtk.gdk.pixbuf_new_from_file (case)
             self.__coverComp = True
