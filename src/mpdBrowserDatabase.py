@@ -23,10 +23,10 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
             # Collection scanned
             "scanned": (
            gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, [gobject.TYPE_PYOBJECT]),
-            # status bar message
+            # Status bar message
             "status": (
            gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, [gobject.TYPE_STRING]),
-            # progress bar percent
+            # Progress bar percent
             "progress": (
            gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, [gobject.TYPE_FLOAT])
             }
@@ -57,7 +57,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
             albumList = []
             currentPath=""
             
-            if self.__update: #wait for update to finish
+            if self.__update: # Wait for update to finish
                 self.emit ("status", _("Updating MPD collection..."))
                 try:
                     while True:
@@ -66,7 +66,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
                         self.__conn.close ()
                         time.sleep (1)
                 except: 
-                    self.__conn.close ()# update finished
+                    self.__conn.close () # Update finished
 
             # Get albums list
             self.emit ("status", _("Connecting to MPD..."))
