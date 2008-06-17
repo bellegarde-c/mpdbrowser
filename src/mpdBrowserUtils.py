@@ -25,7 +25,6 @@ def cutStringAtSize (string, size, totalSize):
         string = string[:totalSize] + "..."
         
     newString = ""
-    lastSpace = -1
     i = 0
     sub = 0
     while i < len (string):
