@@ -125,7 +125,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
                 nbItems += 1
             
             # List is already sorted by genre, artist, album
-            # Uncomment if mpd behaviour change
+            # Uncomment if python-mpd behaviour change
             #albumList.sort ()
             self.emit ("scanned", albumList)
         except:
