@@ -25,7 +25,6 @@ if not os.path.exists (case): case = "../images/mpdBrowser_case.png"
 class MissingCover(Exception):
     pass
 
-
 class mpdBrowserCovers (IdleObject):
                    
     def __init__ (self, stylizedCovers, hideMissing, coverName, coverSize):
@@ -49,7 +48,7 @@ class mpdBrowserCovers (IdleObject):
     
     def __initEmpty (self):
         """
-            Initialise empty cover path
+            Initialise empty cover
         """   
         self.__emptyPath = os.path.expanduser ("~") + \
                        "/.local/share/mpdBrowser/empty.png"
