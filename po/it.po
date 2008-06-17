@@ -1,5 +1,4 @@
 # Italian translations for PACKAGE package
-#
 # Copyright (C) 2008
 # This file is distributed under the same license as the PACKAGE package.
 # bautz <bautz@email.com>, 2008.
@@ -9,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-16 14:11+0200\n"
-"PO-Revision-Date: 2008-05-05 21:55+0200\n"
+"POT-Creation-Date: 2008-06-17 08:23+0200\n"
+"PO-Revision-Date: 2008-06-16 22:33+0200\n"
 "Last-Translator: bautz <bautz@email.com>\n"
 "Language-Team: Italian\n"
 "MIME-Version: 1.0\n"
@@ -42,12 +41,12 @@ msgstr "Genere"
 msgid "Loading..."
 msgstr "Caricamento..."
 
-#: ../src/mpdBrowserBase.py:417 ../src/mpdBrowserBase.py:508
+#: ../src/mpdBrowserBase.py:419 ../src/mpdBrowserBase.py:510
 #: ../src/mpdBrowserDatabase.py:134
 msgid "Can't contact mpd!"
 msgstr "Impossibile connettersi a mpd!"
 
-#: ../src/mpdBrowserBase.py:435
+#: ../src/mpdBrowserBase.py:437
 #, python-format
 msgid "You have %i albums."
 msgstr "Hai %i albums."
@@ -82,7 +81,7 @@ msgstr "Opzioni: "
 
 #: ../src/mpdBrowserCfgDlg.py:77
 msgid "Update collection at startup"
-msgstr ""
+msgstr "Aggiorna libreria all'avvio"
 
 #: ../src/mpdBrowserCfgDlg.py:79
 msgid "Show albums names"
@@ -98,11 +97,11 @@ msgstr "Nascondi copertine mancanti"
 
 #: ../src/mpdBrowserCfgDlg.py:85
 msgid "Always show filter bar"
-msgstr ""
+msgstr "Mostra sempre la barra filtro"
 
 #: ../src/mpdBrowserCfgDlg.py:87
 msgid "Queue by default"
-msgstr ""
+msgstr "Metti sempre in coda"
 
 #: ../src/mpdBrowserCfgDlg.py:90
 msgid "Custom cover name:"
@@ -110,7 +109,7 @@ msgstr "Nome album senza titolo:"
 
 #: ../src/mpdBrowserCfgDlg.py:102
 msgid "Covers size:"
-msgstr ""
+msgstr "Dimensione copertina"
 
 #: ../src/mpdBrowserCfgDlg.py:126
 msgid "Cache:"
@@ -179,7 +178,7 @@ msgstr "Premi F5"
 
 #: ../src/mpdBrowserCfgDlg.py:181
 msgid "How to refresh collection?"
-msgstr ""
+msgstr "Come aggiorno la libreria?"
 
 #: ../src/mpdBrowserCfgDlg.py:183
 msgid "Just press Ctrl + F5"
@@ -189,16 +188,16 @@ msgstr "Premi Ctrl + F5"
 msgid "Informations"
 msgstr "Informazioni"
 
-#. wait for update to finish
+#. Wait for update to finish
 #: ../src/mpdBrowserDatabase.py:61
 msgid "Updating MPD collection..."
-msgstr ""
+msgstr "Aggiornamento libreria MPD..."
 
-#. update finished
+#. Update finished
 #. Get albums list
 #: ../src/mpdBrowserDatabase.py:72
 msgid "Connecting to MPD..."
-msgstr ""
+msgstr "Connessione a MPD..."
 
 #: ../src/mpdBrowserDatabase.py:80
 msgid "Loading albums..."
@@ -211,8 +210,8 @@ msgstr "Sconosciuto"
 
 #: ../mpdBrowser.desktop.in.h:1
 msgid "MPD click & play client"
-msgstr ""
+msgstr "Client per MPD click & play"
 
 #: ../mpdBrowser.desktop.in.h:2
 msgid "mpdBrowser"
-msgstr ""
+msgstr "mpdBrowser"

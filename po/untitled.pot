@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-16 14:11+0200\n"
+"POT-Creation-Date: 2008-06-17 08:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,12 +40,12 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
-#: ../src/mpdBrowserBase.py:417 ../src/mpdBrowserBase.py:508
+#: ../src/mpdBrowserBase.py:419 ../src/mpdBrowserBase.py:510
 #: ../src/mpdBrowserDatabase.py:134
 msgid "Can't contact mpd!"
 msgstr ""
 
-#: ../src/mpdBrowserBase.py:435
+#: ../src/mpdBrowserBase.py:437
 #, python-format
 msgid "You have %i albums."
 msgstr ""
@@ -186,12 +186,12 @@ msgstr ""
 msgid "Informations"
 msgstr ""
 
-#. wait for update to finish
+#. Wait for update to finish
 #: ../src/mpdBrowserDatabase.py:61
 msgid "Updating MPD collection..."
 msgstr ""
 
-#. update finished
+#. Update finished
 #. Get albums list
 #: ../src/mpdBrowserDatabase.py:72
 msgid "Connecting to MPD..."
