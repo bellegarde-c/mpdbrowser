@@ -22,9 +22,6 @@ from idleObject import *
 case = sys.prefix + "/share/pixmaps/mpdBrowser_case.png"
 if not os.path.exists (case): case = "../images/mpdBrowser_case.png"
 
-SPINE_RATIO = 60.0/600.0
-CAIRO_COVER = "/tmp/mpdBrowserCover.png"
-
 class MissingCover(Exception):
     pass
 
