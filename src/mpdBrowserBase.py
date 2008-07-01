@@ -400,7 +400,6 @@ class mpdBrowserBase:
                 self.__statusBar.show ()
                 self.__progressBar.hide ()
                 self.__statusBar.push (self.__contId, info);
-                self.__prefsButton.set_sensitive (True)
         except: 
             print "mpdBrowserBase::__statusCb():"
             print sys.exc_info ()
