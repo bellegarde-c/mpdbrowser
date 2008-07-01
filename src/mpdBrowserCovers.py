@@ -93,6 +93,8 @@ class mpdBrowserCovers (IdleObject):
             # Rather than merely compositing the case on top of the artwork, 
             # we will scale the artwork so that it isn't covered by the case:
             spineWidth = int (w * spineRatio)
+
+	    # We wan't to preserve aspect ratio
             if h >= w - spineWidth:
                 h -= spineWidth
                 
