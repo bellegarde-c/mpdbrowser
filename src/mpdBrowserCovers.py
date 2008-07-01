@@ -48,7 +48,10 @@ class mpdBrowserCovers (IdleObject):
     
     def __initEmpty (self):
         """
-            Initialise empty cover
+	    Initialise empty cover:
+	    	- User cover first
+		- System cover then
+		- Fallback to install dir if no covers
         """   
         self.__emptyPath = os.path.expanduser ("~") + \
                        "/.local/share/mpdBrowser/empty.png"
