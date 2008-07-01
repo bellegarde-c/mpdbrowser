@@ -165,6 +165,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
             except:
                 title = infos[i]['title']
 
+            # We only want songs from album in path
             if os.path.dirname (self.__path + infos[i]['file']) == path:
                 list.append ((title, self.__path + infos[i]['file']))
         return list
