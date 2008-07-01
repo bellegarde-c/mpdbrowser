@@ -57,3 +57,21 @@ def getDirListing (dirPath, revert):
     else:
         dirList.reverse ()
     return dirList + fileList
+
+
+def clearCache (self, data):
+    """
+        Clear covers cache
+    """
+    userDir = os.path.expanduser ("~")
+    for coverType in ["composite", "normal"]:
+        dirList = getDirListing (
+                "%s/.local/share/mpdBrowser/%s" % (userDir, coverType), True
+                                )
+        try:
+            for item in dirList:    
+                if os.path.isdir (item):
+                    os.rmdir (item)
+                else:
+                    os.unlink (item)
+        except: pass

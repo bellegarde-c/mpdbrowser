@@ -125,7 +125,7 @@ class mpdBrowserCfgDlg (IdleObject):
         
         prefsCacheFrame = gtk.Frame (_("Cache:"))
         clearButton = gtk.Button (_("Clear:"), gtk.STOCK_CLEAR)
-        clearButton.connect ("clicked", self.__clearCache)
+        clearButton.connect ("clicked", clearCache)
         prefsCacheFrame.add (clearButton)
 
         vbox = gtk.VBox ()
@@ -239,29 +239,11 @@ class mpdBrowserCfgDlg (IdleObject):
           (self.__hideMissing.get_active () == True and 
            self.__hideMissingOrig != self.__hideMissing.get_active ()):
            
-            self.__clearCache (None)
+            clearCache (None)
             
         self.emit ("update_opts")
      
      
-    def __clearCache (self, data):
-        """
-            Clear covers cache
-        """
-        userDir = os.path.expanduser ("~")
-        for coverType in ["composite", "normal"]:
-            dirList = getDirListing (
-                    "%s/.local/share/mpdBrowser/%s" % (userDir, coverType), True
-                                    )
-            try:
-                for item in dirList:    
-                    if os.path.isdir (item):
-                        os.rmdir (item)
-                    else:
-                        os.unlink (item)
-            except: pass
-      
-      
     def __coverNameCb (self, button, entry):
         """
             Enable cover name entry
