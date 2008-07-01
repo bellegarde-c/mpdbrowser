@@ -210,6 +210,7 @@ class mpdBrowserBase:
                 - F5            -> update view
                 - Ctrl F5       -> update collection
                 - Ctrl f        -> show filter bar
+		- F3            -> Change add/enqueue bahaviour
         """
         try:
             if event.type == gtk.gdk.BUTTON_RELEASE:
@@ -270,6 +271,9 @@ class mpdBrowserBase:
                         self.__albums = []
                         self.__scanning ()
                         self.__DB.start ()
+		    elif event.keyval == gtk.keysyms.F3:
+                        self.conf.set ("queuebydefault", 
+				       not self.__conf.get ("queuebydefault"))
                     elif event.keyval == gtk.keysyms.q:
                         self.quit (None)
                 elif event.keyval == gtk.keysyms.F5:
