@@ -118,6 +118,11 @@ class mpdBrowserCovers (IdleObject):
         """
             Create a cover from text
         """
+	#TODO Now write png to CAIRO_COVER
+	# Should be better to keep it in memory and let cache manager
+	# copy it to mpdBrowser cache.
+	# How convert a CAIRO Image Surface to a GTK PIXBUF?
+
         # Setup Cairo
         surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, 
                                      self.__coverSize, self.__coverSize)
