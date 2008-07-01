@@ -484,8 +484,8 @@ class mpdBrowserBase:
         path = self.__albums[pos][ALBUM_PATH]
         popupMenu = gtk.Menu()
         for song in self.__DB.getSongs (path, album):
-            if len (song[0]) > 25:
-                name = song[0][:25] + "..."
+            if len (song[0]) > STRING_SONG_SIZE:
+                name = song[0][:STRING_SONG_SIZE] + "..."
             else:
                 name = song[0]
             item =  gtk.MenuItem (name)
