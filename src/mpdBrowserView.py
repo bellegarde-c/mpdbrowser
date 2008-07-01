@@ -33,7 +33,9 @@ class mpdBrowserView:
         self.iconview.set_model (self.__model)    
         
         self.__items = []
-        self.__realItemPos = [] # For filtered view
+	# We store here real item index. IconView index may be different from
+	# database one in filtering mode
+        self.__realItemPos = [] 
         self.__countItems = 0
         self.__showNames = showNames
 
