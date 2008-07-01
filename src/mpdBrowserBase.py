@@ -271,9 +271,6 @@ class mpdBrowserBase:
                         self.__albums = []
                         self.__scanning ()
                         self.__DB.start ()
-		    elif event.keyval == gtk.keysyms.F3:
-                        self.conf.set ("queuebydefault", 
-				       not self.__conf.get ("queuebydefault"))
                     elif event.keyval == gtk.keysyms.q:
                         self.quit (None)
                 elif event.keyval == gtk.keysyms.F5:
@@ -283,6 +280,9 @@ class mpdBrowserBase:
                     self.__albums = []
                     self.__scanning ()
                     self.__DB.start ()
+	        elif event.keyval == gtk.keysyms.F3:
+                    self.__conf.set ("queuebydefault", 
+		                     not self.__conf.get ("queuebydefault"))
         except:
             print "mpdBrowserBase::__eventsFilter():"
             print sys.exc_info ()
