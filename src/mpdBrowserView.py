@@ -88,12 +88,12 @@ class mpdBrowserView:
             try:
                 if filter != "":
                     # Filter by Genre, Artist, Album
-                    if (filter.lower() not in albums[i][ALBUM_GENRE].lower() or \
-                        filterType not in (FILTER_ALL, FILTER_GENRE)) \
-                    and (filter.lower() not in albums[i][ALBUM_ARTIST].lower() or \
-                         filterType not in (FILTER_ALL, FILTER_ARTIST)) \
-                    and (filter.lower() not in albums[i][ALBUM_NAME].lower() or \
-                         filterType not in (FILTER_ALL, FILTER_ALBUM)): 
+                    if (filter.lower() not in albums[i][ALBUM_GENRE].lower()\
+		          or filterType not in (FILTER_ALL, FILTER_GENRE))\
+                    and (filter.lower() not in albums[i][ALBUM_ARTIST].lower()\
+		    	  or filterType not in (FILTER_ALL, FILTER_ARTIST))\
+                    and (filter.lower() not in albums[i][ALBUM_NAME].lower()\
+		          or filterType not in (FILTER_ALL, FILTER_ALBUM)): 
                         i+=1 
                         continue
                 
