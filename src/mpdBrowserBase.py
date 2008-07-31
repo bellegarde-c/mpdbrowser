@@ -283,6 +283,11 @@ class mpdBrowserBase:
 	        elif event.keyval == gtk.keysyms.F3:
                     self.__conf.set ("queuebydefault", 
 		                     not self.__conf.get ("queuebydefault"))
+    	            if self.__conf.get ("queuebydefault"):
+    		            self.__messageCb (None, _("Queue by default"))
+                    else:
+                        self.__messageCb (None, _("Replace by default"))
+		                
         except:
             print "mpdBrowserBase::__eventsFilter():"
             print sys.exc_info ()
