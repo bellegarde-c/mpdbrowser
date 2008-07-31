@@ -51,6 +51,7 @@ class mpdBrowserBase:
         self.__window.set_icon (pixbuf)
         self.__window.connect ("configure_event", self.__configEventCb)
         self.__window.connect ("destroy", self.quit)
+        self.__window.connect ("key-release-event", self.__windowEventsFilter)
         
         # Create IPC service
         self.__ipc = mpdBrowserIPC_S ()
@@ -148,7 +149,8 @@ class mpdBrowserBase:
             else:
                 self.__initDB (False)
             self.__view = mpdBrowserView (self.__conf.get ("shownames"))
-            self.__view.iconview.connect ("event-after", self.__eventsFilter)
+            self.__view.iconview.connect ("event-after", 
+                                          self.__iconviewEventsFilter)
             
         except:
             print "mpdBrowserBase::__init__()/IPC:"
@@ -201,7 +203,52 @@ class mpdBrowserBase:
         self.__progressBar.show ()
 
     
-    def __eventsFilter (self, iconview, event):
+    def __windowEventsFilter (self, data, event):
+        """
+            events filter:
+                - F5            -> update view
+                - Ctrl F5       -> update collection
+                - Ctrl f        -> show filter bar
+		        - F3            -> Change add/enqueue bahaviour
+        """
+        if (event.get_state() & gtk.gdk.CONTROL_MASK) != 0:
+            if event.keyval == gtk.keysyms.f and not self.__alwaysFiltering:
+                if self.__filterBox.get_no_show_all ():
+                    self.__motionEvent (-1)
+                    self.__filterBox.set_no_show_all (False)
+                    self.__filterBox.show_all ()
+                    self.__filterPattern.grab_focus ()
+                else:
+                    self.__filterHideCb (None)
+            elif event.keyval == gtk.keysyms.F5:
+                    self.__view.clear ()
+                    self.__DB.stop ()
+                    self.__conn.open () 
+                    self.__conn.update ("/")
+                    self.__conn.close ()
+                    self.__initDB (True)
+                    self.__albums = []
+                    self.__scanning ()
+                    self.__DB.start ()
+            elif event.keyval == gtk.keysyms.q:
+                    self.quit (None)
+        elif event.keyval == gtk.keysyms.F5:
+            self.__view.clear ()
+            self.__DB.stop ()
+            self.__initDB (False)
+            self.__albums = []
+            self.__scanning ()
+            self.__DB.start ()
+        elif event.keyval == gtk.keysyms.F3:
+            self.__conf.set ("queuebydefault", 
+		                                 not self.__conf.get ("queuebydefault"))
+            if self.__conf.get ("queuebydefault"):
+    		    self.__messageCb (None, _("Queue by default"))
+            else:
+                self.__messageCb (None, _("Replace by default"))
+		                
+        
+    def __iconviewEventsFilter (self, iconview, event):
         """
             events filter:
                 - Left click    -> play/enqueue album
@@ -210,7 +257,7 @@ class mpdBrowserBase:
                 - F5            -> update view
                 - Ctrl F5       -> update collection
                 - Ctrl f        -> show filter bar
-		- F3            -> Change add/enqueue bahaviour
+		        - F3            -> Change add/enqueue bahaviour
         """
         try:
             if event.type == gtk.gdk.BUTTON_RELEASE:
@@ -251,43 +298,7 @@ class mpdBrowserBase:
                         if pos != -1:
                             self.__playAlbum (pos, 1)
                     except: pass # no cursor
-                elif (event.get_state() & gtk.gdk.CONTROL_MASK) != 0:
-                    if event.keyval == gtk.keysyms.f and not \
-                       self.__alwaysFiltering:
-                        if self.__filterBox.get_no_show_all ():
-                            self.__motionEvent (-1)
-                            self.__filterBox.set_no_show_all (False)
-                            self.__filterBox.show_all ()
-                            self.__filterPattern.grab_focus ()
-                        else:
-                            self.__filterHideCb (None)
-                    elif event.keyval == gtk.keysyms.F5:
-                        self.__view.clear ()
-                        self.__DB.stop ()
-                        self.__conn.open () 
-                        self.__conn.update ("/")
-                        self.__conn.close ()
-                        self.__initDB (True)
-                        self.__albums = []
-                        self.__scanning ()
-                        self.__DB.start ()
-                    elif event.keyval == gtk.keysyms.q:
-                        self.quit (None)
-                elif event.keyval == gtk.keysyms.F5:
-                    self.__view.clear ()
-                    self.__DB.stop ()
-                    self.__initDB (False)
-                    self.__albums = []
-                    self.__scanning ()
-                    self.__DB.start ()
-	        elif event.keyval == gtk.keysyms.F3:
-                    self.__conf.set ("queuebydefault", 
-		                     not self.__conf.get ("queuebydefault"))
-    	            if self.__conf.get ("queuebydefault"):
-    		            self.__messageCb (None, _("Queue by default"))
-                    else:
-                        self.__messageCb (None, _("Replace by default"))
-		                
+                
         except:
             print "mpdBrowserBase::__eventsFilter():"
             print sys.exc_info ()
