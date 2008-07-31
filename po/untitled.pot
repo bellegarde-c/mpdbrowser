@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-17 08:23+0200\n"
+"POT-Creation-Date: 2008-07-31 12:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,17 +40,25 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
-#: ../src/mpdBrowserBase.py:419 ../src/mpdBrowserBase.py:510
+#: ../src/mpdBrowserBase.py:287 ../src/mpdBrowserCfgDlg.py:87
+msgid "Queue by default"
+msgstr ""
+
+#: ../src/mpdBrowserBase.py:289
+msgid "Replace by default"
+msgstr ""
+
+#: ../src/mpdBrowserBase.py:427 ../src/mpdBrowserBase.py:518
 #: ../src/mpdBrowserDatabase.py:134
 msgid "Can't contact mpd!"
 msgstr ""
 
-#: ../src/mpdBrowserBase.py:437
+#: ../src/mpdBrowserBase.py:445
 #, python-format
 msgid "You have %i albums."
 msgstr ""
 
-#: ../src/mpdBrowserCfgDlg.py:38 ../src/mpdBrowserCfgDlg.py:193
+#: ../src/mpdBrowserCfgDlg.py:38 ../src/mpdBrowserCfgDlg.py:199
 msgid "Preferences"
 msgstr ""
 
@@ -96,10 +104,6 @@ msgstr ""
 
 #: ../src/mpdBrowserCfgDlg.py:85
 msgid "Always show filter bar"
-msgstr ""
-
-#: ../src/mpdBrowserCfgDlg.py:87
-msgid "Queue by default"
 msgstr ""
 
 #: ../src/mpdBrowserCfgDlg.py:90
@@ -182,7 +186,15 @@ msgstr ""
 msgid "Just press Ctrl + F5"
 msgstr ""
 
-#: ../src/mpdBrowserCfgDlg.py:195
+#: ../src/mpdBrowserCfgDlg.py:187
+msgid "How to switch between enqueue modes?"
+msgstr ""
+
+#: ../src/mpdBrowserCfgDlg.py:189
+msgid "Just press F3"
+msgstr ""
+
+#: ../src/mpdBrowserCfgDlg.py:201
 msgid "Informations"
 msgstr ""
 

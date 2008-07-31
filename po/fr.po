@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-16 14:11+0200\n"
+"POT-Creation-Date: 2008-07-31 12:01+0200\n"
 "PO-Revision-Date: 2008-04-02 11:15+0200\n"
 "Last-Translator: Bellegarde Cedric <gnumdk@gmail.com>\n"
 "Language-Team: French\n"
@@ -41,17 +41,25 @@ msgstr "Style"
 msgid "Loading..."
 msgstr "Chargement..."
 
-#: ../src/mpdBrowserBase.py:417 ../src/mpdBrowserBase.py:508
+#: ../src/mpdBrowserBase.py:287 ../src/mpdBrowserCfgDlg.py:87
+msgid "Queue by default"
+msgstr "Ne pas remplacer par défaut"
+
+#: ../src/mpdBrowserBase.py:289
+msgid "Replace by default"
+msgstr "Remplacer par défaut"
+
+#: ../src/mpdBrowserBase.py:427 ../src/mpdBrowserBase.py:518
 #: ../src/mpdBrowserDatabase.py:134
 msgid "Can't contact mpd!"
 msgstr "Impossible de contacter mpd!"
 
-#: ../src/mpdBrowserBase.py:435
+#: ../src/mpdBrowserBase.py:445
 #, python-format
 msgid "You have %i albums."
 msgstr "Vous avez %i albums."
 
-#: ../src/mpdBrowserCfgDlg.py:38 ../src/mpdBrowserCfgDlg.py:193
+#: ../src/mpdBrowserCfgDlg.py:38 ../src/mpdBrowserCfgDlg.py:199
 msgid "Preferences"
 msgstr "Préférences"
 
@@ -98,10 +106,6 @@ msgstr "Cacher les pochettes manquantes"
 #: ../src/mpdBrowserCfgDlg.py:85
 msgid "Always show filter bar"
 msgstr "Toujours afficher la barre de filtre"
-
-#: ../src/mpdBrowserCfgDlg.py:87
-msgid "Queue by default"
-msgstr "Ne pas remplacer par défaut"
 
 #: ../src/mpdBrowserCfgDlg.py:90
 msgid "Custom cover name:"
@@ -185,16 +189,24 @@ msgstr "Comment rafraichir la bibliothèque?"
 msgid "Just press Ctrl + F5"
 msgstr "Appuyez sur Ctrl + F5"
 
-#: ../src/mpdBrowserCfgDlg.py:195
+#: ../src/mpdBrowserCfgDlg.py:187
+msgid "How to switch between enqueue modes?"
+msgstr "Changer le mode d'ajout de morceau:"
+
+#: ../src/mpdBrowserCfgDlg.py:189
+msgid "Just press F3"
+msgstr "Appuyez sur F3"
+
+#: ../src/mpdBrowserCfgDlg.py:201
 msgid "Informations"
 msgstr "Informations"
 
-#. wait for update to finish
+#. Wait for update to finish
 #: ../src/mpdBrowserDatabase.py:61
 msgid "Updating MPD collection..."
 msgstr "Mise à jour de la bibliothèque MPD..."
 
-#. update finished
+#. Update finished
 #. Get albums list
 #: ../src/mpdBrowserDatabase.py:72
 msgid "Connecting to MPD..."

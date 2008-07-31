@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mpdBrowser\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-16 14:11+0200\n"
+"POT-Creation-Date: 2008-07-31 12:01+0200\n"
 "PO-Revision-Date: 2008-05-05 17:25+0100\n"
 "Last-Translator: Tomasz Dominikowski <dominikowski@gmail.com>\n"
 "Language-Team: Tomasz Dominikowski (Aviary.pl) <dominikowski@gmail.com>\n"
@@ -43,17 +43,25 @@ msgstr "Gatunek"
 msgid "Loading..."
 msgstr "Wczytywanie..."
 
-#: ../src/mpdBrowserBase.py:417 ../src/mpdBrowserBase.py:508
+#: ../src/mpdBrowserBase.py:287 ../src/mpdBrowserCfgDlg.py:87
+msgid "Queue by default"
+msgstr ""
+
+#: ../src/mpdBrowserBase.py:289
+msgid "Replace by default"
+msgstr ""
+
+#: ../src/mpdBrowserBase.py:427 ../src/mpdBrowserBase.py:518
 #: ../src/mpdBrowserDatabase.py:134
 msgid "Can't contact mpd!"
 msgstr "Nie można się połączyć z mpd!"
 
-#: ../src/mpdBrowserBase.py:435
+#: ../src/mpdBrowserBase.py:445
 #, python-format
 msgid "You have %i albums."
 msgstr "Ilość albumów: %i."
 
-#: ../src/mpdBrowserCfgDlg.py:38 ../src/mpdBrowserCfgDlg.py:193
+#: ../src/mpdBrowserCfgDlg.py:38 ../src/mpdBrowserCfgDlg.py:199
 msgid "Preferences"
 msgstr "Preferencje"
 
@@ -99,10 +107,6 @@ msgstr "Ukrywanie brakujących okładek"
 
 #: ../src/mpdBrowserCfgDlg.py:85
 msgid "Always show filter bar"
-msgstr ""
-
-#: ../src/mpdBrowserCfgDlg.py:87
-msgid "Queue by default"
 msgstr ""
 
 #: ../src/mpdBrowserCfgDlg.py:90
@@ -187,16 +191,25 @@ msgstr ""
 msgid "Just press Ctrl + F5"
 msgstr "Wystarczy nacisnąć Ctrl + F5"
 
-#: ../src/mpdBrowserCfgDlg.py:195
+#: ../src/mpdBrowserCfgDlg.py:187
+msgid "How to switch between enqueue modes?"
+msgstr ""
+
+#: ../src/mpdBrowserCfgDlg.py:189
+#, fuzzy
+msgid "Just press F3"
+msgstr "Wystarczy nacisnąć F5"
+
+#: ../src/mpdBrowserCfgDlg.py:201
 msgid "Informations"
 msgstr "Informacje"
 
-#. wait for update to finish
+#. Wait for update to finish
 #: ../src/mpdBrowserDatabase.py:61
 msgid "Updating MPD collection..."
 msgstr ""
 
-#. update finished
+#. Update finished
 #. Get albums list
 #: ../src/mpdBrowserDatabase.py:72
 msgid "Connecting to MPD..."

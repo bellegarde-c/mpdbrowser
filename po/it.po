@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-17 08:23+0200\n"
+"POT-Creation-Date: 2008-07-31 12:01+0200\n"
 "PO-Revision-Date: 2008-06-16 22:33+0200\n"
 "Last-Translator: bautz <bautz@email.com>\n"
 "Language-Team: Italian\n"
@@ -41,17 +41,26 @@ msgstr "Genere"
 msgid "Loading..."
 msgstr "Caricamento..."
 
-#: ../src/mpdBrowserBase.py:419 ../src/mpdBrowserBase.py:510
+#: ../src/mpdBrowserBase.py:287 ../src/mpdBrowserCfgDlg.py:87
+msgid "Queue by default"
+msgstr "Metti sempre in coda"
+
+#: ../src/mpdBrowserBase.py:289
+#, fuzzy
+msgid "Replace by default"
+msgstr "Metti sempre in coda"
+
+#: ../src/mpdBrowserBase.py:427 ../src/mpdBrowserBase.py:518
 #: ../src/mpdBrowserDatabase.py:134
 msgid "Can't contact mpd!"
 msgstr "Impossibile connettersi a mpd!"
 
-#: ../src/mpdBrowserBase.py:437
+#: ../src/mpdBrowserBase.py:445
 #, python-format
 msgid "You have %i albums."
 msgstr "Hai %i albums."
 
-#: ../src/mpdBrowserCfgDlg.py:38 ../src/mpdBrowserCfgDlg.py:193
+#: ../src/mpdBrowserCfgDlg.py:38 ../src/mpdBrowserCfgDlg.py:199
 msgid "Preferences"
 msgstr "Preferenze"
 
@@ -98,10 +107,6 @@ msgstr "Nascondi copertine mancanti"
 #: ../src/mpdBrowserCfgDlg.py:85
 msgid "Always show filter bar"
 msgstr "Mostra sempre la barra filtro"
-
-#: ../src/mpdBrowserCfgDlg.py:87
-msgid "Queue by default"
-msgstr "Metti sempre in coda"
 
 #: ../src/mpdBrowserCfgDlg.py:90
 msgid "Custom cover name:"
@@ -184,7 +189,16 @@ msgstr "Come aggiorno la libreria?"
 msgid "Just press Ctrl + F5"
 msgstr "Premi Ctrl + F5"
 
-#: ../src/mpdBrowserCfgDlg.py:195
+#: ../src/mpdBrowserCfgDlg.py:187
+msgid "How to switch between enqueue modes?"
+msgstr ""
+
+#: ../src/mpdBrowserCfgDlg.py:189
+#, fuzzy
+msgid "Just press F3"
+msgstr "Premi F5"
+
+#: ../src/mpdBrowserCfgDlg.py:201
 msgid "Informations"
 msgstr "Informazioni"
 
