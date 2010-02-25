@@ -1,12 +1,7 @@
-plip
+Installation:
 ./setup.py install
-plop
-
-Changement dans test
 
 Run app:
-Modif dans master
-
 - Run ./mB to run from dir
 - Run mpdBrowser after installation.
 
