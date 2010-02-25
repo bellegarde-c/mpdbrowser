@@ -1,7 +1,8 @@
-oInstallation:
+Installation:
 ./setup.py install
 
 Run app:
+plop
 
 - Run ./mB to run from dir
 - Run mpdBrowser after installation.
