@@ -1,5 +1,7 @@
-oInstallation:
+Installation:
 ./setup.py install
+
+Changement dans test
 
 Run app:
 
