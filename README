@@ -1,5 +1,6 @@
-Installation:
+plip
 ./setup.py install
+plop
 
 Changement dans test
 
