@@ -2,7 +2,7 @@ Installation:
 ./setup.py install
 
 Run app:
-plop
+Modif dans master
 
 - Run ./mB to run from dir
 - Run mpdBrowser after installation.
