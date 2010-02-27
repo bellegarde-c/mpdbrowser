@@ -72,8 +72,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
             # Get albums list
             self.emit ("status", _("Connecting to MPD..."))
             self.__conn.open ()
-            for album in self.__conn.list ('album'):
-                mpdCollection += self.__conn.search ('album', album)
+            mpdCollection = self.__conn.listallinfo('/')
             self.__conn.close ()
             
             # Create internal DB
@@ -82,6 +81,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
             self.emit ("status", _("Loading albums..."))
 
             for item in mpdCollection:
+                if not item.has_key('album'): continue
                 if self.__stopevent.isSet():
                     return
 
