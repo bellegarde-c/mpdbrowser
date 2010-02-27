@@ -59,7 +59,7 @@ def getDirListing (dirPath, revert):
     return dirList + fileList
 
 
-def clearCache (self, data):
+def clearCache (data):
     """
         Clear covers cache
     """
