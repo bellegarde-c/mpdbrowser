@@ -55,6 +55,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
         """
         try:
             albumList = []
+            mpdCollection= []
             currentPath=""
             
             if self.__update: # Wait for update to finish
@@ -71,9 +72,10 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
             # Get albums list
             self.emit ("status", _("Connecting to MPD..."))
             self.__conn.open ()
-            mpdCollection = self.__conn.search ('album', "")
+            for album in self.__conn.list ('album'):
+                mpdCollection += self.__conn.search ('album', album)
             self.__conn.close ()
-
+            
             # Create internal DB
             totalItems = float (len (mpdCollection))
             nbItems = 0.0
@@ -84,6 +86,7 @@ class mpdBrowserDatabase (threading.Thread, IdleObject):
                     return
 
                 path = os.path.dirname (self.__path + item['file'])                  
+
                 if currentPath != path: # New album
                     try:
                         # Deal with missing tags
