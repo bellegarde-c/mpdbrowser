@@ -140,19 +140,22 @@ class mpdBrowserBase:
                                                 self.__conf.get ("mpdport"),
                                                 self.__conf.get ("mpdpasswd"))
             if self.__conf.get ("upstart"):
-                self.__conn.open ()
                 try:
+                    self.__conn.open ()
                     self.__conn.update ("/")
-                except: pass # Already updating
-                self.__conn.close ()
-                self.__initDB (True)
+                    self.__conn.close ()
+                    self.__initDB (True)
+                except:
+                    self.__initDB (False)
             else:
                 self.__initDB (False)
+
             self.__view = mpdBrowserView (self.__conf.get ("shownames"))
             self.__view.iconview.connect ("event-after", 
                                           self.__iconviewEventsFilter)
-            
-        except:
+        
+    
+	except:
             print "mpdBrowserBase::__init__()/IPC:"
             print sys.exc_info()
             try:
@@ -164,8 +167,7 @@ class mpdBrowserBase:
             sys.exit ()
             
         self.__scanning ()     
-        self.__DB.start ()        
-        
+        self.__DB.start ()
         self.__scrolled.add (self.__view.iconview)
         
         vbox = gtk.VBox ()
