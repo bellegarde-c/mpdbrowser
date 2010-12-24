@@ -101,6 +101,7 @@ class mpdBrowserBase:
         playerImg.set_from_stock (gtk.STOCK_INDEX, gtk.ICON_SIZE_MENU)
         self.__playerButton = gtk.Button ()
         self.__playerButton.add (playerImg)
+        self.__playerButton.set_tooltip_text (self.__conf.get("mpdclient"))
         self.__playerButton.connect ("clicked", self.__playerCb, self.__window)
 
         statusBox.pack_start (self.__prefsButton, False, False, 0)
