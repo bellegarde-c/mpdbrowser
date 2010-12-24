@@ -26,7 +26,7 @@ class mpdBrowserCfg:
          "window"    : ("x", "y","width","height"),
          "options"   : ("stylizedcovers", "shownames", "hidemissing",
                         "alwaysFiltering", "covername", "coversize",
-                        "queuebydefault")
+                        "mpdclient", "queuebydefault")
                          }
         # Defaults values
         self.__defaults = {
@@ -45,6 +45,7 @@ class mpdBrowserCfg:
                             "alwaysFiltering": True,
                             "covername"      : "",
                             "coversize"      : 128,
+                            "mpdclient"      : "sonata",
                             "queuebydefault" : False
                            }
         # Defaults types

@@ -32,6 +32,7 @@ class mpdBrowserCfgDlg (IdleObject):
         self.__coverNameOrig = options["covername"]
         self.__hideMissingOrig = options["hidemissing"]
         self.__coverSizeOrig = options["coversize"]
+        self.__mpdClient = options["mpdclient"]
         
         IdleObject.__init__ (self)
         
@@ -59,8 +60,12 @@ class mpdBrowserCfgDlg (IdleObject):
         self.__dirEntry = gtk.Entry ()
         self.__dirEntry.set_text (options["collectionpath"])
 
+        mpdClientLabel = gtk.Label (_("Mpd client:"))
+        self.__mpdClient = gtk.Entry ()
+        self.__mpdClient.set_text (options["mpdclient"])
+        
         prefsConnFrame = gtk.Frame (_("Connection:"))
-        table = gtk.Table (4, 2, False)
+        table = gtk.Table (5, 2, False)
         table.set_col_spacings (3)
         table.attach (hostLabel, 0, 1, 0, 1)
         table.attach (self.__hostEntry, 1, 2, 0, 1)
@@ -70,6 +75,8 @@ class mpdBrowserCfgDlg (IdleObject):
         table.attach (self.__passwordEntry, 1, 2, 2, 3)
         table.attach (dirLabel, 0, 1, 3, 4)        
         table.attach (self.__dirEntry, 1, 2, 3, 4)
+        table.attach (mpdClientLabel, 0, 1, 4, 5)
+        table.attach (self.__mpdClient, 1, 2, 4, 5)
         prefsConnFrame.add (table)
 
         prefsOptFrame = gtk.Frame (_("Options:"))
@@ -105,7 +112,7 @@ class mpdBrowserCfgDlg (IdleObject):
         self.__coverSize.set_increments (1, 1)
         self.__coverSize.set_digits(0)
         self.__coverSize.set_value (options["coversize"])
-        
+
         table = gtk.Table (2, 2, False)
         table.set_homogeneous (True)
         table.set_col_spacings (3)
@@ -234,6 +241,7 @@ class mpdBrowserCfgDlg (IdleObject):
                         "alwaysFiltering": self.__alwaysFiltering.get_active (),
                         "covername"      : self.__coverName.get_text (),
                         "coversize"      : int (self.__coverSize.get_value ()),
+                        "mpdclient"      : self.__mpdClient.get_text (),
                         "queuebydefault" : self.__queueByDefault.get_active ()
                           }
                           

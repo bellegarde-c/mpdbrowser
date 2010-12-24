@@ -16,6 +16,7 @@
 import gtk, pygtk, gobject
 pygtk.require('2.0')
 import os, sys
+import subprocess
 import gettext
 from mpdBrowserDatabase import *
 from mpdBrowserView import *
@@ -89,15 +90,24 @@ class mpdBrowserBase:
         self.__statusBar = gtk.Statusbar ()
         self.__statusBar.set_no_show_all (True)
         self.__contId = self.__statusBar.get_context_id ("info")
-        image = gtk.Image ()
-        image.set_from_stock (gtk.STOCK_PREFERENCES, gtk.ICON_SIZE_MENU)
+
+        prefImg = gtk.Image ()
+        prefImg.set_from_stock (gtk.STOCK_PREFERENCES, gtk.ICON_SIZE_MENU)
         self.__prefsButton = gtk.Button ()
-        self.__prefsButton.add (image)
+        self.__prefsButton.add (prefImg)
         self.__prefsButton.connect ("clicked", self.__prefsCb, self.__window)
+        
+        playerImg = gtk.Image ()
+        playerImg.set_from_stock (gtk.STOCK_INDEX, gtk.ICON_SIZE_MENU)
+        self.__playerButton = gtk.Button ()
+        self.__playerButton.add (playerImg)
+        self.__playerButton.connect ("clicked", self.__playerCb, self.__window)
+
         statusBox.pack_start (self.__prefsButton, False, False, 0)
+        statusBox.pack_start (self.__playerButton, False, False, 0)
         statusBox.pack_start (self.__progressBar, True, True, 0)
         statusBox.pack_start (self.__statusBar, True, True, 0)
-        
+
         self.__filterBox = gtk.HBox ()
         self.__filterPattern = gtk.Entry ()
         self.__filterPattern.connect ("changed", self.__filterInsCb)
@@ -313,7 +323,14 @@ class mpdBrowserBase:
         self.__prefsDialog = mpdBrowserCfgDlg (parent, 
                                                self.__conf.getAllOptions ())
         self.__prefsDialog.connect ("update_opts", self.__updateOpts)
-       
+    
+
+    def __playerCb (self, userData, parent):
+        """
+            Run prefered mpd client
+        """
+        subprocess.Popen([self.__conf.get("mpdclient")])
+
        
     def __filterClearCb (self, userData):
         """
