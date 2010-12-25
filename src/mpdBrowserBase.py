@@ -25,7 +25,7 @@ from mpdBrowserCfgDlg import *
 from mpdBrowserIPC import *
 from mpdBrowserConnection import *
    
-icon = sys.prefix + "/share/pixmaps/mpdBrowser.png"
+icon = "@SYS@/share/pixmaps/mpdBrowser.png"
 if not os.path.exists(icon): icon = "../images/mpdBrowser.png"
 
 class mpdBrowserBase:

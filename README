@@ -1,5 +1,5 @@
 Installation:
-./install.sh or setup.py for packagers
+./install.sh [prefix]
 
 Run app:
 - Run ./mB to run from dir
