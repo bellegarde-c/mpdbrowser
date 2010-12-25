@@ -28,23 +28,26 @@ def rmgeneric(path, __func__):
 		__func__(path)
 	except OSError, (errno, strerror):
 		pass
-		
+
 os.system("intltool-merge -d -u   po mpdBrowser.desktop.in mpdBrowser.desktop")
+
 # Create mo files:
 if not os.path.exists("mo/"):
 	os.mkdir("mo/")
-for lang in ('de', 'pl', 'ru', 'fr', 'zh_CN', 'sv', 'es', 'fi', 'uk', 'it', 'cs', 'nl', 'pt_BR', 'da', 'be@latin'):
+for lang in ('de', 'pl', 'ru', 'fr', 'zh_CN', 'sv', 'es', 'fi', 'uk', 'it', 'cs', \
+             'nl', 'pt_BR', 'da', 'be@latin', 'et', 'ca', 'ar', 'tr', 'el_GR', 'sk', \
+             'zh_TW', 'ja', 'sl'):
 	pofile = "po/" + lang + ".po"
-	mofile = "mo/" + lang + "/mpdBrowser.mo"
+	mofile = "mo/" + lang + "/sonata.mo"
 	if not os.path.exists("mo/" + lang + "/"):
 		os.mkdir("mo/" + lang + "/")
 	print "generating", mofile
 	os.system("msgfmt %s -o %s" % (pofile, mofile))
 
 setup(name='mpdBrowser',
-        version='0.9.0',
+        version="0.9.16",
         description='GTK+ client for the Music Player Daemon (MPD).',
-        author='Bellegarde Cedric',
+        author='Cedric Bellegarde',
         author_email='gnumdk@gmail.com',
         url='',
         classifiers=[
@@ -59,12 +62,12 @@ setup(name='mpdBrowser',
         packages=["mpdBrowser"],
         package_dir={"mpdBrowser": "src/"},
         scripts = ['src/mpdBrowser'],
-        data_files=[('share/mpdbrowser', ['README', 'CHANGELOG', 'TODO', 'TRANSLATORS']),
+        data_files=[('share/mpdBrowser', ['README', 'CHANGELOG', 'TODO', 'TRANSLATORS']),
                     ('share/applications', ['mpdBrowser.desktop']),
-                    ('share/locale/fr/LC_MESSAGES', ['mo/fr/mpdBrowser.mo']),
-                    ('share/locale/it/LC_MESSAGES', ['mo/it/mpdBrowser.mo']),
-                    ('share/locale/pl/LC_MESSAGES', ['mo/pl/mpdBrowser.mo']),
-                    ('share/pixmaps', glob.glob('images/*'))],
+                    ('share/pixmaps', glob.glob('pixmaps/*')),
+                    ('share/locale/pl/LC_MESSAGES', ['mo/pl/sonata.mo']),
+                    ('share/locale/fr/LC_MESSAGES', ['mo/fr/sonata.mo']),
+                    ('share/locale/it/LC_MESSAGES', ['mo/it/sonata.mo'])]
         )
 
 # Cleanup (remove /build, /mo, and *.pyc files:
@@ -72,9 +75,11 @@ print "Cleaning up..."
 try:
 	removeall("build/")
 	os.rmdir("build/")
+except:
+	pass
+try:
 	removeall("mo/")
 	os.rmdir("mo/")
-	os.unlink("mpdBrowser.desktop")
 except:
 	pass
 try:
