@@ -39,8 +39,12 @@ try:
 
     for line in fileinput.FileInput("src/mpdBrowser",inplace=1):    
         line = line.replace("@SYS@", prefix)
+        sys.stdout.write(line)
+
     for line in fileinput.FileInput("src/mpdBrowserBase.py",inplace=1):    
         line = line.replace("@SYS@", prefix)
+        sys.stdout.write(line)
+
 except getopt.GetoptError:
     print "usage: ./setup.py --prefix=/PREFIX"
     sys.exit(2)             
