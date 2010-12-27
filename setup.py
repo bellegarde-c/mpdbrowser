@@ -66,7 +66,7 @@ for lang in ('de', 'pl', 'ru', 'fr', 'zh_CN', 'sv', 'es', 'fi', 'uk', 'it', 'cs'
              'nl', 'pt_BR', 'da', 'be@latin', 'et', 'ca', 'ar', 'tr', 'el_GR', 'sk', \
              'zh_TW', 'ja', 'sl'):
 	pofile = "po/" + lang + ".po"
-	mofile = "mo/" + lang + "/sonata.mo"
+	mofile = "mo/" + lang + "/mpdBrowser.mo"
 	if not os.path.exists("mo/" + lang + "/"):
 		os.mkdir("mo/" + lang + "/")
 	print "generating", mofile
@@ -93,9 +93,9 @@ setup(name='mpdBrowser',
         data_files=[('share/mpdBrowser', ['README', 'CHANGELOG', 'TODO', 'TRANSLATORS']),
                     ('share/applications', ['mpdBrowser.desktop']),
                     ('share/pixmaps', glob.glob('pixmaps/*')),
-                    ('share/locale/pl/LC_MESSAGES', ['mo/pl/sonata.mo']),
-                    ('share/locale/fr/LC_MESSAGES', ['mo/fr/sonata.mo']),
-                    ('share/locale/it/LC_MESSAGES', ['mo/it/sonata.mo'])]
+                    ('share/locale/pl/LC_MESSAGES', ['mo/pl/mpdBrowser.mo']),
+                    ('share/locale/fr/LC_MESSAGES', ['mo/fr/mpdBrowser.mo']),
+                    ('share/locale/it/LC_MESSAGES', ['mo/it/mpdBrowser.mo'])]
         )
 
 # Cleanup (remove /build, /mo, and *.pyc files:
