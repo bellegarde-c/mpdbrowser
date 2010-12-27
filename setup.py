@@ -48,7 +48,6 @@ try:
 except getopt.GetoptError:
     print "usage: ./setup.py --prefix=/PREFIX"
     sys.exit(2)             
-sys.exit(0)
 
 os.system("intltool-merge -d -u   po mpdBrowser.desktop.in mpdBrowser.desktop")
 
