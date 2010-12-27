@@ -1,5 +1,7 @@
 Installation:
-./install.sh [prefix]
+./setup.py install --prefix=/usr
+
+Setting prefix will only work at first run (install issue)
 
 Run app:
 - Run ./mB to run from dir
