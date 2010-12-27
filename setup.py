@@ -32,8 +32,9 @@ def rmgeneric(path, __func__):
 
 prefix="/usr/local"
 try:                                
-    opts, args = getopt.getopt(sys.argv[1:], "", ["prefix="])
+    opts, args = getopt.getopt(sys.argv[2:], "", ["prefix="])
     for opt, arg in opts:
+        print opt + arg
         if opt == "--prefix":
             prefix = arg
 
