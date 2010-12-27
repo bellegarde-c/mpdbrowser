@@ -45,6 +45,10 @@ try:
         line = line.replace("@SYS@", prefix)
         sys.stdout.write(line)
 
+    for line in fileinput.FileInput("src/mpdBrowserCovers.py",inplace=1):    
+        line = line.replace("@SYS@", prefix)
+        sys.stdout.write(line)
+
 except getopt.GetoptError:
     print "usage: ./setup.py --prefix=/PREFIX"
     sys.exit(2)             

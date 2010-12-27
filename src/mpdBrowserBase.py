@@ -25,8 +25,8 @@ from mpdBrowserCfgDlg import *
 from mpdBrowserIPC import *
 from mpdBrowserConnection import *
    
-icon = "@SYS@/share/pixmaps/mpdBrowser.png"
-if not os.path.exists(icon): icon = "../images/mpdBrowser.png"
+icon = "/usr/share/pixmaps/mpdBrowser.png"
+if not os.path.exists(icon): icon = "../pixmaps/mpdBrowser.png"
 
 class mpdBrowserBase:
 
@@ -48,8 +48,13 @@ class mpdBrowserBase:
         # Create main window        
         self.__window = gtk.Window (gtk.WINDOW_TOPLEVEL)
         self.__window.set_role ("mpdBrowser")
-        pixbuf = gtk.gdk.pixbuf_new_from_file (icon)
-        self.__window.set_icon (pixbuf)
+
+        try:
+            pixbuf = gtk.gdk.pixbuf_new_from_file (icon)
+            self.__window.set_icon (pixbuf)
+        except:
+            pass
+
         self.__window.connect ("configure_event", self.__configEventCb)
         self.__window.connect ("destroy", self.quit)
         self.__window.connect ("key-release-event", self.__windowEventsFilter)

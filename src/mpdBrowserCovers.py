@@ -19,8 +19,8 @@ from mpdBrowserUtils import *
 from mpdBrowserDefine import *
 from idleObject import *
 
-case = sys.prefix + "/share/pixmaps/mpdBrowser_case.png"
-if not os.path.exists (case): case = "../images/mpdBrowser_case.png"
+case = "@SYS@/share/pixmaps/mpdBrowser_case.png"
+if not os.path.exists (case): case = "../pixmaps/mpdBrowser_case.png"
 
 class MissingCover(Exception):
     pass
@@ -58,7 +58,7 @@ class mpdBrowserCovers (IdleObject):
         if not os.path.exists (self.__emptyPath):
             self.__emptyPath = sys.prefix + "/share/pixmaps/mpdBrowser_empty.png"
             if not os.path.exists (self.__emptyPath): 
-                self.__emptyPath = "../images/mpdBrowser_empty.png"
+                self.__emptyPath = "../pixmaps/mpdBrowser_empty.png"
 
         self.__empty = gtk.gdk.pixbuf_new_from_file_at_size (self.__emptyPath,
                                                              self.__coverSize, 

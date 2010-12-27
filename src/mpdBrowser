@@ -22,7 +22,7 @@ import sys
 import gobject
 
 # Ubuntu Fix
-sys.path.append('@SYS@/lib/python%s/site-packages' % sys.version[:3])
+sys.path.append('/usr/lib/python%s/site-packages' % sys.version[:3])
 
 from mpdBrowser import mpdBrowserBase
 from mpdBrowser import mpdBrowserIPC
